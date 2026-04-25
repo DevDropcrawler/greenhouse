@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-forest: #2E5D3A;
+      --color-olive: #6B7A3F;
+      --color-terracotta: #C06B3A;
+      --color-honey: #E0A458;
+      --color-brass: #B8860B;
+      --color-cream: #FAF7F1;
+      --color-ink: #1E2A22;
+      --color-sprout: #4E8C52;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--color-cream);
+      color: var(--color-ink);
+      line-height: 1.55;
+    }
+
+    .font-fraunces {
+      font-family: 'Fraunces', serif;
+      letter-spacing: -0.01em;
+    }
+
+    .paper-grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .app-bar {
+      background-color: var(--color-olive);
+      border-bottom: 0.5px solid var(--color-brass);
+    }
+
+    .warm-shadow {
+      box-shadow: 0 2px 4px rgba(46,45,33,0.06), 0 8px 16px rgba(46,45,33,0.06);
+    }
+
+    .nav-blur {
+      background-color: rgba(250, 247, 241, 0.92);
+      backdrop-filter: blur(8px);
+      border-top: 0.5px solid var(--color-brass);
+    }
+
+    .active-nav-underline {
+      width: 24px;
+      height: 2px;
+      background-color: var(--color-brass);
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .card-top-hairline {
+      border-top: 0.5px solid var(--color-brass);
+    }
+
+    .progress-timeline {
+      background: repeating-linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2) 1px,
+        transparent 1px,
+        transparent calc(100% / 12)
+      );
+    }
+
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <div class="paper-grain"></div>
+
+  <div class="w-full h-screen flex flex-col relative">
+    
+    <!-- App Bar -->
+    <header class="sticky top-0 shrink-0 pt-14 bg-[#6B7A3F] border-t-[0.5px] border-[#B89968] z-50">
+      <div class="h-14 px-4 flex items-center justify-between">
+        <div class="w-10"></div> <!-- Left spacer for centering -->
+        <h1 class="font-fraunces text-[20px] font-semibold text-[#FAF7F1] tracking-tight flex-1 text-center">Garden</h1>
+        <div class="flex items-center gap-4 w-10 justify-end">
+          <a href="#search" id="garden-search-link" class="text-[#FAF7F1] active:scale-95 transition-transform">
+            <iconify-icon icon="lucide:search" class="text-2xl"></iconify-icon>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto px-6 pt-6 pb-32">
+      
+      <!-- Greeting Section -->
+      <div class="mb-8">
+        <p class="text-sm italic font-fraunces text-[#B8860B] mb-1">April</p>
+        <h2 class="font-fraunces text-[28px] text-[#6B7A3F] font-bold tracking-tight">Good morning</h2>
+      </div>
+
+      <!-- Planting Cards -->
+      <div class="space-y-8">
+        
+        <!-- Card 1: Tomato -->
+        <div class="bg-white rounded-[22px] overflow-hidden warm-shadow card-top-hairline">
+          <div class="h-[160px] w-full relative">
+            <img src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&q=80&w=600" alt="Tomato" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4">
+              <span class="bg-[#2E5D3A] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">Growing</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h3 class="font-fraunces text-[18px] font-semibold text-[#1E2A22]">Tomato 'Money Maker'</h3>
+                <p class="text-[12px] text-[#7A7A7A] mt-0.5">Greenhouse A</p>
+              </div>
+            </div>
+
+            <!-- Progress Area -->
+            <div class="space-y-3">
+              <div class="relative h-3 w-full bg-[#E8E5D7] rounded-full overflow-hidden">
+                <div class="absolute inset-0 progress-timeline"></div>
+                <div class="h-full bg-[#2E5D3A]" style="width: 40%"></div>
+              </div>
+              <div class="flex justify-between items-center text-[11px] font-bold">
+                <span class="text-[#2E5D3A] uppercase tracking-wide">Vegetative Stage</span>
+                <span class="text-[#B89968] tabular-nums tracking-wider">40/70 Days</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Basil -->
+        <div class="bg-white rounded-[22px] overflow-hidden warm-shadow card-top-hairline">
+          <div class="h-[160px] w-full relative">
+            <img src="https://images.unsplash.com/photo-1618375531912-867984d28994?auto=format&fit=crop&q=80&w=600" alt="Basil" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4">
+              <span class="bg-[#4E8C52] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">Ready to Harvest</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h3 class="font-fraunces text-[18px] font-semibold text-[#1E2A22]">Basil 'Genovese'</h3>
+                <p class="text-[12px] text-[#7A7A7A] mt-0.5">Herb Garden</p>
+              </div>
+            </div>
+
+            <!-- Progress Area -->
+            <div class="space-y-3">
+              <div class="relative h-3 w-full bg-[#E8E5D7] rounded-full overflow-hidden">
+                <div class="absolute inset-0 progress-timeline"></div>
+                <div class="h-full bg-[#4E8C52]" style="width: 95%"></div>
+              </div>
+              <div class="flex justify-between items-center text-[11px] font-bold">
+                <span class="text-[#4E8C52] uppercase tracking-wide">Harvest Stage</span>
+                <span class="text-[#B89968] tabular-nums tracking-wider">Ready to harvest</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Meyer Lemon -->
+        <div class="bg-white rounded-[22px] overflow-hidden warm-shadow card-top-hairline">
+          <div class="h-[160px] w-full relative">
+            <img src="https://images.unsplash.com/photo-1621252329302-3151859c22a1?auto=format&fit=crop&q=80&w=600" alt="Lemon Tree" class="w-full h-full object-cover">
+            <div class="absolute top-4 right-4">
+              <span class="bg-[#E0A458] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">Seed</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h3 class="font-fraunces text-[18px] font-semibold text-[#1E2A22]">Meyer Lemon Tree</h3>
+                <p class="text-[12px] text-[#7A7A7A] mt-0.5">Shade House</p>
+              </div>
+            </div>
+
+            <!-- Progress Area -->
+            <div class="space-y-3">
+              <div class="relative h-3 w-full bg-[#E8E5D7] rounded-full overflow-hidden">
+                <div class="absolute inset-0 progress-timeline"></div>
+                <div class="h-full bg-[#E0A458]" style="width: 10%"></div>
+              </div>
+              <div class="flex justify-between items-center text-[11px] font-bold">
+                <span class="text-[#E0A458] uppercase tracking-wide">Seed Stage</span>
+                <span class="text-[#B89968] tabular-nums tracking-wider">Week 1/5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- FAB -->
+    <button id="add-planting-fab" class="fixed bottom-24 right-6 w-14 h-14 bg-[#2E5D3A] text-white rounded-full flex items-center justify-center warm-shadow active:scale-95 transition-transform z-40">
+      <iconify-icon icon="lucide:plus" class="text-2xl"></iconify-icon>
+    </button>
+
+    <!-- Bottom Navigation (72dp) -->
+    <footer class="fixed bottom-0 left-0 right-0 h-[96px] bg-[#FFF8F3]/92 backdrop-blur-[8px] border-t-[0.5px] border-[#C5A572] flex items-center justify-around px-2 pb-6 z-50">
+      <a href="#home" id="nav-home" class="flex flex-col items-center gap-1 text-[#8B8B7A]">
+        <iconify-icon icon="lucide:home" class="text-[24px]"></iconify-icon>
+        <span class="text-[11px] font-semibold text-[#8B8B7A]">Home</span>
+      </a>
+      <a href="#calendar" id="nav-calendar" class="flex flex-col items-center gap-1 text-[#8B8B7A]">
+        <iconify-icon icon="lucide:calendar" class="text-[24px]"></iconify-icon>
+        <span class="text-[11px] font-semibold text-[#8B8B7A]">Calendar</span>
+      </a>
+      <a href="#crops" id="nav-crops" class="flex flex-col items-center gap-1 text-[#8B8B7A]">
+        <iconify-icon icon="lucide:sprout" class="text-[24px]"></iconify-icon>
+        <span class="text-[11px] font-semibold text-[#8B8B7A]">Crops</span>
+      </a>
+      <a href="#garden" id="nav-garden" class="flex flex-col items-center gap-1 text-[#556B2F]">
+        <iconify-icon icon="lucide:droplets" class="text-[24px]"></iconify-icon>
+        <span class="text-[11px] font-bold text-[#556B2F]">Garden</span>
+      </a>
+      <a href="#more" id="nav-more" class="flex flex-col items-center gap-1 text-[#8B8B7A]">
+        <iconify-icon icon="lucide:more-vertical" class="text-[24px]"></iconify-icon>
+        <span class="text-[11px] font-semibold text-[#8B8B7A]">More</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

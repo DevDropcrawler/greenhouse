@@ -1,0 +1,57 @@
+# Android Studio / IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+.gradle/
+local.properties
+.cxx/
+captures/
+
+# Gradle
+build/
+**/build/
+.gradletasknamecache
+
+# Kotlin
+*.hprof
+.kotlin/
+
+# Android build outputs
+app/build/
+app/release/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+
+# Keys and secrets
+*.jks
+*.keystore
+keystore.properties
+google-services.json
+release-keystore.properties
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Image source files (we ship WebP exports, originals stay local)
+art-source/
+
+# Python venvs / scripts (if any tooling lands here)
+.venv/
+__pycache__/
+
+# Editor scratch
+*.swp
+*~
+.vscode/
+
+# Superdesign cache (if the IDE extension gets installed later)
+.superdesign/cache/

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-forest: #2D5016;
+      --color-olive: #6B7A3F;
+      --color-brass: #B89968;
+      --color-terracotta: #C06B3A;
+      --color-honey: #E0A458;
+      --color-cream: #FAF7F1;
+      --color-ink: #1E2A22;
+      --shadow-warm: 0 2px 4px rgba(46, 45, 33, 0.03), 0 8px 16px rgba(46, 45, 33, 0.06);
+    }
+
+    .font-fraunces {
+      font-family: 'Fraunces', serif;
+    }
+
+    .font-inter {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .paper-grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .app-bar {
+      background-color: #6B7A3F;
+      color: #FAF7F1;
+      border-top: 0.5px solid #B89968;
+      view-transition-name: app-bar;
+    }
+
+    .nav-hairline {
+      border-top: 0.5px solid var(--color-brass);
+    }
+
+    .warm-shadow {
+      box-shadow: var(--shadow-warm);
+    }
+
+    .eyebrow-small-caps {
+      font-family: 'Fraunces', serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-brass);
+      font-weight: 600;
+    }
+
+    .active-underline {
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 2px;
+      background-color: var(--color-brass);
+      border-radius: 99px;
+    }
+
+    .line-height-1-55 {
+      line-height: 1.55;
+    }
+
+    /* Disable tap highlight color on mobile */
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-[#FAF7F1] text-[#1E2A22] font-inter">
+  <div class="paper-grain"></div>
+
+  <div class="w-full max-w-[412px] mx-auto min-h-screen flex flex-col relative">
+    
+    <!-- App Bar -->
+    <header class="sticky top-0 shrink-0 pt-[14px] app-bar z-50">
+      <div class="h-14 px-4 flex items-center justify-between">
+        <div class="w-10"></div> <!-- Left spacer for centering -->
+        <h1 class="font-fraunces text-[20px] font-semibold text-[#FAF7F1] tracking-tight flex-1 text-center">This Month</h1>
+        <div class="flex items-center gap-4 w-10 justify-end">
+          <a href="#search" id="top-nav-search-link" class="p-1 active:scale-90 transition-transform">
+            <iconify-icon icon="lucide:search" class="text-2xl"></iconify-icon>
+          </a>
+          <a href="#settings" id="top-nav-settings-link" class="p-1 active:scale-90 transition-transform">
+            <iconify-icon icon="lucide:settings" class="text-2xl"></iconify-icon>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto px-4 pb-[106px] pt-8">
+      
+      <!-- Greeting Section -->
+      <section class="mb-10">
+        <h2 class="font-fraunces text-[36px] font-bold text-[#6B7A3F] leading-tight">Good morning</h2>
+        <p class="text-[#1E2A22] text-sm mt-1 font-inter opacity-100">Wednesday, April 17, 2024</p>
+      </section>
+
+      <!-- Task List Section -->
+      <section class="mb-8">
+        <div class="flex flex-col gap-1">
+          <div class="flex items-center gap-1.5">
+            <iconify-icon icon="lucide:leaf" class="text-[#B89968] text-[12px]"></iconify-icon>
+            <h3 class="eyebrow-small-caps">Today's Tasks</h3>
+          </div>
+          <div class="h-[1px] w-full bg-[#B89968] opacity-30 mt-1 mb-4"></div>
+        </div>
+
+        <!-- Task Cards -->
+        <div class="space-y-4">
+          
+          <!-- Task 1 -->
+          <button class="w-full flex items-center gap-4 bg-white p-5 rounded-[22px] warm-shadow active:scale-[0.97] transition-all text-left group">
+            <div class="w-[22px] h-[22px] rounded-full border-[1.5px] border-[#B89968] flex-shrink-0"></div>
+            <div class="flex-1 min-w-0">
+              <p class="text-[16px] font-semibold text-[#1E2A22] leading-snug">Transplant 4 tomato seedlings</p>
+              <p class="text-[14px] text-[#1E2A22] opacity-55 mt-0.5">Greenhouse A</p>
+            </div>
+          </button>
+
+          <!-- Task 2 -->
+          <button class="w-full flex items-center gap-4 bg-white p-5 rounded-[22px] warm-shadow active:scale-[0.97] transition-all text-left group">
+            <div class="w-[22px] h-[22px] rounded-full border-[1.5px] border-[#B89968] flex-shrink-0"></div>
+            <div class="flex-1 min-w-0">
+              <p class="text-[16px] font-semibold text-[#1E2A22] leading-snug">Check whitefly traps in Bay 1</p>
+              <p class="text-[14px] text-[#1E2A22] opacity-55 mt-0.5">Check daily</p>
+            </div>
+          </button>
+
+          <!-- Task 3 -->
+          <button class="w-full flex items-center gap-4 bg-white p-5 rounded-[22px] warm-shadow active:scale-[0.97] transition-all text-left group">
+            <div class="w-[22px] h-[22px] rounded-full border-[1.5px] border-[#B89968] flex-shrink-0"></div>
+            <div class="flex-1 min-w-0">
+              <p class="text-[16px] font-semibold text-[#1E2A22] leading-snug">Water potted citrus</p>
+              <p class="text-[14px] text-[#1E2A22] opacity-55 mt-0.5">Before noon</p>
+            </div>
+          </button>
+
+          <!-- Task 4 -->
+          <button class="w-full flex items-center gap-4 bg-white p-5 rounded-[22px] warm-shadow active:scale-[0.97] transition-all text-left group">
+            <div class="w-[22px] h-[22px] rounded-full border-[1.5px] border-[#B89968] flex-shrink-0"></div>
+            <div class="flex-1 min-w-0">
+              <p class="text-[16px] font-semibold text-[#1E2A22] leading-snug">Pinch basil tips</p>
+              <p class="text-[14px] text-[#1E2A22] opacity-55 mt-0.5">Kitchen garden</p>
+            </div>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- Botanical Divider -->
+      <div class="h-[1px] w-full bg-[#B89968] opacity-20 my-8"></div>
+      
+    </main>
+
+    <!-- Bottom Navigation (72dp) -->
+    <footer class="fixed bottom-0 left-0 right-0 h-[72px] pb-safe bg-[#FAF7F1] nav-hairline z-[100] px-6">
+      <div class="h-full max-w-[412px] mx-auto flex items-center justify-between">
+        
+        <!-- Home (Active) -->
+        <a href="#home" id="nav-home-link" class="flex flex-col items-center relative active:scale-[0.96] transition-transform">
+          <iconify-icon icon="ph:house-line-bold" class="text-[#2E5D3A] text-[24px]"></iconify-icon>
+          <span class="text-[11px] font-semibold text-[#2E5D3A] mt-1">Home</span>
+          <div class="active-underline"></div>
+        </a>
+
+        <!-- Calendar -->
+        <a href="#calendar" id="nav-calendar-link" class="flex flex-col items-center active:scale-[0.96] transition-transform opacity-55">
+          <iconify-icon icon="ph:calendar-blank-bold" class="text-[#1E2A22] text-[24px]"></iconify-icon>
+          <span class="text-[11px] font-semibold text-[#1E2A22] mt-1">Calendar</span>
+        </a>
+
+        <!-- Crops -->
+        <a href="#crops" id="nav-crops-link" class="flex flex-col items-center active:scale-[0.96] transition-transform opacity-55">
+          <iconify-icon icon="ph:plant-bold" class="text-[#1E2A22] text-[24px]"></iconify-icon>
+          <span class="text-[11px] font-semibold text-[#1E2A22] mt-1">Crops</span>
+        </a>
+
+        <!-- Garden -->
+        <a href="#garden" id="nav-garden-link" class="flex flex-col items-center active:scale-[0.96] transition-transform opacity-55">
+          <iconify-icon icon="ph:drop-bold" class="text-[#1E2A22] text-[24px]"></iconify-icon>
+          <span class="text-[11px] font-semibold text-[#1E2A22] mt-1">Garden</span>
+        </a>
+
+        <!-- More -->
+        <a href="#more" id="nav-more-link" class="flex flex-col items-center active:scale-[0.96] transition-transform opacity-55">
+          <iconify-icon icon="ph:dots-three-outline-bold" class="text-[#1E2A22] text-[24px]"></iconify-icon>
+          <span class="text-[11px] font-semibold text-[#1E2A22] mt-1">More</span>
+        </a>
+
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

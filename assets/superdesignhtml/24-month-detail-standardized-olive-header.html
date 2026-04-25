@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FAF7F1;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-fraunces {
+      font-family: 'Fraunces', serif;
+    }
+    .brass-divider {
+      border-bottom: 1px solid #B89968;
+    }
+    .active-tab-indicator {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #B89968;
+    }
+    /* Hide scrollbar */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="w-full h-screen flex flex-col bg-[#FAF7F1]">
+    <!-- App Bar -->
+    <header class="shrink-0 pt-14 bg-[#9BA872] shadow-sm z-20">
+      <div class="h-[64px] flex items-center px-4 relative">
+        <button class="w-10 h-10 flex items-center justify-center text-white" id="back-btn">
+          <iconify-icon icon="lucide:chevron-left" class="text-2xl"></iconify-icon>
+        </button>
+        <h1 class="flex-1 text-center font-fraunces text-2xl font-bold text-white mr-10">
+          October
+        </h1>
+      </div>
+      
+      <!-- Segmented Control -->
+      <nav class="bg-[#FAF7F1] flex border-b border-[#B89968]/30">
+        <button class="flex-1 h-12 flex items-center justify-center relative">
+          <div class="flex items-center gap-2">
+            <span class="text-[12px] font-bold text-[#2E5D3A] uppercase tracking-wider">Seed</span>
+            <span class="w-5 h-5 flex items-center justify-center bg-[#B89968] text-white text-[10px] font-bold rounded-full">14</span>
+          </div>
+          <div class="active-tab-indicator"></div>
+        </button>
+        <div class="w-[1px] h-6 self-center bg-[#B89968]/40"></div>
+        <button class="flex-1 h-12 flex items-center justify-center opacity-50">
+          <div class="flex items-center gap-2">
+            <span class="text-[12px] font-semibold text-[#1E2A22] uppercase tracking-wider">Seedling</span>
+          </div>
+        </button>
+        <div class="w-[1px] h-6 self-center bg-[#B89968]/40"></div>
+        <button class="flex-1 h-12 flex items-center justify-center opacity-50">
+          <div class="flex items-center gap-2">
+            <span class="text-[12px] font-semibold text-[#1E2A22] uppercase tracking-wider">Harvest</span>
+          </div>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Main Content: Crop List -->
+    <main class="flex-1 overflow-y-auto bg-[#FAF7F1] no-scrollbar">
+      <div class="flex flex-col">
+        <!-- Row 1: Tomato -->
+        <a href="#" id="crop-tomato" class="flex items-center gap-4 px-4 py-3 bg-white/40 hover:bg-white/60 active:bg-white/80 transition-colors brass-divider">
+          <div class="w-16 h-16 rounded-lg shrink-0 bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center shadow-sm">
+            <iconify-icon icon="lucide:leaf" class="text-white/40 text-3xl"></iconify-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-fraunces text-[18px] font-semibold text-[#1E2A22] leading-tight">Tomato 'Money Maker'</h3>
+            <p class="text-[13px] italic text-[#556B4D] truncate">Solanum lycopersicum / Kamāto</p>
+            <span class="inline-block mt-1 px-2 py-0.5 bg-[#FAF7F1] text-[#B89968] text-[10px] font-bold rounded-full border border-[#B89968]/30 uppercase">Fruiting</span>
+          </div>
+          <iconify-icon icon="lucide:chevron-right" class="text-[#B89968] text-xl"></iconify-icon>
+        </a>
+
+        <!-- Row 2: Capsicum -->
+        <a href="#" id="crop-capsicum" class="flex items-center gap-4 px-4 py-3 bg-white/40 hover:bg-white/60 active:bg-white/80 transition-colors brass-divider">
+          <div class="w-16 h-16 rounded-lg shrink-0 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center shadow-sm">
+            <iconify-icon icon="lucide:leaf" class="text-white/40 text-3xl"></iconify-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-fraunces text-[18px] font-semibold text-[#1E2A22] leading-tight">Capsicum 'Californian'</h3>
+            <p class="text-[13px] italic text-[#556B4D] truncate">Capsicum annuum / Kāpikama</p>
+            <span class="inline-block mt-1 px-2 py-0.5 bg-[#FAF7F1] text-[#B89968] text-[10px] font-bold rounded-full border border-[#B89968]/30 uppercase">Fruiting</span>
+          </div>
+          <iconify-icon icon="lucide:chevron-right" class="text-[#B89968] text-xl"></iconify-icon>
+        </a>
+
+        <!-- Row 3: Cucumber -->
+        <a href="#" id="crop-cucumber" class="flex items-center gap-4 px-4 py-3 bg-white/40 hover:bg-white/60 active:bg-white/80 transition-colors brass-divider">
+          <div class="w-16 h-16 rounded-lg shrink-0 bg-gradient-to-br from-lime-400 to-lime-600 flex items-center justify-center shadow-sm">
+            <iconify-icon icon="lucide:leaf" class="text-white/40 text-3xl"></iconify-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-fraunces text-[18px] font-semibold text-[#1E2A22] leading-tight">Cucumber 'Lebanese'</h3>
+            <p class="text-[13px] italic text-[#556B4D] truncate">Cucumis sativus / Kūkamo</p>
+            <span class="inline-block mt-1 px-2 py-0.5 bg-[#FAF7F1] text-[#B89968] text-[10px] font-bold rounded-full border border-[#B89968]/30 uppercase">Vine</span>
+          </div>
+          <iconify-icon icon="lucide:chevron-right" class="text-[#B89968] text-xl"></iconify-icon>
+        </a>
+
+        <!-- Row 4: Basil -->
+        <a href="#" id="crop-basil" class="flex items-center gap-4 px-4 py-3 bg-white/40 hover:bg-white/60 active:bg-white/80 transition-colors brass-divider">
+          <div class="w-16 h-16 rounded-lg shrink-0 bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-sm">
+            <iconify-icon icon="lucide:leaf" class="text-white/40 text-3xl"></iconify-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-fraunces text-[18px] font-semibold text-[#1E2A22] leading-tight">Basil 'Genovese'</h3>
+            <p class="text-[13px] italic text-[#556B4D] truncate">Ocimum basilicum / Pāhiri</p>
+            <span class="inline-block mt-1 px-2 py-0.5 bg-[#FAF7F1] text-[#B89968] text-[10px] font-bold rounded-full border border-[#B89968]/30 uppercase">Leafy</span>
+          </div>
+          <iconify-icon icon="lucide:chevron-right" class="text-[#B89968] text-xl"></iconify-icon>
+        </a>
+
+        <!-- Row 5: Eggplant -->
+        <a href="#" id="crop-eggplant" class="flex items-center gap-4 px-4 py-3 bg-white/40 hover:bg-white/60 active:bg-white/80 transition-colors brass-divider">
+          <div class="w-16 h-16 rounded-lg shrink-0 bg-gradient-to-br from-purple-500 to-purple-800 flex items-center justify-center shadow-sm">
+            <iconify-icon icon="lucide:leaf" class="text-white/40 text-3xl"></iconify-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-fraunces text-[18px] font-semibold text-[#1E2A22] leading-tight">Eggplant 'Long Purple'</h3>
+            <p class="text-[13px] italic text-[#556B4D] truncate">Solanum melongena / Otahua</p>
+            <span class="inline-block mt-1 px-2 py-0.5 bg-[#FAF7F1] text-[#B89968] text-[10px] font-bold rounded-full border border-[#B89968]/30 uppercase">Fruiting</span>
+          </div>
+          <iconify-icon icon="lucide:chevron-right" class="text-[#B89968] text-xl"></iconify-icon>
+        </a>
+
+        <!-- Row 6: Zucchini -->
+        <a href="#" id="crop-zucchini" class="flex items-center gap-4 px-4 py-3 bg-white/40 hover:bg-white/60 active:bg-white/80 transition-colors brass-divider">
+          <div class="w-16 h-16 rounded-lg shrink-0 bg-gradient-to-br from-green-800 to-emerald-900 flex items-center justify-center shadow-sm">
+            <iconify-icon icon="lucide:leaf" class="text-white/40 text-3xl"></iconify-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-fraunces text-[18px] font-semibold text-[#1E2A22] leading-tight">Zucchini 'Black Beauty'</h3>
+            <p class="text-[13px] italic text-[#556B4D] truncate">Cucurbita pepo / Tochini</p>
+            <span class="inline-block mt-1 px-2 py-0.5 bg-[#FAF7F1] text-[#B89968] text-[10px] font-bold rounded-full border border-[#B89968]/30 uppercase">Fruiting</span>
+          </div>
+          <iconify-icon icon="lucide:chevron-right" class="text-[#B89968] text-xl"></iconify-icon>
+        </a>
+
+        <!-- Row 7: Watermelon -->
+        <a href="#" id="crop-watermelon" class="flex items-center gap-4 px-4 py-3 bg-white/40 hover:bg-white/60 active:bg-white/80 transition-colors brass-divider">
+          <div class="w-16 h-16 rounded-lg shrink-0 bg-gradient-to-br from-teal-400 to-green-500 flex items-center justify-center shadow-sm">
+            <iconify-icon icon="lucide:leaf" class="text-white/40 text-3xl"></iconify-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-fraunces text-[18px] font-semibold text-[#1E2A22] leading-tight">Watermelon</h3>
+            <p class="text-[13px] italic text-[#556B4D] truncate">Citrullus lanatus / Mereni</p>
+            <span class="inline-block mt-1 px-2 py-0.5 bg-[#FAF7F1] text-[#B89968] text-[10px] font-bold rounded-full border border-[#B89968]/30 uppercase">Vine</span>
+          </div>
+          <iconify-icon icon="lucide:chevron-right" class="text-[#B89968] text-xl"></iconify-icon>
+        </a>
+
+        <!-- Row 8: Rockmelon -->
+        <a href="#" id="crop-rockmelon" class="flex items-center gap-4 px-4 py-3 bg-white/40 hover:bg-white/60 active:bg-white/80 transition-colors brass-divider mb-20">
+          <div class="w-16 h-16 rounded-lg shrink-0 bg-gradient-to-br from-orange-200 to-orange-400 flex items-center justify-center shadow-sm">
+            <iconify-icon icon="lucide:leaf" class="text-white/40 text-3xl"></iconify-icon>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-fraunces text-[18px] font-semibold text-[#1E2A22] leading-tight">Rockmelon</h3>
+            <p class="text-[13px] italic text-[#556B4D] truncate">Cucumis melo / Mereni-tānga</p>
+            <span class="inline-block mt-1 px-2 py-0.5 bg-[#FAF7F1] text-[#B89968] text-[10px] font-bold rounded-full border border-[#B89968]/30 uppercase">Vine</span>
+          </div>
+          <iconify-icon icon="lucide:chevron-right" class="text-[#B89968] text-xl"></iconify-icon>
+        </a>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <footer class="fixed bottom-0 left-0 right-0 h-[72px] bg-[#FAF7F1] border-t-[0.5px] border-[#B89968] z-50 pb-safe">
+      <nav class="h-full flex items-center justify-between px-8 max-w-md mx-auto">
+        <a href="#" id="nav-home-link" class="flex flex-col items-center justify-center gap-1 text-[#1E2A22] opacity-55 hover:opacity-100 transition-opacity">
+          <iconify-icon icon="lucide:home" class="text-xl"></iconify-icon>
+          <span class="text-[10px] font-semibold uppercase tracking-wider">Home</span>
+        </a>
+        <a href="#" id="nav-calendar-link" class="flex flex-col items-center justify-center gap-1 text-[#2E5D3A] relative">
+          <iconify-icon icon="lucide:calendar" class="text-xl"></iconify-icon>
+          <span class="text-[10px] font-semibold uppercase tracking-wider">Calendar</span>
+          <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-[2px] bg-[#B89968] rounded-full"></div>
+        </a>
+        <a href="#" id="nav-crops-link" class="flex flex-col items-center justify-center gap-1 text-[#1E2A22] opacity-55 hover:opacity-100 transition-opacity">
+          <iconify-icon icon="lucide:leaf" class="text-xl"></iconify-icon>
+          <span class="text-[10px] font-semibold uppercase tracking-wider">Crops</span>
+        </a>
+        <a href="#" id="nav-garden-link" class="flex flex-col items-center justify-center gap-1 text-[#1E2A22] opacity-55 hover:opacity-100 transition-opacity">
+          <iconify-icon icon="lucide:layout-grid" class="text-xl"></iconify-icon>
+          <span class="text-[10px] font-semibold uppercase tracking-wider">Garden</span>
+        </a>
+        <a href="#" id="nav-more-link" class="flex flex-col items-center justify-center gap-1 text-[#1E2A22] opacity-55 hover:opacity-100 transition-opacity">
+          <iconify-icon icon="lucide:more-vertical" class="text-xl"></iconify-icon>
+          <span class="text-[10px] font-semibold uppercase tracking-wider">More</span>
+        </a>
+      </nav>
+    </footer>
+  </div>
+</body>
+</html>

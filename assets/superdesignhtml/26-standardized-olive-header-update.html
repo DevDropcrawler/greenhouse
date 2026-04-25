@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Add Planting Review - Keeley's Greenhouse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-fraunces {
+            font-family: 'Fraunces', serif;
+        }
+        .brass-shadow {
+            box-shadow: 0 4px 14px -2px rgba(184, 153, 104, 0.12), 0 2px 6px -2px rgba(184, 153, 104, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-[#FAF7F1]">
+    <div class="w-full min-h-screen flex flex-col">
+        <!-- HEADER: Olive App Bar -->
+        <header class="shrink-0 pt-14 pb-4 px-4 bg-[#9BA872] flex items-center justify-between sticky top-0 z-50">
+            <div class="flex items-center gap-3">
+                <a href="#" id="header-back-btn" class="w-10 h-10 flex items-center justify-center text-white">
+                    <iconify-icon icon="lucide:chevron-left" class="text-2xl"></iconify-icon>
+                </a>
+                <h1 class="text-white font-fraunces text-[18px] font-semibold">Review</h1>
+            </div>
+            <!-- Step Indicator: 5 Brass Dots -->
+            <div class="flex gap-1.5 px-2">
+                <div class="w-2 h-2 rounded-full bg-[#B89968]"></div>
+                <div class="w-2 h-2 rounded-full bg-[#B89968]"></div>
+                <div class="w-2 h-2 rounded-full bg-[#B89968]"></div>
+                <div class="w-2 h-2 rounded-full bg-[#B89968]"></div>
+                <div class="w-2 h-2 rounded-full bg-[#B89968]"></div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-1 overflow-y-auto px-6 py-8 bg-[#FAF7F1]">
+            <!-- Summary Card -->
+            <div class="bg-white rounded-[16px] border border-[#B89968]/30 brass-shadow p-6 flex flex-col items-center">
+                <!-- Crop Thumbnail -->
+                <div class="w-[120px] h-[120px] rounded-2xl overflow-hidden mb-6 bg-[#E8F0E8]">
+                    <img src="https://images.unsplash.com/photo-1592841608279-07dd9926880c?q=80&w=300&auto=format&fit=crop" 
+                         alt="Tomato Money Maker" 
+                         class="w-full h-full object-cover">
+                </div>
+
+                <!-- Crop Name -->
+                <h2 class="font-fraunces text-[28px] text-[#2E5D3A] leading-tight text-center mb-6">
+                    Tomato <br/>'Money Maker'
+                </h2>
+
+                <!-- Fact Rows -->
+                <div class="w-full space-y-4 mb-8">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-[#B89968]/10 flex items-center justify-center shrink-0">
+                            <iconify-icon icon="lucide:calendar" class="text-[#B89968] text-xl"></iconify-icon>
+                        </div>
+                        <span class="text-[14px] text-gray-700">Sowing 25 Apr 2026</span>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-[#B89968]/10 flex items-center justify-center shrink-0">
+                            <iconify-icon icon="lucide:sprout" class="text-[#B89968] text-xl"></iconify-icon>
+                        </div>
+                        <span class="text-[14px] text-gray-700">Greenhouse · Bay 1</span>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-[#B89968]/10 flex items-center justify-center shrink-0">
+                            <iconify-icon icon="lucide:file-text" class="text-[#B89968] text-xl"></iconify-icon>
+                        </div>
+                        <span class="text-[14px] text-gray-700">Trying single-leader prune this year</span>
+                    </div>
+                </div>
+
+                <!-- Harvest Chip -->
+                <div class="bg-[#B89968]/20 px-4 py-2 rounded-full border border-[#B89968]/30">
+                    <span class="text-[13px] font-semibold text-[#1E2A22] tracking-tight">Harvest ~1 Aug – 15 Sep</span>
+                </div>
+            </div>
+
+            <!-- Help Text -->
+            <p class="text-center text-[12px] text-gray-500 mt-6 px-4 leading-relaxed">
+                We'll create reminders for transplanting and harvest.
+            </p>
+        </main>
+
+        <!-- FOOTER: Action Bar + Navigation -->
+        <footer class="shrink-0 bg-[#FAF7F1] border-t-[0.5px] border-[#B89968] z-50 pb-safe">
+            <!-- Primary Actions -->
+            <div class="h-[140px] flex flex-col items-center justify-center px-6 gap-3">
+                <button id="save-planting-btn" class="w-full h-14 bg-[#2E5D3A] text-white font-fraunces text-[16px] font-semibold rounded-full brass-shadow active:scale-[0.98] transition-transform">
+                    Save planting
+                </button>
+                <button id="edit-details-btn" class="w-full h-10 text-[#2E5D3A] font-medium text-[14px] active:opacity-60">
+                    Edit details
+                </button>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <nav class="h-[72px] flex items-center justify-between px-8 max-w-md mx-auto">
+                <a href="#" id="nav-home-link" class="flex flex-col items-center justify-center gap-1 text-[#1E2A22] opacity-55">
+                    <iconify-icon icon="lucide:home" class="text-xl"></iconify-icon>
+                    <span class="text-[10px] font-semibold uppercase tracking-wider">Home</span>
+                </a>
+                <a href="#" id="nav-calendar-link" class="flex flex-col items-center justify-center gap-1 text-[#2E5D3A] relative">
+                    <iconify-icon icon="lucide:calendar" class="text-xl"></iconify-icon>
+                    <span class="text-[10px] font-semibold uppercase tracking-wider">Calendar</span>
+                    <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-[2px] bg-[#B89968] rounded-full"></div>
+                </a>
+                <a href="#" id="nav-crops-link" class="flex flex-col items-center justify-center gap-1 text-[#1E2A22] opacity-55">
+                    <iconify-icon icon="lucide:leaf" class="text-xl"></iconify-icon>
+                    <span class="text-[10px] font-semibold uppercase tracking-wider">Crops</span>
+                </a>
+                <a href="#" id="nav-garden-link" class="flex flex-col items-center justify-center gap-1 text-[#1E2A22] opacity-55">
+                    <iconify-icon icon="lucide:layout-grid" class="text-xl"></iconify-icon>
+                    <span class="text-[10px] font-semibold uppercase tracking-wider">Garden</span>
+                </a>
+                <a href="#" id="nav-more-link" class="flex flex-col items-center justify-center gap-1 text-[#1E2A22] opacity-55">
+                    <iconify-icon icon="lucide:more-vertical" class="text-xl"></iconify-icon>
+                    <span class="text-[10px] font-semibold uppercase tracking-wider">More</span>
+                </a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>

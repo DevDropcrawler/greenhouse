@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #2E5D3A;
+      --olive: #6B7A3F;
+      --brass: #B89968;
+      --cream: #FAF7F1;
+      --ink: #1E2A22;
+      --warm-shadow: 0 2px 4px rgba(46, 45, 33, 0.03), 0 8px 16px rgba(46, 45, 33, 0.06);
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      background-color: var(--cream);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-fraunces {
+      font-family: 'Fraunces', serif;
+    }
+
+    .paper-grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .warm-shadow {
+      box-shadow: var(--warm-shadow);
+    }
+
+    .eyebrow {
+      font-family: 'Fraunces', serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--brass);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .timeline-fill {
+      animation: fillTimeline 600ms ease-out forwards;
+    }
+
+    @keyframes fillTimeline {
+      from { width: 0; }
+      to { width: 85%; }
+    }
+
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    .btn-active:active {
+      transform: scale(0.96);
+      filter: brightness(1.04);
+    }
+  </style>
+  <style>sd-component { display: block; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer init></script>
+</head>
+<body class="relative">
+  <div class="paper-grain"></div>
+
+  <div class="w-full h-screen flex flex-col relative overflow-hidden">
+    <!-- App Bar -->
+    <header class="sticky top-0 shrink-0 pt-14 bg-[#6B7A3F] border-t-[0.5px] border-[#B89968] z-50">
+      <div class="h-14 px-4 flex items-center justify-between">
+        <div class="w-24 flex items-center">
+          <button id="nav-back-btn" class="w-10 h-10 flex items-center justify-center text-[#FAF7F1] rounded-full active:bg-white/10 transition-colors">
+            <iconify-icon icon="ph:arrow-left-bold" class="text-2xl"></iconify-icon>
+          </button>
+        </div>
+        <h1 class="font-fraunces text-[20px] font-semibold text-[#FAF7F1] tracking-tight flex-1 text-center truncate">Basil 'Genovese'</h1>
+        <div class="flex items-center gap-1 w-24 justify-end">
+          <button id="action-share-btn" class="w-10 h-10 flex items-center justify-center text-[#FAF7F1] rounded-full active:bg-white/10">
+            <iconify-icon icon="ph:share-network-bold" class="text-2xl"></iconify-icon>
+          </button>
+          <button id="action-fav-btn" class="w-10 h-10 flex items-center justify-center text-[#FAF7F1] rounded-full active:bg-white/10">
+            <iconify-icon icon="ph:heart-bold" class="text-2xl"></iconify-icon>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto scrollbar-hide">
+      <!-- Hero Image -->
+      <div class="relative h-[300px] w-full">
+        <img src="https://images.unsplash.com/photo-1618375531912-867984d28994?auto=format&fit=crop&q=80&w=800" alt="Basil Genovese" class="w-full h-full object-cover rounded-t-[24px]">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+      </div>
+
+      <!-- Overlapping Info Card -->
+      <div class="px-4 -mt-10 relative z-10">
+        <div class="bg-white rounded-[22px] p-6 warm-shadow border-[0.5px] border-[#B89968]/20">
+          <h2 class="font-fraunces text-[22px] font-bold text-[#6B7A3F] leading-tight">Basil 'Genovese'</h2>
+          <p class="font-fraunces italic text-[#B89968] text-[15px] mt-1">Ocimum basilicum</p>
+          
+          <div class="flex flex-wrap gap-2 mt-5">
+            <span class="bg-[#2E5D3A] text-white text-[11px] font-bold px-3 py-1.5 rounded-full tracking-wide">Days to Harvest: 21</span>
+            <span class="bg-[#2E5D3A] text-white text-[11px] font-bold px-3 py-1.5 rounded-full tracking-wide">Water: Daily</span>
+            <span class="bg-[#2E5D3A] text-white text-[11px] font-bold px-3 py-1.5 rounded-full tracking-wide">Height: Compact</span>
+          </div>
+        </div>
+
+        <!-- Timeline Section -->
+        <div class="mt-10 mb-8">
+          <div class="eyebrow mb-4">
+            <iconify-icon icon="ph:leaf-bold"></iconify-icon>
+            Planting Progress
+          </div>
+          
+          <div class="relative w-full h-[18px] bg-[#E8E5D7] rounded-full overflow-hidden flex gap-[2px]">
+            <div class="absolute top-0 left-0 h-full bg-[#2E5D3A] timeline-fill"></div>
+            <!-- 12 segments mask (visual separators) -->
+            <div class="z-10 flex-1 border-r border-[#FAF7F1]/30"></div>
+            <div class="z-10 flex-1 border-r border-[#FAF7F1]/30"></div>
+            <div class="z-10 flex-1 border-r border-[#FAF7F1]/30"></div>
+            <div class="z-10 flex-1 border-r border-[#FAF7F1]/30"></div>
+            <div class="z-10 flex-1 border-r border-[#FAF7F1]/30"></div>
+            <div class="z-10 flex-1 border-r border-[#FAF7F1]/30"></div>
+            <div class="z-10 flex-1 border-r border-[#FAF7F1]/30"></div>
+            <div class="z-10 flex-1 border-r border-[#FAF7F1]/30"></div>
+            <div class="z-10 flex-1 border-r border-[#FAF7F1]/30"></div>
+            <div class="z-10 flex-1 border-r border-[#FAF7F1]/30"></div>
+            <div class="z-10 flex-1 border-r border-[#FAF7F1]/30"></div>
+            <div class="z-10 flex-1"></div>
+          </div>
+          
+          <div class="flex justify-between mt-3 px-1">
+            <span class="text-[12px] font-semibold text-[#1E2A22]/60">In Progress</span>
+            <span class="font-fraunces text-[12px] font-bold text-[#B89968] tabular-nums tracking-wide uppercase">
+              Week 7 of 8 | Day 28/35
+            </span>
+          </div>
+        </div>
+
+        <!-- Growing Tips Card -->
+        <div class="bg-white rounded-[22px] p-6 warm-shadow border-[0.5px] border-[#B89968]/20 mb-8">
+          <div class="eyebrow mb-6">
+            <iconify-icon icon="ph:leaf-bold"></iconify-icon>
+            Growing Tips
+          </div>
+          
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="w-10 h-10 rounded-full bg-[#FAF7F1] flex items-center justify-center text-[#6B7A3F] shrink-0">
+                <iconify-icon icon="ph:sun-bold" class="text-xl"></iconify-icon>
+              </div>
+              <p class="text-[14px] leading-relaxed">Provide at least 6-8 hours of direct sun daily. Rotate pot weekly for even growth.</p>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-10 h-10 rounded-full bg-[#FAF7F1] flex items-center justify-center text-[#6B7A3F] shrink-0">
+                <iconify-icon icon="ph:drop-bold" class="text-xl"></iconify-icon>
+              </div>
+              <p class="text-[14px] leading-relaxed">Keep soil consistently moist but not soggy. Basil wilts quickly if it dries out.</p>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-10 h-10 rounded-full bg-[#FAF7F1] flex items-center justify-center text-[#6B7A3F] shrink-0">
+                <iconify-icon icon="ph:scissors-bold" class="text-xl"></iconify-icon>
+              </div>
+              <p class="text-[14px] leading-relaxed">Pinch off flower spikes as they appear to preserve leaf flavor and plant energy.</p>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-10 h-10 rounded-full bg-[#FAF7F1] flex items-center justify-center text-[#6B7A3F] shrink-0">
+                <iconify-icon icon="ph:leaf-bold" class="text-xl"></iconify-icon>
+              </div>
+              <p class="text-[14px] leading-relaxed">Mulch with organic matter to retain soil temperature and humidity in Papamoa summers.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Companion Section -->
+        <div class="mb-8">
+          <div class="eyebrow mb-5">
+            <iconify-icon icon="ph:leaf-bold"></iconify-icon>
+            Companion Plants
+          </div>
+          
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-white rounded-[20px] p-3 border-[0.5px] border-[#B89968]/20 flex flex-col items-center gap-2 warm-shadow">
+              <div class="w-12 h-12 rounded-full overflow-hidden border border-[#2E5D3A]/20 p-1">
+                <img src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&q=80&w=150" alt="Tomato" class="w-full h-full object-cover rounded-full">
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="text-[11px] font-bold">Tomato</span>
+                <iconify-icon icon="ph:check-circle-fill" class="text-[#4E8C52] text-sm"></iconify-icon>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-[20px] p-3 border-[0.5px] border-[#B89968]/20 flex flex-col items-center gap-2 warm-shadow">
+              <div class="w-12 h-12 rounded-full overflow-hidden border border-[#2E5D3A]/20 p-1">
+                <img src="https://images.unsplash.com/photo-1591552554271-91a5e1197825?auto=format&fit=crop&q=80&w=150" alt="Pepper" class="w-full h-full object-cover rounded-full">
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="text-[11px] font-bold">Pepper</span>
+                <iconify-icon icon="ph:check-circle-fill" class="text-[#4E8C52] text-sm"></iconify-icon>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-[20px] p-3 border-[0.5px] border-[#B89968]/20 flex flex-col items-center gap-2 warm-shadow">
+              <div class="w-12 h-12 rounded-full overflow-hidden border border-[#2E5D3A]/20 p-1">
+                <img src="https://images.unsplash.com/photo-1449339854873-750e6df51301?auto=format&fit=crop&q=80&w=150" alt="Cucumber" class="w-full h-full object-cover rounded-full">
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="text-[11px] font-bold">Cucumber</span>
+                <iconify-icon icon="ph:check-circle-fill" class="text-[#4E8C52] text-sm"></iconify-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Harvesting Guide -->
+        <div class="mb-20">
+          <div class="eyebrow mb-6">
+            <iconify-icon icon="ph:leaf-bold"></iconify-icon>
+            Harvesting Guide
+          </div>
+          
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="w-6 h-6 rounded-full bg-[#B89968] flex items-center justify-center shrink-0">
+                <span class="text-white font-bold text-[12px]">1</span>
+              </div>
+              <p class="text-[14px] text-[#1E2A22]/80">Start harvesting when plant has at least 6 leaves. Always pick from the top down.</p>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-6 h-6 rounded-full bg-[#B89968] flex items-center justify-center shrink-0">
+                <span class="text-white font-bold text-[12px]">2</span>
+              </div>
+              <p class="text-[14px] text-[#1E2A22]/80">Cut the stem just above the point where two large leaves meet. This encourages branching.</p>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-6 h-6 rounded-full bg-[#B89968] flex items-center justify-center shrink-0">
+                <span class="text-white font-bold text-[12px]">3</span>
+              </div>
+              <p class="text-[14px] text-[#1E2A22]/80">Harvest regularly to keep the plant productive and prevent it from going to seed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Sticky Bottom Actions -->
+    <footer class="shrink-0 px-6 py-4 bg-white border-t-[0.5px] border-[#B89968]/30 pb-24 z-40 flex gap-4">
+      <button id="action-edit" class="flex-1 h-12 rounded-full border-2 border-[#2E5D3A] text-[#2E5D3A] font-fraunces font-semibold transition-all btn-active">
+        Edit
+      </button>
+      <button id="action-harvest" class="flex-[1.5] h-12 bg-[#2E5D3A] text-[#FAF7F1] rounded-full font-fraunces font-semibold transition-all warm-shadow btn-active">
+        Harvest
+      </button>
+    </footer>
+    <!-- component: BottomNavigation (cd8c80f5-74cc-4601-89c1-0e037aa5e3af) -->
+<div v-scope="{ ...{&quot;activeItem&quot;:&quot;crops&quot;,&quot;homeHref&quot;:&quot;#home&quot;,&quot;cropsHref&quot;:&quot;#crops&quot;,&quot;calendarHref&quot;:&quot;#calendar&quot;,&quot;pestsHref&quot;:&quot;#pests&quot;,&quot;settingsHref&quot;:&quot;#settings&quot;}, $emit() {} }">
+<footer class="fixed bottom-0 left-0 right-0 bg-white border-t-[0.5px] border-[#B89968]/30 px-2 pb-[34px] pt-3 z-50" style="box-shadow: 0 2px 4px rgba(46,45,33,0.03), 0 8px 16px rgba(46,45,33,0.06)"><nav class="flex justify-between items-center max-w-md mx-auto"><a :href="homeHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:home" class="text-[18px]" :class="activeItem === 'home' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'home' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Home</span><div v-if="activeItem === 'home'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a><a :href="cropsHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:sprout" class="text-[18px]" :class="activeItem === 'crops' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'crops' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Crops</span><div v-if="activeItem === 'crops'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a><a :href="calendarHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:calendar" class="text-[18px]" :class="activeItem === 'calendar' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'calendar' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Calendar</span><div v-if="activeItem === 'calendar'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a><a :href="pestsHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:bug" class="text-[18px]" :class="activeItem === 'pests' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'pests' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Pests</span><div v-if="activeItem === 'pests'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a><a :href="settingsHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:settings" class="text-[18px]" :class="activeItem === 'settings' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'settings' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Settings</span><div v-if="activeItem === 'settings'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a></nav></footer>
+</div>
+<!-- /component: BottomNavigation (cd8c80f5-74cc-4601-89c1-0e037aa5e3af) -->
+  </div>
+</body>
+</html>

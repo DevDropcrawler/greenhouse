@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-forest: #2E5D3A;
+      --color-olive: #6B7A3F;
+      --color-terracotta: #C06B3A;
+      --color-honey: #E0A458;
+      --color-brass: #B8860B;
+      --color-cream: #FAF7F1;
+      --color-ink: #1E2A22;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--color-cream);
+      color: var(--color-ink);
+      line-height: 1.55;
+    }
+    .font-fraunces { font-family: 'Fraunces', serif; }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+    .paper-grain {
+      position: fixed; inset: 0; pointer-events: none; z-index: 100; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+    .warm-shadow {
+      box-shadow: 0 2px 4px rgba(46, 45, 33, 0.03), 0 8px 16px rgba(46, 45, 33, 0.06);
+    }
+    .app-bar { background-color: #6B7A3F; color: #FAF7F1; border-top: 0.5px solid #B89968; view-transition-name: app-bar; }
+    .eyebrow-label {
+      font-family: 'Fraunces', serif; font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-brass);
+      display: flex; align-items: center; gap: 4px;
+    }
+    .progress-bar-fill {
+      transition: width 1s ease-out;
+    }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+  <style>sd-component { display: block; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer init></script>
+</head>
+<body class="antialiased">
+  <div class="paper-grain"></div>
+
+  <div class="w-full min-h-screen flex flex-col relative overflow-x-hidden">
+    <!-- App Bar -->
+    <header class="sticky top-0 shrink-0 pt-14 app-bar z-50">
+      <div class="h-14 px-4 flex items-center justify-between">
+        <div class="w-10 flex items-center">
+          <a href="#" id="nav-back-link" class="text-[#FAF7F1] active:scale-90 transition-transform">
+            <iconify-icon icon="lucide:arrow-left" class="text-2xl"></iconify-icon>
+          </a>
+        </div>
+        <h1 class="font-fraunces text-[20px] font-semibold text-[#FAF7F1] tracking-tight flex-1 text-center truncate">Tomato Planting</h1>
+        <div class="flex items-center gap-2 w-10 justify-end">
+          <button id="action-share-btn" class="text-[#FAF7F1] active:scale-90 transition-transform">
+            <iconify-icon icon="lucide:share-2" class="text-xl"></iconify-icon>
+          </button>
+          <button id="action-fav-btn" class="text-[#FAF7F1] active:scale-90 transition-transform">
+            <iconify-icon icon="lucide:heart" class="text-xl"></iconify-icon>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 overflow-y-auto">
+      <!-- Hero Image Area -->
+      <div class="relative h-[280px] w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&q=80&w=800" alt="Tomato Plant in Greenhouse" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#FAF7F1] via-transparent to-black/30"></div>
+      </div>
+
+      <!-- Detail Content -->
+      <div class="px-6 -mt-10 relative z-10 space-y-6 pb-20">
+        
+        <!-- Main Info Card -->
+        <div class="bg-white rounded-[22px] p-6 warm-shadow border-[0.5px] border-[#B89968]/20">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <h2 class="font-fraunces text-2xl font-bold text-[#4A5630]">Tomato 'Money Maker'</h2>
+              <p class="font-fraunces italic text-[#B89968] text-sm mt-1">Solanum lycopersicum</p>
+            </div>
+            <span class="bg-[#4A5630]/10 text-[#4A5630] px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider">
+              In Progress
+            </span>
+          </div>
+          
+          <div class="flex flex-wrap gap-3">
+            <div class="flex items-center gap-2 bg-[#FAF7F1] border border-[#B89968]/20 px-3 py-2 rounded-[14px]">
+              <iconify-icon icon="lucide:map-pin" class="text-[#2E5D3A] text-sm"></iconify-icon>
+              <span class="text-xs font-semibold">Greenhouse Bay 1</span>
+            </div>
+            <div class="flex items-center gap-2 bg-[#FAF7F1] border border-[#B89968]/20 px-3 py-2 rounded-[14px]">
+              <iconify-icon icon="lucide:calendar" class="text-[#2E5D3A] text-sm"></iconify-icon>
+              <span class="text-xs font-semibold tabular-nums">April 5, 2024</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress Display -->
+        <div class="bg-white rounded-[22px] p-6 warm-shadow border-[0.5px] border-[#B89968]/20">
+          <div class="eyebrow-label mb-4">
+            <iconify-icon icon="lucide:leaf"></iconify-icon>
+            Planting Maturity
+          </div>
+          <div class="flex items-end justify-between mb-4">
+            <div class="font-fraunces text-[32px] font-bold text-[#4A5630] leading-none tabular-nums">Day 34 <span class="text-lg font-semibold text-[#1E2A22]/40 uppercase tracking-tighter">of 90</span></div>
+            <div class="text-right">
+              <p class="text-[11px] font-bold text-[#2E5D3A] uppercase tracking-wider">Growing Stage</p>
+              <p class="text-xs text-[#1E2A22]/40 tabular-nums font-medium">38% Completed</p>
+            </div>
+          </div>
+          <div class="w-full h-3 bg-[#E8E5D7] rounded-full overflow-hidden">
+            <div class="h-full bg-[#2E5D3A] progress-bar-fill" style="width: 38%"></div>
+          </div>
+        </div>
+
+        <!-- Care Timeline Section -->
+        <div>
+          <div class="eyebrow-label mb-6 px-1">
+            <iconify-icon icon="lucide:leaf"></iconify-icon>
+            Care History
+          </div>
+          
+          <div class="relative ml-3 space-y-8">
+            <div class="absolute left-[7px] top-1 bottom-1 w-[0.5px] bg-[#B89968]/40"></div>
+            
+            <!-- Event 1 -->
+            <div class="relative flex items-start gap-4">
+              <div class="w-4 h-4 rounded-full bg-[#2E5D3A] border-2 border-white z-10 mt-1"></div>
+              <div class="flex-1">
+                <div class="flex justify-between">
+                  <h4 class="text-[15px] font-semibold">Watered</h4>
+                  <span class="text-[#B89968] font-bold tabular-nums text-xs">April 23</span>
+                </div>
+                <p class="text-[13px] text-[#1E2A22]/60">500ml applied • Morning</p>
+              </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="relative flex items-start gap-4">
+              <div class="w-4 h-4 rounded-full bg-[#2E5D3A] border-2 border-white z-10 mt-1"></div>
+              <div class="flex-1">
+                <div class="flex justify-between">
+                  <h4 class="text-[15px] font-semibold">Watered</h4>
+                  <span class="text-[#B89968] font-bold tabular-nums text-xs">April 20</span>
+                </div>
+                <p class="text-[13px] text-[#1E2A22]/60">Full soil saturation</p>
+              </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="relative flex items-start gap-4">
+              <div class="w-4 h-4 rounded-full bg-[#B89968] border-2 border-white z-10 mt-1"></div>
+              <div class="flex-1">
+                <div class="flex justify-between">
+                  <h4 class="text-[15px] font-semibold">Fertilized</h4>
+                  <span class="text-[#B89968] font-bold tabular-nums text-xs">April 18</span>
+                </div>
+                <p class="text-[13px] text-[#1E2A22]/60">Organic Kelp Mix applied</p>
+              </div>
+            </div>
+
+            <!-- Event 4 -->
+            <div class="relative flex items-start gap-4">
+              <div class="w-4 h-4 rounded-full bg-[#2E5D3A] border-2 border-white z-10 mt-1"></div>
+              <div class="flex-1">
+                <div class="flex justify-between">
+                  <h4 class="text-[15px] font-semibold">Watered</h4>
+                  <span class="text-[#B89968] font-bold tabular-nums text-xs">April 15</span>
+                </div>
+                <p class="text-[13px] text-[#1E2A22]/60">Light misting session</p>
+              </div>
+            </div>
+
+            <!-- Event 5 -->
+            <div class="relative flex items-start gap-4">
+              <div class="w-4 h-4 rounded-full bg-[#4A5630] border-2 border-white z-10 mt-1"></div>
+              <div class="flex-1">
+                <div class="flex justify-between">
+                  <h4 class="text-[15px] font-semibold">Planted</h4>
+                  <span class="text-[#B89968] font-bold tabular-nums text-xs">April 5</span>
+                </div>
+                <p class="text-[13px] text-[#1E2A22]/60">Greenhouse Bay 1 • 60cm spacing</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming Tasks -->
+        <div class="bg-white rounded-[22px] p-6 warm-shadow border-[0.5px] border-[#B89968]/20">
+          <div class="eyebrow-label mb-4">
+            <iconify-icon icon="lucide:leaf"></iconify-icon>
+            Upcoming Care
+          </div>
+          <div class="space-y-4">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-full bg-[#FAF7F1] flex items-center justify-center text-[#2E5D3A]">
+                <iconify-icon icon="lucide:droplets" class="text-xl"></iconify-icon>
+              </div>
+              <div class="flex-1">
+                <h4 class="text-[14px] font-semibold">Water plant</h4>
+                <p class="text-[11px] font-bold text-[#B89968] uppercase tracking-wider">Tomorrow</p>
+              </div>
+              <iconify-icon icon="lucide:chevron-right" class="text-gray-300"></iconify-icon>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-full bg-[#FAF7F1] flex items-center justify-center text-[#C06B3A]">
+                <iconify-icon icon="lucide:bug" class="text-xl"></iconify-icon>
+              </div>
+              <div class="flex-1">
+                <h4 class="text-[14px] font-semibold">Check for pests</h4>
+                <p class="text-[11px] font-bold text-[#B89968] uppercase tracking-wider">In 2 days</p>
+              </div>
+              <iconify-icon icon="lucide:chevron-right" class="text-gray-300"></iconify-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo Log -->
+        <div>
+          <div class="flex justify-between items-center mb-4">
+            <div class="eyebrow-label">
+              <iconify-icon icon="lucide:leaf"></iconify-icon>
+              Growth Log
+            </div>
+            <button class="text-[#2E5D3A] text-[11px] font-bold uppercase tracking-widest">Add Photo</button>
+          </div>
+          <div class="flex gap-3 overflow-x-auto scrollbar-hide pb-2">
+            <div class="w-[80px] h-[80px] shrink-0 rounded-[14px] border border-[#B89968]/30 overflow-hidden bg-white warm-shadow">
+               <img src="https://images.unsplash.com/photo-1594498653385-d5172b532c00?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover">
+            </div>
+            <div class="w-[80px] h-[80px] shrink-0 rounded-[14px] border border-[#B89968]/30 overflow-hidden bg-white warm-shadow">
+               <img src="https://images.unsplash.com/photo-1558449028-b53a39d100fc?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover">
+            </div>
+            <div class="w-[80px] h-[80px] shrink-0 rounded-[14px] border border-[#B89968]/30 overflow-hidden bg-white warm-shadow">
+               <img src="https://images.unsplash.com/photo-1545241047-191986427817?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover">
+            </div>
+            <div class="w-[80px] h-[80px] shrink-0 rounded-[14px] border border-[#B89968]/30 overflow-hidden bg-white warm-shadow">
+               <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=150" class="w-full h-full object-cover">
+            </div>
+            <button class="w-[80px] h-[80px] shrink-0 rounded-[14px] border-2 border-dashed border-[#B89968]/30 flex items-center justify-center text-[#B89968]/50">
+              <iconify-icon icon="lucide:plus" class="text-2xl"></iconify-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Notes Section -->
+        <div>
+          <div class="eyebrow-label mb-4 px-1">
+            <iconify-icon icon="lucide:leaf"></iconify-icon>
+            Planting Notes
+          </div>
+          <div class="bg-white rounded-[22px] p-2 warm-shadow border-[0.5px] border-[#B89968]/20">
+            <textarea 
+              placeholder="Tap to add notes about this planting..."
+              class="w-full min-h-[100px] bg-transparent border-none focus:ring-0 p-4 text-[14px] placeholder:text-[#1E2A22]/30"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Sticky Bottom Action Bar -->
+    <footer class="shrink-0 px-6 py-4 bg-white border-t-[0.5px] border-[#B89968]/20 mb-[72px] relative z-40">
+      <div class="flex gap-4">
+        <button id="btn-next-stage" class="flex-1 h-[48px] border-2 border-[#2E5D3A] text-[#2E5D3A] rounded-full font-fraunces font-semibold active:scale-[0.96] transition-all">
+          Next Stage
+        </button>
+        <button id="btn-complete" class="flex-1 h-[48px] bg-[#2E5D3A] text-[#FAF7F1] rounded-full font-fraunces font-semibold warm-shadow active:scale-[0.96] transition-all">
+          Complete
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- component: BottomNavigation (cd8c80f5-74cc-4601-89c1-0e037aa5e3af) -->
+<div v-scope="{ ...{&quot;activeItem&quot;:&quot;crops&quot;,&quot;homeHref&quot;:&quot;#home&quot;,&quot;cropsHref&quot;:&quot;#crops&quot;,&quot;calendarHref&quot;:&quot;#calendar&quot;,&quot;pestsHref&quot;:&quot;#pests&quot;,&quot;settingsHref&quot;:&quot;#settings&quot;}, $emit() {} }">
+<footer class="fixed bottom-0 left-0 right-0 bg-white border-t-[0.5px] border-[#B89968]/30 px-2 pb-[34px] pt-3 z-50" style="box-shadow: 0 2px 4px rgba(46,45,33,0.03), 0 8px 16px rgba(46,45,33,0.06)"><nav class="flex justify-between items-center max-w-md mx-auto"><a :href="homeHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:home" class="text-[18px]" :class="activeItem === 'home' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'home' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Home</span><div v-if="activeItem === 'home'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a><a :href="cropsHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:sprout" class="text-[18px]" :class="activeItem === 'crops' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'crops' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Crops</span><div v-if="activeItem === 'crops'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a><a :href="calendarHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:calendar" class="text-[18px]" :class="activeItem === 'calendar' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'calendar' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Calendar</span><div v-if="activeItem === 'calendar'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a><a :href="pestsHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:bug" class="text-[18px]" :class="activeItem === 'pests' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'pests' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Pests</span><div v-if="activeItem === 'pests'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a><a :href="settingsHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:settings" class="text-[18px]" :class="activeItem === 'settings' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'settings' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Settings</span><div v-if="activeItem === 'settings'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a></nav></footer>
+</div>
+<!-- /component: BottomNavigation (cd8c80f5-74cc-4601-89c1-0e037aa5e3af) -->
+</body>
+</html>

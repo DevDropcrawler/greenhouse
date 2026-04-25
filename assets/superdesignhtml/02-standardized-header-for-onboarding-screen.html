@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="view-transition" content="same-origin">
+  <title>Keeley's Greenhouse - Onboarding 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap');
+
+    :root {
+      --color-forest: #2E5D3A;
+      --color-olive: #6B7A3F;
+      --color-brass: #B89968;
+      --color-terracotta: #C06B3A;
+      --color-honey: #E0A458;
+      --color-cream: #FAF7F1;
+      --color-dark: #1E2A22;
+    }
+
+    .font-fraunces {
+      font-family: 'Fraunces', serif;
+      font-optical-sizing: auto;
+    }
+
+    .font-inter {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .paper-grain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .warm-shadow {
+      box-shadow: 0 2px 4px rgba(46, 45, 33, 0.03), 0 8px 16px rgba(46, 45, 33, 0.06);
+    }
+
+    .button-press:active {
+      transform: scale(0.96);
+      filter: brightness(1.04);
+    }
+
+    .fade-in {
+      animation: fadeIn 300ms ease-out both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @view-transition {
+      navigation: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="w-full h-screen flex flex-col bg-[#FAF7F1] relative overflow-hidden font-inter text-[#1E2A22]">
+    <!-- Paper Grain Texture Overlay -->
+    <div class="paper-grain"></div>
+
+    <!-- App Bar (Signature Element) -->
+    <header class="sticky top-0 shrink-0 w-full pt-14 bg-[#6B7A3F] border-t-[0.5px] border-[#B89968] z-50">
+      <div class="h-14 flex items-center px-4 justify-between">
+        <div class="w-10"></div>
+        <h1 class="font-fraunces text-[20px] font-semibold text-[#FAF7F1] tracking-tight flex-1 text-center">Keeley's Greenhouse</h1>
+        <div class="flex items-center gap-4 w-10 justify-end">
+          <button id="header-search-btn" class="p-1 active:scale-90 transition-transform flex items-center">
+            <iconify-icon icon="lucide:search" class="text-[#FAF7F1] text-[22px]"></iconify-icon>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto fade-in">
+      <!-- Hero Image Section -->
+      <div class="px-4 pt-4">
+        <div class="w-full h-[280px] rounded-[24px] overflow-hidden warm-shadow">
+          <img 
+            src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80&w=1000" 
+            alt="Lush greenhouse in Papamoa"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="px-4 mt-6">
+        <div class="w-full h-[1px] bg-[#B89968] opacity-30"></div>
+      </div>
+
+      <!-- Content Section -->
+      <div class="px-6 py-6">
+        <!-- Eyebrow Label -->
+        <div class="flex items-center gap-2 mb-3">
+          <iconify-icon icon="lucide:leaf" class="text-[#B89968] text-[12px]"></iconify-icon>
+          <span class="font-fraunces text-[11px] font-bold text-[#B89968] uppercase tracking-[0.15em]">Orientation</span>
+        </div>
+
+        <h2 class="font-fraunces text-[32px] font-bold text-[#6B7A3F] leading-[1.1] tracking-tighter mb-4">
+          Planting, tuned for Papamoa
+        </h2>
+
+        <p class="text-[16px] leading-[1.55] text-[#1E2A22] opacity-90">
+          Discover what grows best in your local climate. Papamoa's unique conditions – sunshine, soil, and seasons – shape every recommendation in this journal.
+        </p>
+
+        <!-- NZ Context/Badge -->
+        <div class="mt-8 flex items-center gap-3 bg-[#6B7A3F]/5 border border-[#B89968]/20 p-4 rounded-[22px]">
+          <iconify-icon icon="lucide:map-pin" class="text-[#2E5D3A] text-[24px]"></iconify-icon>
+          <div>
+            <p class="text-[14px] font-semibold text-[#6B7A3F]">Bay of Plenty</p>
+            <p class="text-[12px] opacity-70">Climate Zone: Temperate Maritime</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bottom Action Section -->
+    <footer class="shrink-0 p-6 pb-[34px] bg-white/40 backdrop-blur-md border-t-[1px] border-[#B89968] flex items-center gap-4">
+      <a 
+        href="#skip" 
+        id="onboarding-skip-btn"
+        class="button-press flex-1 h-[48px] border-2 border-[#2E5D3A] text-[#2E5D3A] font-fraunces font-semibold rounded-full flex items-center justify-center transition-all duration-100"
+      >
+        Skip
+      </a>
+      <a 
+        href="#next" 
+        id="onboarding-next-btn"
+        class="button-press flex-1 h-[48px] bg-[#2E5D3A] text-[#FAF7F1] font-fraunces font-semibold rounded-full flex items-center justify-center transition-all duration-100 warm-shadow"
+      >
+        Next Step
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

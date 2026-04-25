@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #2E5D3A;
+      --olive: #6B7A3F;
+      --terracotta: #C06B3A;
+      --honey: #E0A458;
+      --brass: #B89968;
+      --cream: #FAF7F1;
+      --dark-ink: #1E2A22;
+      --shadow-color: rgba(46, 45, 33, 0.06);
+    }
+
+    .font-fraunces { font-family: 'Fraunces', serif; }
+    .font-inter { font-family: 'Inter', sans-serif; }
+
+    .paper-grain {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 100; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .warm-shadow {
+      box-shadow: 0 2px 4px var(--shadow-color), 0 8px 16px var(--shadow-color);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar { display: none; }
+    .custom-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .eyebrow-label {
+      font-family: 'Fraunces', serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; color: var(--brass);
+      display: flex; align-items: center; gap: 6px;
+      text-transform: uppercase;
+    }
+
+    .control-tab-active {
+      color: var(--forest);
+      border-bottom: 2px solid var(--forest);
+    }
+
+    .tabular-numbers { font-variant-numeric: tabular-nums; }
+  </style>
+  <style>sd-component { display: block; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer init></script>
+</head>
+<body class="bg-[#FAF7F1] text-[#1E2A22] font-inter antialiased">
+  <div class="paper-grain"></div>
+
+  <div class="w-full h-screen flex flex-col">
+    <!-- Signature App Bar -->
+    <header class="sticky top-0 shrink-0 pt-14 bg-[#6B7A3F] border-t-[0.5px] border-[#B89968] z-50">
+      <div class="h-14 px-4 flex items-center justify-between">
+        <div class="w-10 flex items-center">
+          <a href="#" id="nav-back-link" class="w-10 h-10 -ml-2 flex items-center justify-center rounded-full active:bg-white/10 transition-colors">
+            <iconify-icon icon="lucide:arrow-left" class="text-[#FAF7F1] text-xl"></iconify-icon>
+          </a>
+        </div>
+        <h1 class="font-fraunces text-[20px] font-semibold text-[#FAF7F1] tracking-tight flex-1 text-center">Botrytis</h1>
+        <div class="flex items-center gap-1 w-10 justify-end">
+          <button id="action-share-btn" class="w-10 h-10 -mr-2 flex items-center justify-center rounded-full active:bg-white/10 transition-colors">
+            <iconify-icon icon="lucide:share-2" class="text-[#FAF7F1] text-xl"></iconify-icon>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 overflow-y-auto relative pb-0">
+      <!-- Hero Image -->
+      <div class="relative h-[300px] w-full overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1594498653385-d5172b532c00?auto=format&fit=crop&q=80&w=800" alt="Botrytis mold damage" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent"></div>
+      </div>
+
+      <!-- Disease Profile Card -->
+      <div class="px-4 -mt-10 relative z-10">
+        <div class="bg-white rounded-[22px] p-6 warm-shadow border-[0.5px] border-[#B89968]/20">
+          <div class="flex justify-between items-start">
+            <div class="flex-1">
+              <h2 class="font-fraunces text-2xl font-bold text-[#6B7A3F] tracking-tight">Botrytis</h2>
+              <p class="font-fraunces italic text-[#B89968] text-sm mt-1">Botrytis cinerea</p>
+            </div>
+            <span class="bg-[#C06B3A] text-white text-[10px] font-bold uppercase tracking-[0.1em] px-3 py-1.5 rounded-full">
+              High Impact
+            </span>
+          </div>
+          <p class="text-sm text-[#1E2A22]/80 mt-4 leading-relaxed">
+            Known as 'Gray Mold', this fungal disease thrives in humid conditions. It spreads via spores and can quickly devastate fruit, flowers, and foliage in poorly ventilated greenhouses.
+          </p>
+        </div>
+      </div>
+
+      <!-- Symptoms Section -->
+      <section class="mt-8 px-4">
+        <div class="bg-white rounded-[22px] p-6 warm-shadow border-[0.5px] border-[#B89968]">
+          <div class="eyebrow-label mb-4">
+            <iconify-icon icon="lucide:leaf" class="text-[14px]"></iconify-icon>
+            Symptoms
+          </div>
+          <ul class="space-y-4">
+            <li class="flex gap-4 items-start">
+              <iconify-icon icon="lucide:leaf" class="text-[#2E5D3A] mt-1 shrink-0"></iconify-icon>
+              <span class="text-sm font-medium leading-relaxed">Wet brown spots on petals and leaves</span>
+            </li>
+            <li class="flex gap-4 items-start">
+              <iconify-icon icon="lucide:leaf" class="text-[#2E5D3A] mt-1 shrink-0"></iconify-icon>
+              <span class="text-sm font-medium leading-relaxed">Fuzzy gray mold layer (sporulation)</span>
+            </li>
+            <li class="flex gap-4 items-start">
+              <iconify-icon icon="lucide:leaf" class="text-[#2E5D3A] mt-1 shrink-0"></iconify-icon>
+              <span class="text-sm font-medium leading-relaxed">Soft rot of fruit and stems</span>
+            </li>
+            <li class="flex gap-4 items-start">
+              <iconify-icon icon="lucide:leaf" class="text-[#2E5D3A] mt-1 shrink-0"></iconify-icon>
+              <span class="text-sm font-medium leading-relaxed">Rapid defoliation and decay</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Damage Carousel -->
+      <section class="mt-10 px-4">
+        <div class="eyebrow-label mb-4">
+          <iconify-icon icon="lucide:leaf" class="text-[14px]"></iconify-icon>
+          Damage looks like
+        </div>
+        <div class="flex gap-3 overflow-x-auto pb-2 custom-scrollbar">
+          <img src="https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=200" class="w-20 h-20 rounded-[22px] border-[0.5px] border-[#B89968] object-cover shrink-0">
+          <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=200" class="w-20 h-20 rounded-[22px] border-[0.5px] border-[#B89968] object-cover shrink-0">
+          <img src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=200" class="w-20 h-20 rounded-[22px] border-[0.5px] border-[#B89968] object-cover shrink-0">
+        </div>
+      </section>
+
+      <!-- Control Methods Tabs -->
+      <section class="mt-10 px-4">
+        <div class="flex items-center border-b-[0.5px] border-[#B89968]/30 px-2">
+          <button class="flex-1 py-3 text-sm font-semibold control-tab-active">Organic</button>
+          <button class="flex-1 py-3 text-sm font-medium text-[#1E2A22]/50">Biological</button>
+          <button class="flex-1 py-3 text-sm font-medium text-[#1E2A22]/50">Chemical</button>
+        </div>
+
+        <div class="mt-4 space-y-3">
+          <div class="flex items-center gap-4 bg-white p-4 rounded-[22px] warm-shadow border-[0.5px] border-[#B89968]/10">
+            <iconify-icon icon="lucide:check-circle" class="text-[#2E5D3A] text-xl"></iconify-icon>
+            <span class="text-sm font-medium">Improve air circulation</span>
+          </div>
+          <div class="flex items-center gap-4 bg-white p-4 rounded-[22px] warm-shadow border-[0.5px] border-[#B89968]/10">
+            <iconify-icon icon="lucide:check-circle" class="text-[#2E5D3A] text-xl"></iconify-icon>
+            <span class="text-sm font-medium">Remove and burn infected parts</span>
+          </div>
+          <div class="flex items-center gap-4 bg-white p-4 rounded-[22px] warm-shadow border-[0.5px] border-[#B89968]/10">
+            <iconify-icon icon="lucide:check-circle" class="text-[#2E5D3A] text-xl"></iconify-icon>
+            <span class="text-sm font-medium">Avoid overhead watering</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Prevention Section -->
+      <section class="mt-10 px-4">
+        <div class="eyebrow-label mb-6">
+          <iconify-icon icon="lucide:leaf" class="text-[14px]"></iconify-icon>
+          Prevention
+        </div>
+        <div class="space-y-6">
+          <div class="flex gap-4">
+            <div class="w-8 h-8 rounded-full border border-[#B89968] flex items-center justify-center shrink-0">
+              <span class="font-inter font-bold text-[10px] text-[#B89968] tabular-numbers">01</span>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <iconify-icon icon="lucide:wind" class="text-[#2E5D3A] text-lg"></iconify-icon>
+                <h4 class="text-sm font-bold uppercase tracking-tight">Maximize Airflow</h4>
+              </div>
+              <p class="text-xs text-[#1E2A22]/60 leading-relaxed">Use greenhouse fans and vent daily to keep humidity below 60%.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="w-8 h-8 rounded-full border border-[#B89968] flex items-center justify-center shrink-0">
+              <span class="font-inter font-bold text-[10px] text-[#B89968] tabular-numbers">02</span>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <iconify-icon icon="lucide:scissors" class="text-[#2E5D3A] text-lg"></iconify-icon>
+                <h4 class="text-sm font-bold uppercase tracking-tight">Clean Pruning</h4>
+              </div>
+              <p class="text-xs text-[#1E2A22]/60 leading-relaxed">Sanitize secateurs between every cut to prevent cross-contamination.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="w-8 h-8 rounded-full border border-[#B89968] flex items-center justify-center shrink-0">
+              <span class="font-inter font-bold text-[10px] text-[#B89968] tabular-numbers">03</span>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <iconify-icon icon="lucide:droplets" class="text-[#2E5D3A] text-lg"></iconify-icon>
+                <h4 class="text-sm font-bold uppercase tracking-tight">Morning Watering</h4>
+              </div>
+              <p class="text-xs text-[#1E2A22]/60 leading-relaxed">Water only in the morning so foliage dries before evening humidity rises.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Affected Crops -->
+      <section class="mt-10 px-4">
+        <div class="eyebrow-label mb-4">
+          <iconify-icon icon="lucide:leaf" class="text-[14px]"></iconify-icon>
+          Affected Crops
+        </div>
+        <div class="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
+          <span class="bg-white px-4 py-2 rounded-full border-[0.5px] border-[#B89968] text-[#2E5D3A] text-[13px] font-semibold whitespace-nowrap warm-shadow">Strawberry 'Camarosa'</span>
+          <span class="bg-white px-4 py-2 rounded-full border-[0.5px] border-[#B89968] text-[#2E5D3A] text-[13px] font-semibold whitespace-nowrap warm-shadow">Tomato 'Money Maker'</span>
+          <span class="bg-white px-4 py-2 rounded-full border-[0.5px] border-[#B89968] text-[#2E5D3A] text-[13px] font-semibold whitespace-nowrap warm-shadow">Meyer Lemon</span>
+          <span class="bg-white px-4 py-2 rounded-full border-[0.5px] border-[#B89968] text-[#2E5D3A] text-[13px] font-semibold whitespace-nowrap warm-shadow">Capsicum</span>
+        </div>
+      </section>
+
+      <!-- Watch & Learn -->
+      <section class="mt-10 px-4 pb-32">
+        <div class="eyebrow-label mb-5">
+          <iconify-icon icon="lucide:leaf" class="text-[14px]"></iconify-icon>
+          Watch & Learn
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="group cursor-pointer">
+            <div class="relative aspect-[4/3] rounded-[22px] overflow-hidden warm-shadow border-[0.5px] border-[#B89968]/20">
+              <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                <iconify-icon icon="lucide:play" class="text-white text-3xl"></iconify-icon>
+              </div>
+              <div class="absolute bottom-2 right-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-white font-bold">5:15</div>
+            </div>
+            <p class="mt-2 text-xs font-bold leading-tight line-clamp-2 uppercase tracking-tight">Curing Gray Mold in Berries</p>
+          </div>
+
+          <div class="group cursor-pointer">
+            <div class="relative aspect-[4/3] rounded-[22px] overflow-hidden warm-shadow border-[0.5px] border-[#B89968]/20">
+              <img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=400" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                <iconify-icon icon="lucide:play" class="text-white text-3xl"></iconify-icon>
+              </div>
+              <div class="absolute bottom-2 right-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-white font-bold">3:10</div>
+            </div>
+            <p class="mt-2 text-xs font-bold leading-tight line-clamp-2 uppercase tracking-tight">Greenhouse Humidity Guide</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Sticky Bottom Action Bar -->
+    <footer class="sticky bottom-0 bg-white border-t-[0.5px] border-[#B89968]/30 px-6 pb-6 pt-4 flex gap-3 z-30 shadow-[0_-4px_12px_rgba(46,45,33,0.08)]">
+      <button id="action-learn-more-btn" class="flex-1 h-12 border-2 border-[#2E5D3A] text-[#2E5D3A] rounded-full font-fraunces font-semibold transition-transform active:scale-95">
+        Learn More
+      </button>
+      <button id="action-confirm-treated-btn" class="flex-1 h-12 bg-[#2E5D3A] text-[#FAF7F1] rounded-full font-fraunces font-semibold transition-transform active:scale-95 warm-shadow">
+        Confirm Treated
+      </button>
+    </footer>
+    </main>
+
+    <!-- Global Bottom Navigation -->
+    <!-- component: BottomNavigation (cd8c80f5-74cc-4601-89c1-0e037aa5e3af) -->
+<div v-scope="{ ...{&quot;activeItem&quot;:&quot;pests&quot;,&quot;homeHref&quot;:&quot;#home&quot;,&quot;cropsHref&quot;:&quot;#crops&quot;,&quot;calendarHref&quot;:&quot;#calendar&quot;,&quot;pestsHref&quot;:&quot;#pests&quot;,&quot;settingsHref&quot;:&quot;#settings&quot;}, $emit() {} }">
+<footer class="fixed bottom-0 left-0 right-0 bg-white border-t-[0.5px] border-[#B89968]/30 px-2 pb-[34px] pt-3 z-50" style="box-shadow: 0 2px 4px rgba(46,45,33,0.03), 0 8px 16px rgba(46,45,33,0.06)"><nav class="flex justify-between items-center max-w-md mx-auto"><a :href="homeHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:home" class="text-[18px]" :class="activeItem === 'home' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'home' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Home</span><div v-if="activeItem === 'home'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a><a :href="cropsHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:sprout" class="text-[18px]" :class="activeItem === 'crops' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'crops' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Crops</span><div v-if="activeItem === 'crops'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a><a :href="calendarHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:calendar" class="text-[18px]" :class="activeItem === 'calendar' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'calendar' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Calendar</span><div v-if="activeItem === 'calendar'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a><a :href="pestsHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:bug" class="text-[18px]" :class="activeItem === 'pests' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'pests' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Pests</span><div v-if="activeItem === 'pests'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a><a :href="settingsHref" class="flex flex-col items-center gap-1 px-4 relative"><iconify-icon icon="lucide:settings" class="text-[18px]" :class="activeItem === 'settings' ? 'text-[#2E5D3A]' : 'text-[#7A7A7A]'"></iconify-icon><span class="text-[10px] font-fraunces" :class="activeItem === 'settings' ? 'font-bold text-[#2E5D3A]' : 'font-medium text-[#7A7A7A]'">Settings</span><div v-if="activeItem === 'settings'" class="absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2E5D3A] rounded-full"></div></a></nav></footer>
+</div>
+<!-- /component: BottomNavigation (cd8c80f5-74cc-4601-89c1-0e037aa5e3af) -->
+  </div>
+</body>
+</html>

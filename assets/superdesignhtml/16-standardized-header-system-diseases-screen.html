@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #2E5D3A;
+      --olive-moss: #6B7A3F;
+      --brass: #B89968;
+      --terracotta: #C06B3A;
+      --honey: #E0A458;
+      --cream: #FAF7F1;
+      --ink: #1E2A22;
+      --shadow-warm: 0 2px 4px rgba(46, 45, 33, 0.03), 0 8px 16px rgba(46, 45, 33, 0.06);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--cream);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    .font-fraunces {
+      font-family: 'Fraunces', serif;
+    }
+
+    .paper-grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .app-bar {
+      background-color: #6B7A3F;
+      color: #FAF7F1;
+      border-top: 0.5px solid #B89968;
+      view-transition-name: app-bar;
+    }
+
+    .warm-shadow {
+      box-shadow: var(--shadow-warm);
+    }
+
+    .active-underline {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 2px;
+      background-color: var(--brass);
+      border-radius: 99px;
+    }
+
+    .card-hairline {
+      border: 0.5px solid rgba(184, 153, 104, 0.3);
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .press-effect:active {
+      transform: scale(0.97);
+      transition: transform 120ms ease;
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <div class="paper-grain"></div>
+
+  <div class="w-full h-screen flex flex-col relative overflow-hidden">
+    
+    <!-- App Bar -->
+    <header class="sticky top-0 shrink-0 h-[70px] pt-[14px] app-bar z-50">
+      <div class="h-14 px-4 flex items-center justify-between">
+        <div class="w-10"></div> <!-- Left spacer for centering -->
+        <h1 class="font-fraunces text-[20px] font-semibold text-[#FAF7F1] tracking-tight flex-1 text-center">Diseases</h1>
+        <div class="flex items-center gap-4 w-10 justify-end">
+          <button id="disease-search-btn" class="p-1 active:scale-90 transition-transform">
+            <iconify-icon icon="lucide:search" class="text-2xl"></iconify-icon>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Filter Tabs -->
+    <div class="shrink-0 bg-[#FAF7F1] border-b border-[#B89968]/20 z-40">
+      <nav class="flex items-center justify-around h-12 px-6">
+        <button id="filter-all" class="relative h-full px-2 flex flex-col items-center justify-center">
+          <span class="text-[11px] font-fraunces font-bold uppercase tracking-[0.1em] text-[#2E5D3A]">All</span>
+          <div class="active-underline"></div>
+        </button>
+        <button id="filter-high" class="h-full px-2 flex flex-col items-center justify-center opacity-55">
+          <span class="text-[11px] font-fraunces font-bold uppercase tracking-[0.1em] text-[#1E2A22]">High Impact</span>
+        </button>
+        <button id="filter-garden" class="h-full px-2 flex flex-col items-center justify-center opacity-55">
+          <span class="text-[11px] font-fraunces font-bold uppercase tracking-[0.1em] text-[#1E2A22]">In Garden</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Main Content List -->
+    <main class="flex-1 overflow-y-auto px-6 pt-6 pb-40 scrollbar-hide space-y-6">
+      
+      <!-- Disease Card: Botrytis -->
+      <a href="#" id="disease-botrytis" class="block bg-white rounded-[22px] overflow-hidden warm-shadow card-hairline press-effect">
+        <div class="h-32 w-full overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1596708051795-037146522f77?auto=format&fit=crop&q=80&w=600" alt="Botrytis" class="w-full h-full object-cover">
+          <div class="absolute top-3 right-3">
+            <span class="bg-[#C06B3A] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">High Impact</span>
+          </div>
+        </div>
+        <div class="p-4">
+          <h3 class="font-fraunces text-lg font-semibold text-[#2E5D3A] leading-tight">Botrytis (Grey Mould)</h3>
+          <p class="font-fraunces italic text-[12px] text-[#B89968] mt-0.5">Botrytis cinerea</p>
+          <p class="text-[13px] text-[#1E2A22]/70 mt-2 line-clamp-2 leading-relaxed">Fuzzy grey mould covering flowers, leaves, and fruit in humid conditions.</p>
+        </div>
+      </a>
+
+      <!-- Disease Card: Blight -->
+      <a href="#" id="disease-blight" class="block bg-white rounded-[22px] overflow-hidden warm-shadow card-hairline press-effect">
+        <div class="h-32 w-full overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1628102422317-21792405a9fa?auto=format&fit=crop&q=80&w=600" alt="Late Blight" class="w-full h-full object-cover">
+          <div class="absolute top-3 right-3">
+            <span class="bg-[#C06B3A] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">High Impact</span>
+          </div>
+        </div>
+        <div class="p-4">
+          <h3 class="font-fraunces text-lg font-semibold text-[#2E5D3A] leading-tight">Late Blight</h3>
+          <p class="font-fraunces italic text-[12px] text-[#B89968] mt-0.5">Phytophthora infestans</p>
+          <p class="text-[13px] text-[#1E2A22]/70 mt-2 line-clamp-2 leading-relaxed">Rapid collapse of foliage and dark, water-soaked patches on stems and fruit.</p>
+        </div>
+      </a>
+
+      <!-- Disease Card: Powdery Mildew -->
+      <a href="#" id="disease-mildew" class="block bg-white rounded-[22px] overflow-hidden warm-shadow card-hairline press-effect">
+        <div class="h-32 w-full overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=600" alt="Powdery Mildew" class="w-full h-full object-cover">
+          <div class="absolute top-3 right-3">
+            <span class="bg-[#E0A458] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Medium</span>
+          </div>
+        </div>
+        <div class="p-4">
+          <h3 class="font-fraunces text-lg font-semibold text-[#2E5D3A] leading-tight">Powdery Mildew</h3>
+          <p class="font-fraunces italic text-[12px] text-[#B89968] mt-0.5">Erysiphaceae spp.</p>
+          <p class="text-[13px] text-[#1E2A22]/70 mt-2 line-clamp-2 leading-relaxed">White, flour-like dusting on leaves that inhibits photosynthesis and stunts growth.</p>
+        </div>
+      </a>
+
+      <!-- Disease Card: Damping Off -->
+      <a href="#" id="disease-damping" class="block bg-white rounded-[22px] overflow-hidden warm-shadow card-hairline press-effect">
+        <div class="h-32 w-full overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?auto=format&fit=crop&q=80&w=600" alt="Damping Off" class="w-full h-full object-cover">
+          <div class="absolute top-3 right-3">
+            <span class="bg-[#E0A458] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Medium</span>
+          </div>
+        </div>
+        <div class="p-4">
+          <h3 class="font-fraunces text-lg font-semibold text-[#2E5D3A] leading-tight">Damping Off</h3>
+          <p class="font-fraunces italic text-[12px] text-[#B89968] mt-0.5">Rhizoctonia solani</p>
+          <p class="text-[13px] text-[#1E2A22]/70 mt-2 line-clamp-2 leading-relaxed">Sudden collapse and death of young seedlings at the soil surface level.</p>
+        </div>
+      </a>
+
+      <!-- Disease Card: Leaf Spot -->
+      <a href="#" id="disease-leafspot" class="block bg-white rounded-[22px] overflow-hidden warm-shadow card-hairline press-effect">
+        <div class="h-32 w-full overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&q=80&w=600" alt="Septoria Leaf Spot" class="w-full h-full object-cover">
+          <div class="absolute top-3 right-3">
+            <span class="bg-[#2E5D3A] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Low Impact</span>
+          </div>
+        </div>
+        <div class="p-4">
+          <h3 class="font-fraunces text-lg font-semibold text-[#2E5D3A] leading-tight">Septoria Leaf Spot</h3>
+          <p class="font-fraunces italic text-[12px] text-[#B89968] mt-0.5">Septoria lycopersici</p>
+          <p class="text-[13px] text-[#1E2A22]/70 mt-2 line-clamp-2 leading-relaxed">Small dark spots with light centers appearing first on lower, older leaves.</p>
+        </div>
+      </a>
+
+    </main>
+
+    <!-- Bottom Navigation -->
+    <footer class="fixed bottom-0 left-0 right-0 h-[72px] bg-[#FAF7F1]/92 backdrop-blur-[32px] border-t-[0.5px] border-[#B89968] flex items-center justify-around px-4 pb-6 z-50">
+      <a href="#" id="nav-home-link" class="flex flex-col items-center gap-1 opacity-55 press-effect">
+        <iconify-icon icon="lucide:home" class="text-xl"></iconify-icon>
+        <span class="text-[10px] font-medium uppercase tracking-wider">Home</span>
+      </a>
+      <a href="#" id="nav-calendar-link" class="flex flex-col items-center gap-1 opacity-55 press-effect">
+        <iconify-icon icon="lucide:calendar" class="text-xl"></iconify-icon>
+        <span class="text-[10px] font-medium uppercase tracking-wider">Calendar</span>
+      </a>
+      <a href="#" id="nav-crops-link" class="flex flex-col items-center gap-1 opacity-55 press-effect">
+        <iconify-icon icon="lucide:sprout" class="text-xl"></iconify-icon>
+        <span class="text-[10px] font-medium uppercase tracking-wider">Crops</span>
+      </a>
+      <a href="#" id="nav-garden-link" class="flex flex-col items-center gap-1 opacity-55 press-effect">
+        <iconify-icon icon="lucide:utility-pole" class="text-xl"></iconify-icon>
+        <span class="text-[10px] font-medium uppercase tracking-wider">Garden</span>
+      </a>
+      <a href="#" id="nav-more-link" class="flex flex-col items-center gap-1 relative text-[#2E5D3A] press-effect">
+        <iconify-icon icon="lucide:more-horizontal" class="text-xl"></iconify-icon>
+        <span class="text-[10px] font-medium uppercase tracking-wider">More</span>
+        <div class="active-underline"></div>
+      </a>
+    </footer>
+
+  </div>
+</body>
+</html>

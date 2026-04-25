@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400..700;1,400..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.55;
+      color: #1E2A22;
+    }
+    .font-fraunces {
+      font-family: 'Fraunces', serif;
+    }
+    .paper-grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+    .warm-shadow {
+      box-shadow: 0 2px 4px rgba(46,45,33,0.03), 0 8px 16px rgba(46,45,33,0.06);
+    }
+    .app-bar {
+      background-color: #6B7A3F;
+      color: #FAF7F1;
+      border-top: 0.5px solid #B89968;
+    }
+    .brass-hairline {
+      border: 0.5px solid #B89968;
+    }
+    .toggle-checked {
+      background-color: #2E5D3A;
+    }
+    .toggle-dot {
+      transform: translateX(0px);
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .toggle-dot-checked {
+      transform: translateX(18px);
+    }
+  </style>
+</head>
+<body class="bg-[#FAF7F1]">
+  <div class="paper-grain"></div>
+
+  <div class="w-full min-h-screen flex flex-col">
+    <!-- App Bar -->
+    <header class="sticky top-0 shrink-0 pt-14 app-bar z-50">
+      <div class="h-14 px-4 flex items-center justify-between">
+        <div class="w-10">
+          <a href="#" id="header-back-link" class="w-10 h-10 flex items-center justify-center text-[#FAF7F1] active:scale-95 transition-transform">
+            <iconify-icon icon="lucide:arrow-left" class="text-2xl"></iconify-icon>
+          </a>
+        </div>
+        <h1 class="font-fraunces text-[20px] font-semibold text-[#FAF7F1] tracking-tight flex-1 text-center">Settings</h1>
+        <div class="flex items-center gap-4 w-10 justify-end"></div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto pb-48">
+      <div class="px-6 py-6">
+        
+        <!-- Profile Section -->
+        <div class="bg-white rounded-[22px] p-6 brass-hairline warm-shadow flex flex-col items-center">
+          <div class="relative w-20 h-20 rounded-full border-2 border-[#B89968] p-0.5 overflow-hidden mb-3">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150" alt="Avatar" class="w-full h-full rounded-full object-cover">
+          </div>
+          <h2 class="font-fraunces text-[18px] font-semibold text-[#1E2A22]">Keeley</h2>
+          <p class="text-sm text-[#7A7A7A] mb-4">keeley@greenhouse.nz</p>
+          <button id="profile-edit-btn" class="w-full py-2.5 rounded-full border border-[#2E5D3A] text-[#2E5D3A] font-semibold text-sm transition-transform active:scale-[0.98]">
+            Edit Profile
+          </button>
+        </div>
+
+        <!-- Notifications Section -->
+        <div class="mt-8">
+          <div class="flex items-center gap-1.5 mb-2 px-1">
+            <iconify-icon icon="lucide:leaf" class="text-[11px] text-[#B89968]"></iconify-icon>
+            <span class="font-fraunces text-[11px] uppercase tracking-[0.1em] text-[#B89968] font-bold">Notifications</span>
+          </div>
+          <div class="bg-white rounded-[22px] border-[0.5px] border-[#B89968] warm-shadow overflow-hidden">
+            <!-- Item 1 -->
+            <div class="flex items-center justify-between p-4">
+              <span class="text-base font-medium">Watering Reminders</span>
+              <div class="w-[44px] h-[24px] rounded-full p-1 toggle-checked cursor-pointer">
+                <div class="w-[16px] h-[16px] bg-white rounded-full toggle-dot-checked"></div>
+              </div>
+            </div>
+            <div class="h-[1px] bg-[#B89968]/20 mx-4"></div>
+            <!-- Item 2 -->
+            <div class="flex items-center justify-between p-4">
+              <span class="text-base font-medium">Pest Alerts</span>
+              <div class="w-[44px] h-[24px] rounded-full p-1 toggle-checked cursor-pointer">
+                <div class="w-[16px] h-[16px] bg-white rounded-full toggle-dot-checked"></div>
+              </div>
+            </div>
+            <div class="h-[1px] bg-[#B89968]/20 mx-4"></div>
+            <!-- Item 3 -->
+            <div class="flex items-center justify-between p-4">
+              <span class="text-base font-medium">Harvest Notifications</span>
+              <div class="w-[44px] h-[24px] rounded-full p-1 toggle-checked cursor-pointer">
+                <div class="w-[16px] h-[16px] bg-white rounded-full toggle-dot-checked"></div>
+              </div>
+            </div>
+            <div class="h-[1px] bg-[#B89968]/20 mx-4"></div>
+            <!-- Item 4 -->
+            <div class="flex items-center justify-between p-4">
+              <span class="text-base font-medium">Marketing Emails</span>
+              <div class="w-[44px] h-[24px] rounded-full p-1 bg-[#CBCBCB] cursor-pointer">
+                <div class="w-[16px] h-[16px] bg-white rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Garden Preferences Section -->
+        <div class="mt-8">
+          <div class="flex items-center gap-1.5 mb-2 px-1">
+            <iconify-icon icon="lucide:leaf" class="text-[11px] text-[#B89968]"></iconify-icon>
+            <span class="font-fraunces text-[11px] uppercase tracking-[0.1em] text-[#B89968] font-bold">Garden Preferences</span>
+          </div>
+          <div class="bg-white rounded-[22px] border-[0.5px] border-[#B89968] warm-shadow overflow-hidden">
+            <a href="#" id="pref-units-link" class="flex items-center justify-between p-4 active:bg-[#FAF7F1]">
+              <span class="text-base font-medium">Measurement Units</span>
+              <div class="flex items-center gap-2 text-[#2E5D3A]">
+                <span class="text-sm font-semibold">Metric</span>
+                <iconify-icon icon="lucide:chevron-right" class="text-gray-400"></iconify-icon>
+              </div>
+            </a>
+            <div class="h-[1px] bg-[#B89968]/20 mx-4"></div>
+            <a href="#" id="pref-climate-link" class="flex items-center justify-between p-4 active:bg-[#FAF7F1]">
+              <span class="text-base font-medium">Climate Zone</span>
+              <div class="flex items-center gap-2 text-[#2E5D3A]">
+                <span class="text-sm font-semibold">Temperate</span>
+                <iconify-icon icon="lucide:chevron-right" class="text-gray-400"></iconify-icon>
+              </div>
+            </a>
+            <div class="h-[1px] bg-[#B89968]/20 mx-4"></div>
+            <a href="#" id="pref-size-link" class="flex items-center justify-between p-4 active:bg-[#FAF7F1]">
+              <span class="text-base font-medium">Garden Size</span>
+              <div class="flex items-center gap-2 text-[#2E5D3A]">
+                <span class="text-sm font-semibold">Medium</span>
+                <iconify-icon icon="lucide:chevron-right" class="text-gray-400"></iconify-icon>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="mt-8">
+          <div class="flex items-center gap-1.5 mb-2 px-1">
+            <iconify-icon icon="lucide:leaf" class="text-[11px] text-[#B89968]"></iconify-icon>
+            <span class="font-fraunces text-[11px] uppercase tracking-[0.1em] text-[#B89968] font-bold">About</span>
+          </div>
+          <div class="bg-white rounded-[22px] border-[0.5px] border-[#B89968] warm-shadow overflow-hidden">
+            <div class="flex items-center justify-between p-4">
+              <span class="text-base font-medium">App version</span>
+              <span class="text-sm font-semibold text-[#B89968] font-mono">1.0.0</span>
+            </div>
+            <div class="h-[1px] bg-[#B89968]/20 mx-4"></div>
+            <a href="#" id="about-privacy-link" class="block p-4 active:bg-[#FAF7F1]">
+              <span class="text-base font-semibold text-[#2E5D3A]">Privacy Policy</span>
+            </a>
+            <div class="h-[1px] bg-[#B89968]/20 mx-4"></div>
+            <a href="#" id="about-terms-link" class="block p-4 active:bg-[#FAF7F1]">
+              <span class="text-base font-semibold text-[#2E5D3A]">Terms of Service</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Sticky Sign Out Area -->
+    <div class="fixed bottom-[72px] left-0 right-0 px-6 py-4 bg-gradient-to-t from-[#FFF8F0] via-[#FFF8F0] to-transparent z-30">
+      <button id="sign-out-btn" class="w-full h-[48px] bg-[#C06B3A] text-white rounded-full font-fraunces font-semibold tracking-wide warm-shadow transition-transform active:scale-[0.96]">
+        Sign Out
+      </button>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <footer class="fixed bottom-0 left-0 right-0 h-[72px] bg-[#FFF8F0]/92 backdrop-blur-md border-t-[0.5px] border-[#A89968] z-50 flex items-center justify-around px-2">
+      <a href="#" id="nav-home" class="flex flex-col items-center gap-1 group">
+        <iconify-icon icon="lucide:home" class="text-2xl text-[#1E2A22]/55"></iconify-icon>
+        <span class="text-[11px] font-semibold text-[#1E2A22]/55">Home</span>
+      </a>
+      <a href="#" id="nav-calendar" class="flex flex-col items-center gap-1">
+        <iconify-icon icon="lucide:grid-3x3" class="text-2xl text-[#1E2A22]/55"></iconify-icon>
+        <span class="text-[11px] font-semibold text-[#1E2A22]/55">Calendar</span>
+      </a>
+      <a href="#" id="nav-crops" class="flex flex-col items-center gap-1">
+        <iconify-icon icon="lucide:sprout" class="text-2xl text-[#1E2A22]/55"></iconify-icon>
+        <span class="text-[11px] font-semibold text-[#1E2A22]/55">Crops</span>
+      </a>
+      <a href="#" id="nav-garden" class="flex flex-col items-center gap-1">
+        <iconify-icon icon="lucide:droplets" class="text-2xl text-[#1E2A22]/55"></iconify-icon>
+        <span class="text-[11px] font-semibold text-[#1E2A22]/55">Garden</span>
+      </a>
+      <a href="#" id="nav-more" class="flex flex-col items-center gap-1 relative">
+        <iconify-icon icon="lucide:more-horizontal" class="text-2xl text-[#2D5016]"></iconify-icon>
+        <span class="text-[11px] font-semibold text-[#2D5016]">More</span>
+        <div class="absolute -bottom-2 w-6 h-[2px] bg-[#A89968] rounded-full"></div>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

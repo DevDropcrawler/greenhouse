@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-forest: #2E5D3A;
+      --color-olive: #6B7A3F;
+      --color-terracotta: #C06B3A;
+      --color-honey: #E0A458;
+      --color-brass: #B89968;
+      --color-cream: #FAF7F1;
+      --color-ink: #1E2A22;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--color-cream);
+      color: var(--color-ink);
+      margin: 0;
+      padding: 0;
+    }
+
+    .font-fraunces {
+      font-family: 'Fraunces', serif;
+    }
+
+    .paper-grain {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 60;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .custom-shadow {
+      box-shadow: 0 2px 4px rgba(46, 45, 33, 0.06), 0 8px 16px rgba(46, 45, 33, 0.06);
+    }
+
+    .sheet-animate-up {
+      animation: slideUp 0.3s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+    }
+
+    .backdrop-fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .action-row:active {
+      transform: scale(0.97);
+      opacity: 0.8;
+      transition: all 120ms ease;
+    }
+
+    .botanical-icon {
+      stroke-width: 1.5px;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="relative w-full h-screen flex flex-col overflow-hidden">
+    <!-- Paper Grain Texture Overlay -->
+    <div class="paper-grain"></div>
+
+    <!-- Background Content (Simulating Home Screen under Modal) -->
+    <div class="flex-1 flex flex-col blur-[2px] pointer-events-none">
+      <header class="sticky top-0 shrink-0 pt-[14px] bg-[#6B7A3F] border-t-[0.5px] border-[#B89968] z-50">
+        <div class="h-14 px-4 flex items-center justify-between">
+          <div class="w-10"></div>
+          <h1 class="font-fraunces text-[20px] font-semibold text-[#FAF7F1] tracking-tight flex-1 text-center">Keeley's Greenhouse</h1>
+          <div class="flex items-center gap-4 w-10 justify-end">
+            <button id="header-search-btn" class="p-1 active:scale-90 transition-transform">
+              <iconify-icon id="header-search-icon" icon="lucide:search" class="text-2xl text-[#FAF7F1]"></iconify-icon>
+            </button>
+          </div>
+        </div>
+      </header>
+      <main class="flex-1 p-6">
+        <p class="font-fraunces text-sm italic text-[#B89968] mb-1">April</p>
+        <h2 class="font-fraunces text-3xl font-bold text-[#4A5630]">Good morning, Keeley</h2>
+      </main>
+    </div>
+
+    <!-- Dark Backdrop -->
+    <div id="modal-backdrop" class="fixed inset-0 z-30 bg-[#1E2A22]/40 backdrop-fade-in"></div>
+
+    <!-- Bottom Sheet Modal -->
+    <div id="more-sheet" class="fixed bottom-[72px] left-0 right-0 z-40 bg-[#FAF7F1] rounded-t-[24px] flex flex-col sheet-animate-up h-[60%] overflow-hidden shadow-[0_-8px_30px_rgba(0,0,0,0.12)]">
+      
+      <!-- Modal Header -->
+      <header class="sticky top-0 shrink-0 pt-[14px] bg-[#6B7A3F] border-t-[0.5px] border-[#B89968] z-50 relative">
+        <div class="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#FAF7F1]/20 rounded-full"></div>
+        <div class="h-14 px-4 flex items-center justify-between">
+          <div class="w-10"></div>
+          <h2 class="font-fraunces text-[20px] font-semibold text-[#FAF7F1] tracking-tight flex-1 text-center">More</h2>
+          <div class="w-10"></div>
+        </div>
+      </header>
+
+      <!-- Action Buttons List -->
+      <div class="flex-1 px-6">
+        <div class="flex flex-col">
+          
+          <!-- Pests Row -->
+          <a href="#" id="btn-pests" class="action-row flex items-center h-[56px] px-4 group">
+            <iconify-icon icon="lucide:bug" class="text-2xl text-[#2E5D3A] botanical-icon"></iconify-icon>
+            <span class="ml-4 text-[16px] font-semibold text-[#1E2A22] leading-none">Pests</span>
+          </a>
+          <div class="mx-6 border-b-[0.5px] border-[#B89968]/50"></div>
+
+          <!-- Diseases Row -->
+          <a href="#" id="btn-diseases" class="action-row flex items-center h-[56px] px-4 group">
+            <iconify-icon icon="lucide:virus" class="text-2xl text-[#2E5D3A] botanical-icon"></iconify-icon>
+            <span class="ml-4 text-[16px] font-semibold text-[#1E2A22] leading-none">Diseases</span>
+          </a>
+          <div class="mx-6 border-b-[0.5px] border-[#B89968]/50"></div>
+
+          <!-- Search Row -->
+          <a href="#" id="btn-search" class="action-row flex items-center h-[56px] px-4 group">
+            <iconify-icon icon="lucide:search" class="text-2xl text-[#2E5D3A] botanical-icon"></iconify-icon>
+            <span class="ml-4 text-[16px] font-semibold text-[#1E2A22] leading-none">Search</span>
+          </a>
+          <div class="mx-6 border-b-[0.5px] border-[#B89968]/50"></div>
+
+          <!-- Favourites Row -->
+          <a href="#" id="btn-favourites" class="action-row flex items-center h-[56px] px-4 group">
+            <iconify-icon icon="lucide:heart" class="text-2xl text-[#2E5D3A] botanical-icon"></iconify-icon>
+            <span class="ml-4 text-[16px] font-semibold text-[#1E2A22] leading-none">Favourites</span>
+          </a>
+          <div class="mx-6 border-b-[0.5px] border-[#B89968]/50"></div>
+
+          <!-- Settings Row -->
+          <a href="#" id="btn-settings" class="action-row flex items-center h-[56px] px-4 group">
+            <iconify-icon icon="lucide:settings" class="text-2xl text-[#2E5D3A] botanical-icon"></iconify-icon>
+            <span class="ml-4 text-[16px] font-semibold text-[#1E2A22] leading-none">Settings</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Footer Safe Area Padding -->
+      <div class="pb-[34px]"></div>
+    </div>
+
+    <!-- Mock Bottom Navigation (Blurred) -->
+    <footer class="fixed bottom-0 left-0 right-0 h-[72px] bg-[#FAF7F1] border-t-[0.5px] border-[#B8956A] flex items-center justify-around px-2 z-50">
+      <a href="#" id="nav-home" class="flex flex-col items-center justify-center w-full h-full gap-1 group">
+        <iconify-icon icon="lucide:home" class="text-xl text-[#8E9388] group-hover:text-[#2D5016] transition-colors"></iconify-icon>
+        <span class="text-[10px] font-semibold text-[#8E9388] group-hover:text-[#2D5016]">Home</span>
+      </a>
+      <a href="#" id="nav-calendar" class="flex flex-col items-center justify-center w-full h-full gap-1 group">
+        <iconify-icon icon="lucide:calendar" class="text-xl text-[#8E9388] group-hover:text-[#2D5016] transition-colors"></iconify-icon>
+        <span class="text-[10px] font-semibold text-[#8E9388] group-hover:text-[#2D5016]">Calendar</span>
+      </a>
+      <a href="#" id="nav-crops" class="flex flex-col items-center justify-center w-full h-full gap-1 group">
+        <iconify-icon icon="lucide:leaf" class="text-xl text-[#8E9388] group-hover:text-[#2D5016] transition-colors"></iconify-icon>
+        <span class="text-[10px] font-semibold text-[#8E9388] group-hover:text-[#2D5016]">Crops</span>
+      </a>
+      <a href="#" id="nav-garden" class="flex flex-col items-center justify-center w-full h-full gap-1 group">
+        <iconify-icon icon="lucide:sprout" class="text-xl text-[#8E9388] group-hover:text-[#2D5016] transition-colors"></iconify-icon>
+        <span class="text-[10px] font-semibold text-[#8E9388] group-hover:text-[#2D5016]">Garden</span>
+      </a>
+      <a href="#" id="nav-more" class="relative flex flex-col items-center justify-center w-full h-full gap-1 group">
+        <iconify-icon icon="lucide:menu" class="text-xl text-[#2D5016]"></iconify-icon>
+        <span class="text-[10px] font-bold text-[#2D5016]">More</span>
+        <div class="absolute bottom-2 w-6 h-[2px] bg-[#B8956A] rounded-full"></div>
+      </a>
+    </footer>
+  </div>
+
+</body>
+</html>

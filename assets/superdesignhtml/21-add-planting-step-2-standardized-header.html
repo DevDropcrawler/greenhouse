@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-forest: #2E5D3A;
+      --color-olive: #6B7A3F;
+      --color-terracotta: #C06B3A;
+      --color-honey: #E0A458;
+      --color-brass: #B89968;
+      --color-cream: #FAF7F1;
+      --color-ink: #1E2A22;
+      --color-sprout: #4E8C52;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #D2CDC2;
+      color: var(--color-ink);
+      line-height: 1.55;
+    }
+
+    .font-fraunces { font-family: 'Fraunces', serif; }
+
+    .paper-grain {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .warm-shadow {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .modal-shadow {
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    .calendar-cell {
+      aspect-ratio: 1 / 1.1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .selected-date {
+      background-color: var(--color-forest);
+      color: #FFFFFF !important;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .button-press:active {
+      transform: scale(0.96);
+      filter: brightness(1.04);
+    }
+
+    .dot-indicator {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      margin-top: 2px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #B8996840;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 overflow-hidden">
+  <div class="paper-grain"></div>
+
+  <!-- Overlay Background -->
+  <div class="fixed inset-0 bg-[#1E2A22]/40 backdrop-blur-[2px] z-0"></div>
+
+  <!-- Modal Container -->
+  <div class="relative z-10 w-full max-w-[412px] h-full max-h-[820px] bg-[#FAF7F1] rounded-[32px] modal-shadow overflow-hidden flex flex-col">
+    <!-- Header -->
+    <header class="sticky top-0 shrink-0 pt-14 bg-[#6B7A3F] border-t-[0.5px] border-[#B89968] z-50">
+      <div class="h-14 px-4 flex items-center justify-between">
+        <div class="w-10 flex items-center">
+          <a href="#" id="modal-close-btn" class="w-10 h-10 -ml-2 flex items-center justify-center text-[#FAF7F1] active:opacity-70 transition-opacity">
+            <iconify-icon icon="lucide:x" class="text-2xl"></iconify-icon>
+          </a>
+        </div>
+        <div class="flex-1 flex flex-col items-center justify-center">
+          <h1 class="font-fraunces text-[20px] font-semibold text-[#FAF7F1] tracking-tight leading-none">Add Planting</h1>
+          <span class="font-fraunces text-[10px] font-bold text-[#FAF7F1]/80 uppercase tracking-[0.2em] mt-1">Step 2 of 4</span>
+        </div>
+        <div class="w-10"></div>
+      </div>
+    </header>
+
+    <main class="flex-1 overflow-y-auto px-6 custom-scrollbar">
+      <section class="pt-8 pb-6">
+        <h2 class="font-fraunces text-[24px] font-bold text-[#6B7A3F] leading-tight tracking-tight">When to plant?</h2>
+        <p class="text-[#7A7A7A] text-[13px] mt-1">Select the scheduled date for your crop</p>
+      </section>
+
+      <div class="bg-white rounded-[24px] warm-shadow p-5 border-[0.5px] border-[#B89968]/10 relative mb-8">
+        <div class="flex items-center justify-between mb-6 px-1">
+          <button id="prev-month" class="w-8 h-8 flex items-center justify-center text-[#B89968] active:scale-90 transition-transform">
+            <iconify-icon icon="lucide:chevron-left" class="text-xl"></iconify-icon>
+          </button>
+          <h3 class="font-fraunces text-md font-semibold text-[#1E2A22]">April 2024</h3>
+          <button id="next-month" class="w-8 h-8 flex items-center justify-center text-[#B89968] active:scale-90 transition-transform">
+            <iconify-icon icon="lucide:chevron-right" class="text-xl"></iconify-icon>
+          </button>
+        </div>
+
+        <div class="calendar-grid mb-3">
+          <div class="text-center text-[9px] font-bold uppercase tracking-widest text-[#B89968]/50">M</div>
+          <div class="text-center text-[9px] font-bold uppercase tracking-widest text-[#B89968]/50">T</div>
+          <div class="text-center text-[9px] font-bold uppercase tracking-widest text-[#B89968]/50">W</div>
+          <div class="text-center text-[9px] font-bold uppercase tracking-widest text-[#B89968]/50">T</div>
+          <div class="text-center text-[9px] font-bold uppercase tracking-widest text-[#B89968]/50">F</div>
+          <div class="text-center text-[9px] font-bold uppercase tracking-widest text-[#B89968]/50">S</div>
+          <div class="text-center text-[9px] font-bold uppercase tracking-widest text-[#B89968]/50">S</div>
+        </div>
+
+        <div class="calendar-grid gap-y-1">
+          <div class="calendar-cell"><span class="text-xs font-medium">1</span></div>
+          <div class="calendar-cell"><span class="text-xs font-medium">2</span><div class="dot-indicator bg-[#4A90E2]"></div></div>
+          <div class="calendar-cell"><span class="text-xs font-medium text-[#B89968]/30">3</span></div>
+          <div class="calendar-cell"><span class="text-xs font-medium">4</span><div class="dot-indicator bg-[#4E8C52]"></div></div>
+          <div class="calendar-cell"><span class="text-xs font-medium">5</span></div>
+          <div class="calendar-cell"><span class="text-xs font-medium">6</span></div>
+          <div class="calendar-cell"><span class="text-xs font-medium">7</span></div>
+          
+          <div class="calendar-cell"><span class="text-xs font-medium text-[#B89968]/30">8</span></div>
+          <div class="calendar-cell"><span class="text-xs font-medium">9</span><div class="dot-indicator bg-[#C06B3A]"></div></div>
+          <div class="calendar-cell"><span class="text-xs font-medium">10</span></div>
+          <div class="calendar-cell"><span class="text-xs font-medium text-[#B89968]/30">11</span></div>
+          <div class="calendar-cell">
+            <div class="selected-date">
+              <span class="text-xs font-bold">12</span>
+              <iconify-icon icon="lucide:check" class="absolute -top-1 -right-1 bg-white text-[#2E5D3A] rounded-full p-0.5 text-[7px] border border-[#2E5D3A]"></iconify-icon>
+            </div>
+          </div>
+          <div class="calendar-cell"><span class="text-xs font-medium">13</span></div>
+          <div class="calendar-cell"><span class="text-xs font-medium text-[#B89968]/30">14</span></div>
+
+          <div class="calendar-cell"><span class="text-xs font-medium">15</span><div class="dot-indicator bg-[#4A90E2]"></div></div>
+          <div class="calendar-cell"><span class="text-xs font-medium">16</span></div>
+          <div class="calendar-cell"><span class="text-xs font-medium">17</span></div>
+          <div class="calendar-cell"><span class="text-xs font-medium text-[#B89968]/30">18</span></div>
+          <div class="calendar-cell"><span class="text-xs font-medium">19</span></div>
+          <div class="calendar-cell"><span class="text-xs font-medium">20</span><div class="dot-indicator bg-[#4E8C52]"></div></div>
+          <div class="calendar-cell"><span class="text-xs font-medium text-[#B89968]/30">21</span></div>
+        </div>
+
+        <div class="mt-6 flex justify-center gap-3">
+          <div class="flex items-center gap-1">
+            <div class="w-1.5 h-1.5 rounded-full bg-[#4E8C52]"></div>
+            <span class="text-[9px] font-bold text-[#B89968] uppercase tracking-wider">Planting</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <div class="w-1.5 h-1.5 rounded-full bg-[#C06B3A]"></div>
+            <span class="text-[9px] font-bold text-[#B89968] uppercase tracking-wider">Harvest</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <div class="w-1.5 h-1.5 rounded-full bg-[#4A90E2]"></div>
+            <span class="text-[9px] font-bold text-[#B89968] uppercase tracking-wider">Care</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Footer -->
+    <footer class="shrink-0 p-6 flex flex-col gap-3 border-t border-[#B89968]/10 bg-white/50 backdrop-blur-md">
+      <a href="#" id="modal-next-btn" class="button-press h-[52px] bg-[#2E5D3A] text-[#FAF7F1] font-fraunces font-semibold rounded-2xl flex items-center justify-center transition-all duration-100 warm-shadow">
+        Continue to Step 3
+      </a>
+      <button id="modal-back-link" class="text-[13px] font-medium text-[#B89968] hover:text-[#6B7A3F] transition-colors text-center py-1 underline underline-offset-4">
+        Go Back
+      </button>
+    </footer>
+  </div>
+</body>
+</html>
