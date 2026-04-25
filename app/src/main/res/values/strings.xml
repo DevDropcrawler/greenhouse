@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Keeley\'s Greenhouse</string>
+
+    <!-- Bottom navigation labels -->
+    <string name="tab_home">Home</string>
+    <string name="tab_calendar">Calendar</string>
+    <string name="tab_crops">Crops</string>
+    <string name="tab_garden">Garden</string>
+    <string name="tab_more">More</string>
+
+    <!-- Phase 0 placeholder copy -->
+    <string name="placeholder_home">Home</string>
+    <string name="placeholder_calendar">Calendar</string>
+    <string name="placeholder_crops">Crops</string>
+    <string name="placeholder_garden">Garden</string>
+    <string name="placeholder_more">More</string>
+</resources>

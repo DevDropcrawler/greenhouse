@@ -52,6 +52,7 @@ __pycache__/
 *.swp
 *~
 .vscode/
+.claude/
 
 # Superdesign cache (if the IDE extension gets installed later)
 .superdesign/cache/
