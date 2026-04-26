@@ -30,6 +30,18 @@
     <string name="calendar_empty_seedling">No transplants due this month.</string>
     <string name="calendar_empty_harvest">No harvests due this month.</string>
 
+    <!-- Search -->
+    <string name="search_title">Search</string>
+    <string name="search_action">Search</string>
+    <string name="search_hint">Search crops, pests, diseases</string>
+    <string name="search_recent">Recent searches</string>
+    <string name="search_clear_all">Clear all</string>
+    <string name="search_remove">Remove</string>
+    <string name="search_no_results">No matches.</string>
+    <string name="search_section_crops">Crops</string>
+    <string name="search_section_pests">Pests</string>
+    <string name="search_section_diseases">Diseases</string>
+
     <!-- Phase 0 placeholder copy -->
     <string name="placeholder_home">Home</string>
     <string name="placeholder_calendar">Calendar</string>

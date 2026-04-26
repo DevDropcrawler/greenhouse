@@ -7,6 +7,7 @@ import nz.keeleysgreenhouse.app.data.dao.CropDao
 import nz.keeleysgreenhouse.app.data.dao.DiseaseDao
 import nz.keeleysgreenhouse.app.data.dao.FavouriteDao
 import nz.keeleysgreenhouse.app.data.dao.PestDao
+import nz.keeleysgreenhouse.app.data.dao.SearchHistoryDao
 import nz.keeleysgreenhouse.app.data.dao.TaskDao
 import nz.keeleysgreenhouse.app.data.dao.UserPlantingDao
 import nz.keeleysgreenhouse.app.data.entity.Crop
@@ -16,6 +17,7 @@ import nz.keeleysgreenhouse.app.data.entity.DiseaseFts
 import nz.keeleysgreenhouse.app.data.entity.Favourite
 import nz.keeleysgreenhouse.app.data.entity.Pest
 import nz.keeleysgreenhouse.app.data.entity.PestFts
+import nz.keeleysgreenhouse.app.data.entity.SearchHistory
 import nz.keeleysgreenhouse.app.data.entity.Task
 import nz.keeleysgreenhouse.app.data.entity.UserPlanting
 
@@ -29,9 +31,10 @@ import nz.keeleysgreenhouse.app.data.entity.UserPlanting
         DiseaseFts::class,
         UserPlanting::class,
         Task::class,
-        Favourite::class
+        Favourite::class,
+        SearchHistory::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -42,4 +45,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun userPlantingDao(): UserPlantingDao
     abstract fun taskDao(): TaskDao
     abstract fun favouriteDao(): FavouriteDao
+    abstract fun searchHistoryDao(): SearchHistoryDao
 }

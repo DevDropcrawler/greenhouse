@@ -18,6 +18,7 @@ import nz.keeleysgreenhouse.app.ui.home.HomeScreen
 import nz.keeleysgreenhouse.app.ui.more.MoreScreen
 import nz.keeleysgreenhouse.app.ui.pests.PestDetailScreen
 import nz.keeleysgreenhouse.app.ui.pests.PestsScreen
+import nz.keeleysgreenhouse.app.ui.search.SearchScreen
 
 const val CropDetailRoute = "crop"
 const val CropDetailArg = "cropId"
@@ -29,6 +30,7 @@ const val PestDetailArg = "pestId"
 const val DiseasesRoute = "diseases"
 const val DiseaseDetailRoute = "disease"
 const val DiseaseDetailArg = "diseaseId"
+const val SearchRoute = "search"
 
 fun cropDetailRoute(cropId: Int) = "$CropDetailRoute/$cropId"
 fun monthDetailRoute(month: Int) = "$MonthDetailRoute/$month"
@@ -66,8 +68,17 @@ fun AppNavGraph(
         composable(TopDestination.More.route) {
             MoreScreen(
                 contentPadding = contentPadding,
+                onSearchClick = { navController.navigate(SearchRoute) },
                 onPestsClick = { navController.navigate(PestsRoute) },
                 onDiseasesClick = { navController.navigate(DiseasesRoute) }
+            )
+        }
+        composable(SearchRoute) {
+            SearchScreen(
+                onBack = { navController.popBackStack() },
+                onCropClick = { id -> navController.navigate(cropDetailRoute(id)) },
+                onPestClick = { id -> navController.navigate(pestDetailRoute(id)) },
+                onDiseaseClick = { id -> navController.navigate(diseaseDetailRoute(id)) }
             )
         }
         composable(

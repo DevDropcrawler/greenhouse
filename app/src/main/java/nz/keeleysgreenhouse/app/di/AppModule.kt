@@ -11,6 +11,7 @@ import nz.keeleysgreenhouse.app.data.AppDatabase
 import nz.keeleysgreenhouse.app.data.dao.CropDao
 import nz.keeleysgreenhouse.app.data.dao.DiseaseDao
 import nz.keeleysgreenhouse.app.data.dao.PestDao
+import nz.keeleysgreenhouse.app.data.dao.SearchHistoryDao
 import nz.keeleysgreenhouse.app.data.dao.TaskDao
 import nz.keeleysgreenhouse.app.data.seed.DatabaseSeeder
 import nz.keeleysgreenhouse.app.data.seed.SeedSource
@@ -23,6 +24,7 @@ import nz.keeleysgreenhouse.app.domain.usecase.GetThisMonthCropsUseCase
 import nz.keeleysgreenhouse.app.domain.usecase.ObserveCropsUseCase
 import nz.keeleysgreenhouse.app.domain.usecase.ObserveDiseasesUseCase
 import nz.keeleysgreenhouse.app.domain.usecase.ObservePestsUseCase
+import nz.keeleysgreenhouse.app.domain.usecase.SearchAllUseCase
 import javax.inject.Singleton
 
 @Module
@@ -32,7 +34,9 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase =
-        Room.databaseBuilder(context, AppDatabase::class.java, "greenhouse.db").build()
+        Room.databaseBuilder(context, AppDatabase::class.java, "greenhouse.db")
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Provides
     @Singleton
@@ -55,6 +59,16 @@ object AppModule {
 
     @Provides
     fun provideTaskDao(db: AppDatabase): TaskDao = db.taskDao()
+
+    @Provides
+    fun provideSearchHistoryDao(db: AppDatabase): SearchHistoryDao = db.searchHistoryDao()
+
+    @Provides
+    fun provideSearchAllUseCase(
+        cropDao: CropDao,
+        pestDao: PestDao,
+        diseaseDao: DiseaseDao
+    ): SearchAllUseCase = SearchAllUseCase(cropDao, pestDao, diseaseDao)
 
     @Provides
     fun provideGetThisMonthCropsUseCase(cropDao: CropDao): GetThisMonthCropsUseCase =

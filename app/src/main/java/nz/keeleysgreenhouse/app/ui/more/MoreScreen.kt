@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.BugReport
 import androidx.compose.material.icons.outlined.Coronavirus
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,6 +32,7 @@ import nz.keeleysgreenhouse.app.ui.theme.OnSurfaceInk
 @Composable
 fun MoreScreen(
     contentPadding: PaddingValues,
+    onSearchClick: () -> Unit,
     onPestsClick: () -> Unit,
     onDiseasesClick: () -> Unit
 ) {
@@ -41,6 +43,8 @@ fun MoreScreen(
             .padding(contentPadding)
     ) {
         Spacer(Modifier.height(8.dp))
+        MoreRow(icon = Icons.Outlined.Search, label = "Search", onClick = onSearchClick)
+        RowDivider()
         MoreRow(icon = Icons.Outlined.BugReport, label = "Pests", onClick = onPestsClick)
         RowDivider()
         MoreRow(icon = Icons.Outlined.Coronavirus, label = "Diseases", onClick = onDiseasesClick)
