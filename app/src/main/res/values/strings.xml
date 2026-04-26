@@ -9,6 +9,18 @@
     <string name="tab_garden">Garden</string>
     <string name="tab_more">More</string>
 
+    <!-- Home / This Month -->
+    <string name="home_greeting_morning">Good morning</string>
+    <string name="home_greeting_afternoon">Good afternoon</string>
+    <string name="home_greeting_evening">Good evening</string>
+    <string name="home_today_tasks">Today\'s Tasks</string>
+    <string name="home_sow_from_seed">Sow from seed</string>
+    <string name="home_transplant">Transplant</string>
+    <string name="home_harvest">Harvest</string>
+    <string name="home_empty_sow">Nothing to sow this month under glass.</string>
+    <string name="home_empty_transplant">No transplants due this month.</string>
+    <string name="home_empty_harvest">No harvests due this month.</string>
+
     <!-- Phase 0 placeholder copy -->
     <string name="placeholder_home">Home</string>
     <string name="placeholder_calendar">Calendar</string>

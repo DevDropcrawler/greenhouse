@@ -8,8 +8,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import nz.keeleysgreenhouse.app.data.AppDatabase
+import nz.keeleysgreenhouse.app.data.dao.CropDao
+import nz.keeleysgreenhouse.app.data.dao.TaskDao
 import nz.keeleysgreenhouse.app.data.seed.DatabaseSeeder
 import nz.keeleysgreenhouse.app.data.seed.SeedSource
+import nz.keeleysgreenhouse.app.domain.usecase.GetThisMonthCropsUseCase
 import javax.inject.Singleton
 
 @Module
@@ -30,4 +33,14 @@ object AppModule {
     @Singleton
     fun provideSeeder(db: AppDatabase, source: SeedSource): DatabaseSeeder =
         DatabaseSeeder(db, source)
+
+    @Provides
+    fun provideCropDao(db: AppDatabase): CropDao = db.cropDao()
+
+    @Provides
+    fun provideTaskDao(db: AppDatabase): TaskDao = db.taskDao()
+
+    @Provides
+    fun provideGetThisMonthCropsUseCase(cropDao: CropDao): GetThisMonthCropsUseCase =
+        GetThisMonthCropsUseCase(cropDao)
 }
