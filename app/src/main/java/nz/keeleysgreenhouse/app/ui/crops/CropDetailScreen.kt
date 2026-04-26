@@ -1,0 +1,244 @@
+package nz.keeleysgreenhouse.app.ui.crops
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import nz.keeleysgreenhouse.app.data.entity.Crop
+import nz.keeleysgreenhouse.app.data.entity.Disease
+import nz.keeleysgreenhouse.app.data.entity.Pest
+import nz.keeleysgreenhouse.app.domain.usecase.CropDetail
+import nz.keeleysgreenhouse.app.ui.components.AccordionSection
+import nz.keeleysgreenhouse.app.ui.components.Fact
+import nz.keeleysgreenhouse.app.ui.components.FactsGrid
+import nz.keeleysgreenhouse.app.ui.components.TimelineBar
+import nz.keeleysgreenhouse.app.ui.theme.Brass
+import nz.keeleysgreenhouse.app.ui.theme.Cream
+import nz.keeleysgreenhouse.app.ui.theme.OliveMoss
+import nz.keeleysgreenhouse.app.ui.theme.OnSurfaceInk
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CropDetailScreen(
+    onBack: () -> Unit,
+    viewModel: CropDetailViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsState()
+
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = { Text(state.detail?.crop?.commonName ?: "Crop") },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.Outlined.ArrowBack, contentDescription = "Back")
+                    }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = OliveMoss,
+                    titleContentColor = Cream,
+                    navigationIconContentColor = Cream,
+                    actionIconContentColor = Cream
+                )
+            )
+        },
+        containerColor = Cream
+    ) { inner ->
+        when {
+            state.loading -> Box(
+                modifier = Modifier.fillMaxSize().padding(inner),
+                contentAlignment = Alignment.Center
+            ) { CircularProgressIndicator(color = OliveMoss) }
+
+            state.detail == null -> Box(
+                modifier = Modifier.fillMaxSize().padding(inner),
+                contentAlignment = Alignment.Center
+            ) { Text("Crop not found", color = OnSurfaceInk) }
+
+            else -> CropDetailContent(detail = state.detail!!, contentPadding = inner)
+        }
+    }
+}
+
+@Composable
+private fun CropDetailContent(detail: CropDetail, contentPadding: PaddingValues) {
+    val crop = detail.crop
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(contentPadding)
+            .verticalScroll(rememberScrollState())
+            .padding(bottom = 32.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(220.dp)
+                .background(Brass.copy(alpha = 0.18f)),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = crop.commonName.take(1).uppercase(),
+                color = OliveMoss,
+                style = MaterialTheme.typography.displayLarge
+            )
+        }
+
+        Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 20.dp)) {
+            Text(
+                text = crop.commonName,
+                color = OliveMoss,
+                style = MaterialTheme.typography.displayMedium
+            )
+            crop.maoriName?.let {
+                Text(
+                    text = it,
+                    color = OnSurfaceInk.copy(alpha = 0.65f),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontStyle = FontStyle.Italic
+                )
+            }
+            Text(
+                text = crop.family,
+                color = OnSurfaceInk.copy(alpha = 0.55f),
+                style = MaterialTheme.typography.bodyMedium
+            )
+            Spacer(Modifier.height(20.dp))
+            TimelineBar(
+                sowMonths = crop.seedSowMonths,
+                transplantMonths = crop.seedlingPlantMonths,
+                harvestMonths = crop.harvestMonths
+            )
+            Spacer(Modifier.height(20.dp))
+            FactsGrid(facts = factsOf(crop))
+            Spacer(Modifier.height(12.dp))
+
+            AccordionSection(title = "Sowing", initiallyExpanded = true) {
+                BodyText(crop.sowingNotes)
+            }
+            AccordionSection(title = "Greenhouse") {
+                BodyText(crop.greenhouseNotes)
+            }
+            AccordionSection(title = "Feeding") {
+                BodyText(crop.feedingNotes)
+            }
+            crop.pruningNotes?.takeIf { it.isNotBlank() }?.let { notes ->
+                AccordionSection(title = "Pruning") { BodyText(notes) }
+            }
+            crop.pollinationNotes?.takeIf { it.isNotBlank() }?.let { notes ->
+                AccordionSection(title = "Pollination") { BodyText(notes) }
+            }
+            if (detail.companions.isNotEmpty() || detail.avoid.isNotEmpty()) {
+                AccordionSection(title = "Companions") {
+                    if (detail.companions.isNotEmpty()) {
+                        BodyText("Plant with: " + detail.companions.joinToString { it.commonName })
+                    }
+                    if (detail.avoid.isNotEmpty()) {
+                        Spacer(Modifier.height(6.dp))
+                        BodyText("Avoid near: " + detail.avoid.joinToString { it.commonName })
+                    }
+                }
+            }
+            if (detail.pests.isNotEmpty()) {
+                AccordionSection(title = "Pests") {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        detail.pests.forEach { p -> PestRow(p) }
+                    }
+                }
+            }
+            if (detail.diseases.isNotEmpty()) {
+                AccordionSection(title = "Diseases") {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        detail.diseases.forEach { d -> DiseaseRow(d) }
+                    }
+                }
+            }
+            if (crop.youtubeVideoIds.isNotEmpty() || crop.youtubeSearchQuery.isNotBlank()) {
+                AccordionSection(title = "Videos") {
+                    BodyText(
+                        if (crop.youtubeVideoIds.isNotEmpty())
+                            "${crop.youtubeVideoIds.size} curated video(s) — playback in Phase 8."
+                        else "Search: ${crop.youtubeSearchQuery}"
+                    )
+                }
+            }
+        }
+    }
+}
+
+private fun factsOf(crop: Crop): List<Fact> = buildList {
+    add(Fact("Spacing", "${crop.spacingCm} cm"))
+    crop.rowSpacingCm?.let { add(Fact("Row spacing", "$it cm")) }
+    crop.sowDepthMm?.let { add(Fact("Sow depth", "$it mm")) }
+    add(Fact("Day temp", "${crop.dayTempC.first}–${crop.dayTempC.last} °C"))
+    add(Fact("Night temp", "${crop.nightTempC.first}–${crop.nightTempC.last} °C"))
+    add(Fact("Humidity", "${crop.humidityPct.first}–${crop.humidityPct.last} %"))
+    add(Fact("Sun", crop.sunNeed.name.lowercase().replaceFirstChar { it.uppercase() }))
+    add(Fact("Water", crop.waterNeed.name.lowercase().replaceFirstChar { it.uppercase() }))
+    add(Fact("Soil pH", "${crop.soilPhRange.start}–${crop.soilPhRange.endInclusive}"))
+    if (crop.daysSeedlingToHarvest.first > 0) {
+        add(Fact("To harvest", "${crop.daysSeedlingToHarvest.first}–${crop.daysSeedlingToHarvest.last} d"))
+    }
+    crop.yearsToFirstFruit?.let { add(Fact("Years→fruit", "$it")) }
+    crop.potSizeLitres?.let { add(Fact("Pot size", "$it L")) }
+}
+
+@Composable
+private fun BodyText(text: String) {
+    Text(
+        text = text,
+        color = OnSurfaceInk,
+        style = MaterialTheme.typography.bodyLarge
+    )
+}
+
+@Composable
+private fun PestRow(pest: Pest) {
+    Column {
+        Text(pest.name, color = OnSurfaceInk, style = MaterialTheme.typography.titleMedium)
+        Text(
+            pest.shortDescription,
+            color = OnSurfaceInk.copy(alpha = 0.7f),
+            style = MaterialTheme.typography.bodyMedium
+        )
+    }
+}
+
+@Composable
+private fun DiseaseRow(disease: Disease) {
+    Column {
+        Text(disease.name, color = OnSurfaceInk, style = MaterialTheme.typography.titleMedium)
+        Text(
+            disease.description,
+            color = OnSurfaceInk.copy(alpha = 0.7f),
+            style = MaterialTheme.typography.bodyMedium
+        )
+    }
+}

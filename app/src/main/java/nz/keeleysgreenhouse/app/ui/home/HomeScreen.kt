@@ -1,6 +1,7 @@
 package nz.keeleysgreenhouse.app.ui.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -54,6 +55,7 @@ import java.util.Locale
 @Composable
 fun HomeScreen(
     contentPadding: PaddingValues,
+    onCropClick: (Int) -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
@@ -80,7 +82,8 @@ fun HomeScreen(
                 title = stringResource(R.string.home_sow_from_seed),
                 accent = Forest,
                 crops = state.sow,
-                emptyText = stringResource(R.string.home_empty_sow)
+                emptyText = stringResource(R.string.home_empty_sow),
+                onCropClick = onCropClick
             )
         }
         item {
@@ -88,7 +91,8 @@ fun HomeScreen(
                 title = stringResource(R.string.home_transplant),
                 accent = Sprout,
                 crops = state.transplant,
-                emptyText = stringResource(R.string.home_empty_transplant)
+                emptyText = stringResource(R.string.home_empty_transplant),
+                onCropClick = onCropClick
             )
         }
         item {
@@ -96,7 +100,8 @@ fun HomeScreen(
                 title = stringResource(R.string.home_harvest),
                 accent = Honey,
                 crops = state.harvest,
-                emptyText = stringResource(R.string.home_empty_harvest)
+                emptyText = stringResource(R.string.home_empty_harvest),
+                onCropClick = onCropClick
             )
         }
     }
@@ -144,7 +149,8 @@ private fun CropSection(
     title: String,
     accent: Color,
     crops: List<Crop>,
-    emptyText: String
+    emptyText: String,
+    onCropClick: (Int) -> Unit = {}
 ) {
     Column {
         SectionHeader(title)
@@ -162,7 +168,7 @@ private fun CropSection(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 items(crops, key = { it.id }) { crop ->
-                    CropPosterCard(crop = crop, accent = accent)
+                    CropPosterCard(crop = crop, accent = accent, onClick = { onCropClick(crop.id) })
                 }
             }
         }
@@ -170,9 +176,9 @@ private fun CropSection(
 }
 
 @Composable
-private fun CropPosterCard(crop: Crop, accent: Color) {
+private fun CropPosterCard(crop: Crop, accent: Color, onClick: () -> Unit = {}) {
     Card(
-        modifier = Modifier.width(160.dp),
+        modifier = Modifier.width(160.dp).clickable(onClick = onClick),
         shape = RoundedCornerShape(22.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)

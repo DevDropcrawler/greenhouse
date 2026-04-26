@@ -9,10 +9,14 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import nz.keeleysgreenhouse.app.data.AppDatabase
 import nz.keeleysgreenhouse.app.data.dao.CropDao
+import nz.keeleysgreenhouse.app.data.dao.DiseaseDao
+import nz.keeleysgreenhouse.app.data.dao.PestDao
 import nz.keeleysgreenhouse.app.data.dao.TaskDao
 import nz.keeleysgreenhouse.app.data.seed.DatabaseSeeder
 import nz.keeleysgreenhouse.app.data.seed.SeedSource
+import nz.keeleysgreenhouse.app.domain.usecase.GetCropDetailUseCase
 import nz.keeleysgreenhouse.app.domain.usecase.GetThisMonthCropsUseCase
+import nz.keeleysgreenhouse.app.domain.usecase.ObserveCropsUseCase
 import javax.inject.Singleton
 
 @Module
@@ -38,9 +42,26 @@ object AppModule {
     fun provideCropDao(db: AppDatabase): CropDao = db.cropDao()
 
     @Provides
+    fun providePestDao(db: AppDatabase): PestDao = db.pestDao()
+
+    @Provides
+    fun provideDiseaseDao(db: AppDatabase): DiseaseDao = db.diseaseDao()
+
+    @Provides
     fun provideTaskDao(db: AppDatabase): TaskDao = db.taskDao()
 
     @Provides
     fun provideGetThisMonthCropsUseCase(cropDao: CropDao): GetThisMonthCropsUseCase =
         GetThisMonthCropsUseCase(cropDao)
+
+    @Provides
+    fun provideObserveCropsUseCase(cropDao: CropDao): ObserveCropsUseCase =
+        ObserveCropsUseCase(cropDao)
+
+    @Provides
+    fun provideGetCropDetailUseCase(
+        cropDao: CropDao,
+        pestDao: PestDao,
+        diseaseDao: DiseaseDao
+    ): GetCropDetailUseCase = GetCropDetailUseCase(cropDao, pestDao, diseaseDao)
 }

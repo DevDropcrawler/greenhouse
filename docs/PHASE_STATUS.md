@@ -1,7 +1,7 @@
 # Phase Status
 
 ## Active phase
-**Phase 2 — Home / This Month**
+**Phase 4 — Calendar**
 
 ## Phase 2 goals
 - Home screen with three horizontal lists: Sow from seed, Transplant, Harvest (current month from seeded crop data)
@@ -24,8 +24,8 @@
 |---|---|---|---|
 | 0 | Skeleton | done | 2026-04-26 — project, Hilt app, empty scaffold, version catalog, light theme tokens, 5-tab nav, Google Fonts (Fraunces + Inter), Room stub |
 | 1 | Data layer | done | 2026-04-26 — entities, DAOs, FTS4, converters, seeder, 153 crops + 12 pests + 8 diseases JSON, Robolectric SeederTest |
-| 2 | Home / This Month | active | — |
-| 3 | Crop list + detail | not started | — |
+| 2 | Home / This Month | done | 2026-04-26 |
+| 3 | Crop list + detail | done | 2026-04-26 — grid + filter chips, detail with timeline / facts / accordions, nav from Home + Crops |
 | 4 | Calendar | not started | — |
 | 5 | Pest + Disease guide | not started | — |
 | 6 | Search | not started | — |
