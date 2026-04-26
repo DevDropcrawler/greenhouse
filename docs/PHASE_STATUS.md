@@ -1,32 +1,30 @@
 # Phase Status
 
 ## Active phase
-**Phase 1 — Data layer**
+**Phase 2 — Home / This Month**
 
-## Phase 1 goals
-- Define Room entities for Crop, Pest, Disease, UserPlanting, Task, Favourite (plan §4.1)
-- Define DAOs for each entity
-- Add FTS4 virtual tables: CropFts, PestFts, DiseaseFts (plan §4.2)
-- Replace the Phase-0 `Phase0Stub` entity in `data/AppDatabase.kt` with the real entity set, version 1
-- Implement first-launch seeder reading from `app/src/main/assets/seed/*.json`
-- Ship seed JSON for all 153 crops/fruit trees + 12 pests + 8 diseases (plan §11–§13)
-- DAO + seeder unit tests pass
+## Phase 2 goals
+- Home screen with three horizontal lists: Sow from seed, Transplant, Harvest (current month from seeded crop data)
+- Today's tasks strip pulled from `tasks` table
+- Shortcuts to search and calendar
+- ViewModel + repository for crops/tasks; Hilt-injected
+- Match superdesign mockup for Home (light theme, olive app bar, sticky bottom nav)
 
 ## Done when
 - `./gradlew assembleDebug` is green
-- DAO and seeder tests pass
-- App boots and seeds DB on first launch (verify via logcat)
+- VM happy-path tests pass
+- App boots and shows current-month sow/transplant/harvest lists
 - Zero new lint errors
-- Screenshot at `docs/screenshots/phase-1.png`
-- Commit message: `phase 1: data layer`
+- Screenshot at `docs/screenshots/phase-2.png`
+- Commit message: `phase 2: home / this month`
 
 ## Phase history
 
 | # | Phase | Status | Notes |
 |---|---|---|---|
 | 0 | Skeleton | done | 2026-04-26 — project, Hilt app, empty scaffold, version catalog, light theme tokens, 5-tab nav, Google Fonts (Fraunces + Inter), Room stub |
-| 1 | Data layer | active | — |
-| 2 | Home / This Month | not started | — |
+| 1 | Data layer | done | 2026-04-26 — entities, DAOs, FTS4, converters, seeder, 153 crops + 12 pests + 8 diseases JSON, Robolectric SeederTest |
+| 2 | Home / This Month | active | — |
 | 3 | Crop list + detail | not started | — |
 | 4 | Calendar | not started | — |
 | 5 | Pest + Disease guide | not started | — |
