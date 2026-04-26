@@ -16,9 +16,13 @@ import nz.keeleysgreenhouse.app.data.seed.DatabaseSeeder
 import nz.keeleysgreenhouse.app.data.seed.SeedSource
 import nz.keeleysgreenhouse.app.domain.usecase.GetAllMonthsCropsUseCase
 import nz.keeleysgreenhouse.app.domain.usecase.GetCropDetailUseCase
+import nz.keeleysgreenhouse.app.domain.usecase.GetDiseaseDetailUseCase
 import nz.keeleysgreenhouse.app.domain.usecase.GetMonthCropsUseCase
+import nz.keeleysgreenhouse.app.domain.usecase.GetPestDetailUseCase
 import nz.keeleysgreenhouse.app.domain.usecase.GetThisMonthCropsUseCase
 import nz.keeleysgreenhouse.app.domain.usecase.ObserveCropsUseCase
+import nz.keeleysgreenhouse.app.domain.usecase.ObserveDiseasesUseCase
+import nz.keeleysgreenhouse.app.domain.usecase.ObservePestsUseCase
 import javax.inject.Singleton
 
 @Module
@@ -74,4 +78,24 @@ object AppModule {
         pestDao: PestDao,
         diseaseDao: DiseaseDao
     ): GetCropDetailUseCase = GetCropDetailUseCase(cropDao, pestDao, diseaseDao)
+
+    @Provides
+    fun provideObservePestsUseCase(pestDao: PestDao): ObservePestsUseCase =
+        ObservePestsUseCase(pestDao)
+
+    @Provides
+    fun provideGetPestDetailUseCase(
+        pestDao: PestDao,
+        cropDao: CropDao
+    ): GetPestDetailUseCase = GetPestDetailUseCase(pestDao, cropDao)
+
+    @Provides
+    fun provideObserveDiseasesUseCase(diseaseDao: DiseaseDao): ObserveDiseasesUseCase =
+        ObserveDiseasesUseCase(diseaseDao)
+
+    @Provides
+    fun provideGetDiseaseDetailUseCase(
+        diseaseDao: DiseaseDao,
+        cropDao: CropDao
+    ): GetDiseaseDetailUseCase = GetDiseaseDetailUseCase(diseaseDao, cropDao)
 }
