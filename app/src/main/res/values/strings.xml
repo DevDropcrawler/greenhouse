@@ -21,6 +21,15 @@
     <string name="home_empty_transplant">No transplants due this month.</string>
     <string name="home_empty_harvest">No harvests due this month.</string>
 
+    <!-- Calendar -->
+    <string name="calendar_title">Calendar</string>
+    <string name="calendar_tab_seed">Seed</string>
+    <string name="calendar_tab_seedling">Seedling</string>
+    <string name="calendar_tab_harvest">Harvest</string>
+    <string name="calendar_empty_seed">Nothing to sow this month under glass.</string>
+    <string name="calendar_empty_seedling">No transplants due this month.</string>
+    <string name="calendar_empty_harvest">No harvests due this month.</string>
+
     <!-- Phase 0 placeholder copy -->
     <string name="placeholder_home">Home</string>
     <string name="placeholder_calendar">Calendar</string>

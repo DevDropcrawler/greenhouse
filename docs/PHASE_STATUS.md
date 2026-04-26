@@ -1,7 +1,7 @@
 # Phase Status
 
 ## Active phase
-**Phase 4 — Calendar**
+**Phase 5 — Pest + Disease guide**
 
 ## Phase 2 goals
 - Home screen with three horizontal lists: Sow from seed, Transplant, Harvest (current month from seeded crop data)
@@ -26,7 +26,7 @@
 | 1 | Data layer | done | 2026-04-26 — entities, DAOs, FTS4, converters, seeder, 153 crops + 12 pests + 8 diseases JSON, Robolectric SeederTest |
 | 2 | Home / This Month | done | 2026-04-26 |
 | 3 | Crop list + detail | done | 2026-04-26 — grid + filter chips, detail with timeline / facts / accordions, nav from Home + Crops |
-| 4 | Calendar | not started | — |
+| 4 | Calendar | done | 2026-04-26 — 12-month grid (3 cols), MonthCard with S/T/H badges, month detail Seed/Seedling/Harvest tabs |
 | 5 | Pest + Disease guide | not started | — |
 | 6 | Search | not started | — |
 | 7 | My garden + tasks | not started | — |

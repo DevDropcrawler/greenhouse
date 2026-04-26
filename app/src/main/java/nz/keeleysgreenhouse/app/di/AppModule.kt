@@ -14,7 +14,9 @@ import nz.keeleysgreenhouse.app.data.dao.PestDao
 import nz.keeleysgreenhouse.app.data.dao.TaskDao
 import nz.keeleysgreenhouse.app.data.seed.DatabaseSeeder
 import nz.keeleysgreenhouse.app.data.seed.SeedSource
+import nz.keeleysgreenhouse.app.domain.usecase.GetAllMonthsCropsUseCase
 import nz.keeleysgreenhouse.app.domain.usecase.GetCropDetailUseCase
+import nz.keeleysgreenhouse.app.domain.usecase.GetMonthCropsUseCase
 import nz.keeleysgreenhouse.app.domain.usecase.GetThisMonthCropsUseCase
 import nz.keeleysgreenhouse.app.domain.usecase.ObserveCropsUseCase
 import javax.inject.Singleton
@@ -57,6 +59,14 @@ object AppModule {
     @Provides
     fun provideObserveCropsUseCase(cropDao: CropDao): ObserveCropsUseCase =
         ObserveCropsUseCase(cropDao)
+
+    @Provides
+    fun provideGetAllMonthsCropsUseCase(cropDao: CropDao): GetAllMonthsCropsUseCase =
+        GetAllMonthsCropsUseCase(cropDao)
+
+    @Provides
+    fun provideGetMonthCropsUseCase(cropDao: CropDao): GetMonthCropsUseCase =
+        GetMonthCropsUseCase(cropDao)
 
     @Provides
     fun provideGetCropDetailUseCase(

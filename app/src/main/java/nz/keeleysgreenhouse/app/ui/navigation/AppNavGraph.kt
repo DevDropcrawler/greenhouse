@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import nz.keeleysgreenhouse.app.ui.calendar.CalendarScreen
+import nz.keeleysgreenhouse.app.ui.calendar.MonthDetailScreen
 import nz.keeleysgreenhouse.app.ui.crops.CropDetailScreen
 import nz.keeleysgreenhouse.app.ui.crops.CropsScreen
 import nz.keeleysgreenhouse.app.ui.garden.GardenScreen
@@ -16,8 +17,11 @@ import nz.keeleysgreenhouse.app.ui.more.MoreScreen
 
 const val CropDetailRoute = "crop"
 const val CropDetailArg = "cropId"
+const val MonthDetailRoute = "month"
+const val MonthDetailArg = "month"
 
 fun cropDetailRoute(cropId: Int) = "$CropDetailRoute/$cropId"
+fun monthDetailRoute(month: Int) = "$MonthDetailRoute/$month"
 
 @Composable
 fun AppNavGraph(
@@ -34,7 +38,12 @@ fun AppNavGraph(
                 onCropClick = { id -> navController.navigate(cropDetailRoute(id)) }
             )
         }
-        composable(TopDestination.Calendar.route) { CalendarScreen(contentPadding) }
+        composable(TopDestination.Calendar.route) {
+            CalendarScreen(
+                contentPadding = contentPadding,
+                onMonthClick = { m -> navController.navigate(monthDetailRoute(m)) }
+            )
+        }
         composable(TopDestination.Crops.route) {
             CropsScreen(
                 contentPadding = contentPadding,
@@ -48,6 +57,15 @@ fun AppNavGraph(
             arguments = listOf(navArgument(CropDetailArg) { type = NavType.IntType })
         ) {
             CropDetailScreen(onBack = { navController.popBackStack() })
+        }
+        composable(
+            route = "$MonthDetailRoute/{$MonthDetailArg}",
+            arguments = listOf(navArgument(MonthDetailArg) { type = NavType.IntType })
+        ) {
+            MonthDetailScreen(
+                onBack = { navController.popBackStack() },
+                onCropClick = { id -> navController.navigate(cropDetailRoute(id)) }
+            )
         }
     }
 }
