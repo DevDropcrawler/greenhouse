@@ -17,6 +17,7 @@ import androidx.compose.material.icons.outlined.BugReport
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Coronavirus
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -36,7 +37,8 @@ fun MoreScreen(
     onSearchClick: () -> Unit,
     onPestsClick: () -> Unit,
     onDiseasesClick: () -> Unit,
-    onTasksClick: () -> Unit = {}
+    onTasksClick: () -> Unit = {},
+    onSettingsClick: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -52,6 +54,8 @@ fun MoreScreen(
         MoreRow(icon = Icons.Outlined.BugReport, label = "Pests", onClick = onPestsClick)
         RowDivider()
         MoreRow(icon = Icons.Outlined.Coronavirus, label = "Diseases", onClick = onDiseasesClick)
+        RowDivider()
+        MoreRow(icon = Icons.Outlined.Settings, label = "Settings", onClick = onSettingsClick)
         RowDivider()
     }
 }

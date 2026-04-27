@@ -34,6 +34,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import nz.keeleysgreenhouse.app.data.entity.Crop
 import nz.keeleysgreenhouse.app.domain.usecase.DiseaseDetail
 import nz.keeleysgreenhouse.app.ui.components.AccordionSection
+import nz.keeleysgreenhouse.app.ui.components.VideoSection
 import nz.keeleysgreenhouse.app.ui.theme.Brass
 import nz.keeleysgreenhouse.app.ui.theme.Cream
 import nz.keeleysgreenhouse.app.ui.theme.OliveMoss
@@ -148,11 +149,10 @@ private fun DiseaseDetailContent(
                 }
             }
             if (disease.youtubeVideoIds.isNotEmpty() || disease.youtubeSearchQuery.isNotBlank()) {
-                AccordionSection(title = "Videos") {
-                    BodyText(
-                        if (disease.youtubeVideoIds.isNotEmpty())
-                            "${disease.youtubeVideoIds.size} curated video(s) — playback in Phase 8."
-                        else "Search: ${disease.youtubeSearchQuery}"
+                AccordionSection(title = "Videos", initiallyExpanded = true) {
+                    VideoSection(
+                        videoIds = disease.youtubeVideoIds,
+                        searchQuery = disease.youtubeSearchQuery
                     )
                 }
             }

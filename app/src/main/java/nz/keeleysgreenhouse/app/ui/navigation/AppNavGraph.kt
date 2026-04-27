@@ -21,6 +21,7 @@ import nz.keeleysgreenhouse.app.ui.more.MoreScreen
 import nz.keeleysgreenhouse.app.ui.pests.PestDetailScreen
 import nz.keeleysgreenhouse.app.ui.pests.PestsScreen
 import nz.keeleysgreenhouse.app.ui.search.SearchScreen
+import nz.keeleysgreenhouse.app.ui.settings.SettingsScreen
 import nz.keeleysgreenhouse.app.ui.tasks.TasksScreen
 
 const val CropDetailRoute = "crop"
@@ -38,6 +39,7 @@ const val AddPlantingRoute = "add_planting"
 const val PlantingDetailRoute = "planting"
 const val PlantingDetailArg = "plantingId"
 const val TasksRoute = "tasks"
+const val SettingsRoute = "settings"
 
 fun cropDetailRoute(cropId: Int) = "$CropDetailRoute/$cropId"
 fun monthDetailRoute(month: Int) = "$MonthDetailRoute/$month"
@@ -86,8 +88,12 @@ fun AppNavGraph(
                 onSearchClick = { navController.navigate(SearchRoute) },
                 onPestsClick = { navController.navigate(PestsRoute) },
                 onDiseasesClick = { navController.navigate(DiseasesRoute) },
-                onTasksClick = { navController.navigate(TasksRoute) }
+                onTasksClick = { navController.navigate(TasksRoute) },
+                onSettingsClick = { navController.navigate(SettingsRoute) }
             )
+        }
+        composable(SettingsRoute) {
+            SettingsScreen(onBack = { navController.popBackStack() })
         }
         composable(SearchRoute) {
             SearchScreen(

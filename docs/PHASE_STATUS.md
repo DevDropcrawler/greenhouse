@@ -1,7 +1,7 @@
 # Phase Status
 
 ## Active phase
-**Phase 8 — Videos + polish**
+**v1 complete** — all 9 phases shipped.
 
 ## Phase 2 goals
 - Home screen with three horizontal lists: Sow from seed, Transplant, Harvest (current month from seeded crop data)
@@ -30,4 +30,4 @@
 | 5 | Pest + Disease guide | done | 2026-04-26 |
 | 6 | Search | done | 2026-04-26 |
 | 7 | My garden + tasks | done | 2026-04-27 — add planting flow, auto-tasks, daily 08:00 reminder via WorkManager |
-| 8 | Videos + polish | not started | — |
+| 8 | Videos + polish | done | 2026-04-27 — YouTube intents + thumbnail loading, Settings screen with reminder time + reset data + about, More wired to Settings |

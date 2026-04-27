@@ -36,6 +36,7 @@ import nz.keeleysgreenhouse.app.data.entity.Disease
 import nz.keeleysgreenhouse.app.data.entity.Pest
 import nz.keeleysgreenhouse.app.domain.usecase.CropDetail
 import nz.keeleysgreenhouse.app.ui.components.AccordionSection
+import nz.keeleysgreenhouse.app.ui.components.VideoSection
 import nz.keeleysgreenhouse.app.ui.components.Fact
 import nz.keeleysgreenhouse.app.ui.components.FactsGrid
 import nz.keeleysgreenhouse.app.ui.components.TimelineBar
@@ -181,11 +182,10 @@ private fun CropDetailContent(detail: CropDetail, contentPadding: PaddingValues)
                 }
             }
             if (crop.youtubeVideoIds.isNotEmpty() || crop.youtubeSearchQuery.isNotBlank()) {
-                AccordionSection(title = "Videos") {
-                    BodyText(
-                        if (crop.youtubeVideoIds.isNotEmpty())
-                            "${crop.youtubeVideoIds.size} curated video(s) — playback in Phase 8."
-                        else "Search: ${crop.youtubeSearchQuery}"
+                AccordionSection(title = "Videos", initiallyExpanded = true) {
+                    VideoSection(
+                        videoIds = crop.youtubeVideoIds,
+                        searchQuery = crop.youtubeSearchQuery
                     )
                 }
             }

@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- INTERNET is used only to load YouTube thumbnail images on crop/pest/disease detail
+         screens. The app makes no other network calls; video playback is delegated to the
+         YouTube app or browser via Intent.ACTION_VIEW. -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".GreenhouseApp"
