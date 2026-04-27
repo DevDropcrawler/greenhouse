@@ -1,7 +1,7 @@
 # Phase Status
 
 ## Active phase
-**Phase 5 — Pest + Disease guide**
+**Phase 8 — Videos + polish**
 
 ## Phase 2 goals
 - Home screen with three horizontal lists: Sow from seed, Transplant, Harvest (current month from seeded crop data)
@@ -27,7 +27,7 @@
 | 2 | Home / This Month | done | 2026-04-26 |
 | 3 | Crop list + detail | done | 2026-04-26 — grid + filter chips, detail with timeline / facts / accordions, nav from Home + Crops |
 | 4 | Calendar | done | 2026-04-26 — 12-month grid (3 cols), MonthCard with S/T/H badges, month detail Seed/Seedling/Harvest tabs |
-| 5 | Pest + Disease guide | not started | — |
-| 6 | Search | not started | — |
-| 7 | My garden + tasks | not started | — |
+| 5 | Pest + Disease guide | done | 2026-04-26 |
+| 6 | Search | done | 2026-04-26 |
+| 7 | My garden + tasks | done | 2026-04-27 — add planting flow, auto-tasks, daily 08:00 reminder via WorkManager |
 | 8 | Videos + polish | not started | — |

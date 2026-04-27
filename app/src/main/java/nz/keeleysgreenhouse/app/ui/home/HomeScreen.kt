@@ -56,6 +56,7 @@ import java.util.Locale
 fun HomeScreen(
     contentPadding: PaddingValues,
     onCropClick: (Int) -> Unit = {},
+    onTasksClick: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
@@ -71,7 +72,11 @@ fun HomeScreen(
         item { Greeting(state) }
 
         if (state.todayTasks.isNotEmpty()) {
-            item { SectionHeader(stringResource(R.string.home_today_tasks)) }
+            item {
+                Box(modifier = Modifier.clickable(onClick = onTasksClick)) {
+                    SectionHeader(stringResource(R.string.home_today_tasks))
+                }
+            }
             items(state.todayTasks, key = { it.id }) { task ->
                 TaskRow(task, modifier = Modifier.padding(horizontal = 16.dp))
             }

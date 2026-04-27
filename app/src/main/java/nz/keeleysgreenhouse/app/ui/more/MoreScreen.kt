@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.BugReport
+import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Coronavirus
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
@@ -34,7 +35,8 @@ fun MoreScreen(
     contentPadding: PaddingValues,
     onSearchClick: () -> Unit,
     onPestsClick: () -> Unit,
-    onDiseasesClick: () -> Unit
+    onDiseasesClick: () -> Unit,
+    onTasksClick: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -44,6 +46,8 @@ fun MoreScreen(
     ) {
         Spacer(Modifier.height(8.dp))
         MoreRow(icon = Icons.Outlined.Search, label = "Search", onClick = onSearchClick)
+        RowDivider()
+        MoreRow(icon = Icons.Outlined.CheckCircle, label = "Tasks", onClick = onTasksClick)
         RowDivider()
         MoreRow(icon = Icons.Outlined.BugReport, label = "Pests", onClick = onPestsClick)
         RowDivider()

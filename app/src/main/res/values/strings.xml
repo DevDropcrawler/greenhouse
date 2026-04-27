@@ -42,6 +42,64 @@
     <string name="search_section_pests">Pests</string>
     <string name="search_section_diseases">Diseases</string>
 
+    <!-- Garden -->
+    <string name="garden_title">My garden</string>
+    <string name="garden_empty_title">No plantings yet</string>
+    <string name="garden_empty_body">Add your first planting to track its sow, transplant and harvest dates.</string>
+    <string name="garden_add">Add planting</string>
+    <string name="garden_stage_seed">Seed</string>
+    <string name="garden_stage_seedling">Seedling</string>
+    <string name="garden_stage_growing">Growing</string>
+    <string name="garden_stage_harvest">Harvest</string>
+
+    <!-- Add planting -->
+    <string name="add_planting_title">Add planting</string>
+    <string name="add_planting_step_crop">Pick a crop</string>
+    <string name="add_planting_step_date">Sow date</string>
+    <string name="add_planting_step_location">Location</string>
+    <string name="add_planting_step_notes">Notes</string>
+    <string name="add_planting_location_greenhouse">Greenhouse</string>
+    <string name="add_planting_location_outdoor">Outdoor</string>
+    <string name="add_planting_bay_hint">Bay / bed (optional)</string>
+    <string name="add_planting_notes_hint">Variety, supplier, observations…</string>
+    <string name="add_planting_pick_crop">Tap to pick crop</string>
+    <string name="add_planting_save">Save planting</string>
+    <string name="add_planting_cancel">Cancel</string>
+
+    <!-- Planting detail -->
+    <string name="planting_sown">Sown</string>
+    <string name="planting_transplant">Transplant</string>
+    <string name="planting_harvest_window">Harvest window</string>
+    <string name="planting_mark_transplanted">Mark transplanted today</string>
+    <string name="planting_delete">Delete planting</string>
+    <string name="planting_delete_confirm_title">Delete planting?</string>
+    <string name="planting_delete_confirm_body">This removes the planting and any tasks generated for it.</string>
+    <string name="planting_delete_confirm_yes">Delete</string>
+    <string name="planting_delete_confirm_no">Keep</string>
+    <string name="planting_notes">Notes</string>
+
+    <!-- Tasks -->
+    <string name="tasks_title">Tasks</string>
+    <string name="tasks_tab_today">Today</string>
+    <string name="tasks_tab_all">All</string>
+    <string name="tasks_group_today">Today</string>
+    <string name="tasks_group_tomorrow">Tomorrow</string>
+    <string name="tasks_group_week">This week</string>
+    <string name="tasks_group_later">Later</string>
+    <string name="tasks_empty">No tasks. Add a planting to generate reminders.</string>
+
+    <!-- More -->
+    <string name="more_search">Search</string>
+    <string name="more_pests">Pests</string>
+    <string name="more_diseases">Diseases</string>
+    <string name="more_tasks">Tasks</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_tasks">Daily task reminders</string>
+    <string name="notification_title">Greenhouse tasks today</string>
+    <string name="notification_body_one">You have 1 task today.</string>
+    <string name="notification_body_many">You have %1$d tasks today.</string>
+
     <!-- Phase 0 placeholder copy -->
     <string name="placeholder_home">Home</string>
     <string name="placeholder_calendar">Calendar</string>

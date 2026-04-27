@@ -7,6 +7,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import nz.keeleysgreenhouse.app.data.seed.DatabaseSeeder
+import nz.keeleysgreenhouse.app.notifications.NotificationChannels
+import nz.keeleysgreenhouse.app.notifications.NotificationScheduler
 import javax.inject.Inject
 
 @HiltAndroidApp
@@ -19,5 +21,9 @@ class GreenhouseApp : Application() {
     override fun onCreate() {
         super.onCreate()
         appScope.launch { seeder.seed() }
+        runCatching {
+            NotificationChannels.ensure(this)
+            NotificationScheduler.scheduleDaily(this)
+        }
     }
 }

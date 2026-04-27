@@ -13,6 +13,7 @@ import nz.keeleysgreenhouse.app.data.dao.DiseaseDao
 import nz.keeleysgreenhouse.app.data.dao.PestDao
 import nz.keeleysgreenhouse.app.data.dao.SearchHistoryDao
 import nz.keeleysgreenhouse.app.data.dao.TaskDao
+import nz.keeleysgreenhouse.app.data.dao.UserPlantingDao
 import nz.keeleysgreenhouse.app.data.seed.DatabaseSeeder
 import nz.keeleysgreenhouse.app.data.seed.SeedSource
 import nz.keeleysgreenhouse.app.domain.usecase.GetAllMonthsCropsUseCase
@@ -59,6 +60,9 @@ object AppModule {
 
     @Provides
     fun provideTaskDao(db: AppDatabase): TaskDao = db.taskDao()
+
+    @Provides
+    fun provideUserPlantingDao(db: AppDatabase): UserPlantingDao = db.userPlantingDao()
 
     @Provides
     fun provideSearchHistoryDao(db: AppDatabase): SearchHistoryDao = db.searchHistoryDao()
