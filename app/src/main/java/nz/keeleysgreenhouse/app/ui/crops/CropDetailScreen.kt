@@ -1,5 +1,6 @@
 package nz.keeleysgreenhouse.app.ui.crops
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,8 +27,12 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -98,18 +103,31 @@ private fun CropDetailContent(detail: CropDetail, contentPadding: PaddingValues)
             .verticalScroll(rememberScrollState())
             .padding(bottom = 32.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(220.dp)
-                .background(Brass.copy(alpha = 0.18f)),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = crop.commonName.take(1).uppercase(),
-                color = OliveMoss,
-                style = MaterialTheme.typography.displayLarge
+        val ctx = LocalContext.current
+        val heroId = remember(crop.imageResName) {
+            ctx.resources.getIdentifier(crop.imageResName, "drawable", ctx.packageName)
+        }
+        if (heroId != 0) {
+            Image(
+                painter = painterResource(heroId),
+                contentDescription = crop.commonName,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxWidth().height(220.dp)
             )
+        } else {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(220.dp)
+                    .background(Brass.copy(alpha = 0.18f)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = crop.commonName.take(1).uppercase(),
+                    color = OliveMoss,
+                    style = MaterialTheme.typography.displayLarge
+                )
+            }
         }
 
         Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 20.dp)) {
@@ -143,6 +161,11 @@ private fun CropDetailContent(detail: CropDetail, contentPadding: PaddingValues)
 
             AccordionSection(title = "Sowing", initiallyExpanded = true) {
                 BodyText(crop.sowingNotes)
+            }
+            crop.growingNotes.takeIf { it.isNotBlank() }?.let { notes ->
+                AccordionSection(title = "Growing", initiallyExpanded = true) {
+                    BodyText(notes)
+                }
             }
             AccordionSection(title = "Greenhouse") {
                 BodyText(crop.greenhouseNotes)

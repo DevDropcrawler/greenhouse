@@ -80,6 +80,7 @@ private fun CropSeed.toEntity() = Crop(
     soilPhRange = soilPhMin..soilPhMax,
     waterNeed = WaterNeed.valueOf(waterNeed),
     feedingNotes = feedingNotes,
+    growingNotes = growingNotes,
     sowingNotes = sowingNotes,
     greenhouseNotes = greenhouseNotes,
     pruningNotes = pruningNotes,

@@ -1,5 +1,6 @@
 package nz.keeleysgreenhouse.app.ui.crops
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,10 +25,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -87,7 +92,7 @@ fun CropsScreen(
         Spacer(Modifier.height(16.dp))
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 96.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.fillMaxSize()
@@ -128,18 +133,31 @@ private fun CropGridCard(crop: Crop, onClick: () -> Unit) {
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(100.dp)
-                    .background(Brass.copy(alpha = 0.18f)),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = crop.commonName.take(1).uppercase(),
-                    color = Forest,
-                    style = MaterialTheme.typography.displayMedium
+            val ctx = LocalContext.current
+            val imgId = remember(crop.imageResName) {
+                ctx.resources.getIdentifier(crop.imageResName, "drawable", ctx.packageName)
+            }
+            if (imgId != 0) {
+                Image(
+                    painter = painterResource(imgId),
+                    contentDescription = crop.commonName,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxWidth().height(100.dp)
                 )
+            } else {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(100.dp)
+                        .background(Brass.copy(alpha = 0.18f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = crop.commonName.take(1).uppercase(),
+                        color = Forest,
+                        style = MaterialTheme.typography.displayMedium
+                    )
+                }
             }
             Column(modifier = Modifier.padding(12.dp)) {
                 Text(

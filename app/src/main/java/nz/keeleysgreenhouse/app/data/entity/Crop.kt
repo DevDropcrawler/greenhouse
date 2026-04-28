@@ -33,6 +33,7 @@ data class Crop(
     val soilPhRange: ClosedFloatingPointRange<Float>,
     val waterNeed: WaterNeed,
     val feedingNotes: String,
+    val growingNotes: String,
     val sowingNotes: String,
     val greenhouseNotes: String,
     val pruningNotes: String?,

@@ -36,6 +36,7 @@ data class CropSeed(
     val soilPhMax: Float = 7.0f,
     val waterNeed: String = "MEDIUM",
     val feedingNotes: String = "",
+    val growingNotes: String = "",
     val sowingNotes: String = "",
     val greenhouseNotes: String = "",
     val pruningNotes: String? = null,
