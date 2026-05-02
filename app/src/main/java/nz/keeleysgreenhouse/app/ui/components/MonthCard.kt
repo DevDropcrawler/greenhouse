@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,13 +22,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import nz.keeleysgreenhouse.app.ui.theme.Brass
 import nz.keeleysgreenhouse.app.ui.theme.Forest
+import nz.keeleysgreenhouse.app.ui.theme.Fraunces
 import nz.keeleysgreenhouse.app.ui.theme.Honey
 import nz.keeleysgreenhouse.app.ui.theme.Inter
 import nz.keeleysgreenhouse.app.ui.theme.OliveMoss
-import nz.keeleysgreenhouse.app.ui.theme.OnSurfaceInk
-import nz.keeleysgreenhouse.app.ui.theme.Sprout
+import nz.keeleysgreenhouse.app.ui.theme.Terracotta
 
 private val MonthNames = listOf(
     "January", "February", "March", "April", "May", "June",
@@ -36,10 +37,10 @@ private val MonthNames = listOf(
 )
 
 private fun seasonalEmoji(month: Int): String = when (month) {
-    9, 10, 11 -> "\uD83C\uDF31"  // sprout — spring
-    12, 1, 2 -> "\u2600\uFE0F"   // sun — summer
-    3, 4, 5 -> "\uD83C\uDF42"    // leaf — autumn
-    else -> "\u2744\uFE0F"        // snowflake — winter
+    9, 10, 11 -> "\uD83C\uDF31"
+    12, 1, 2 -> "\u2600\uFE0F"
+    3, 4, 5 -> "\uD83C\uDF42"
+    else -> "\u2744\uFE0F"
 }
 
 @Composable
@@ -63,32 +64,39 @@ fun MonthCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         border = border
     ) {
-        Column(modifier = Modifier.padding(12.dp)) {
-            Text(
-                text = seasonalEmoji(month),
-                style = MaterialTheme.typography.titleMedium
-            )
-            Spacer(Modifier.height(2.dp))
-            Text(
-                text = MonthNames[month - 1],
-                color = if (isCurrent) Forest else OliveMoss,
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.SemiBold,
-                maxLines = 1
-            )
-            if (isCurrent) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Column(modifier = Modifier.align(Alignment.CenterStart)) {
+                    if (isCurrent) {
+                        Text(
+                            text = "THIS MONTH",
+                            color = Brass,
+                            fontFamily = Inter,
+                            fontWeight = FontWeight.SemiBold,
+                            letterSpacing = 1.2.sp,
+                            fontSize = 10.sp
+                        )
+                        Spacer(Modifier.height(2.dp))
+                    }
+                    Text(
+                        text = MonthNames[month - 1],
+                        color = OliveMoss,
+                        fontFamily = Fraunces,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 22.sp,
+                        maxLines = 1
+                    )
+                }
                 Text(
-                    text = "THIS MONTH",
-                    color = Brass,
-                    fontFamily = Inter,
-                    style = MaterialTheme.typography.labelSmall,
-                    fontWeight = FontWeight.SemiBold
+                    text = seasonalEmoji(month),
+                    fontSize = 28.sp,
+                    modifier = Modifier.align(Alignment.TopEnd)
                 )
             }
-            Spacer(Modifier.height(10.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                CountBadge("S", seedCount, Forest)
-                CountBadge("T", seedlingCount, Sprout)
+            Spacer(Modifier.height(14.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                CountBadge("S", seedCount, Terracotta)
+                CountBadge("T", seedlingCount, Forest)
                 CountBadge("H", harvestCount, Honey)
             }
         }
@@ -97,27 +105,28 @@ fun MonthCard(
 
 @Composable
 private fun CountBadge(letter: String, count: Int, color: Color) {
+    val active = count > 0
     Row(
         modifier = Modifier
             .clip(RoundedCornerShape(50))
-            .background(color.copy(alpha = if (count > 0) 0.18f else 0.08f))
-            .padding(horizontal = 6.dp, vertical = 4.dp),
+            .background(color.copy(alpha = if (active) 0.18f else 0.08f))
+            .padding(horizontal = 8.dp, vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(2.dp)
+        horizontalArrangement = Arrangement.spacedBy(3.dp)
     ) {
         Text(
             text = letter,
             color = color,
             fontFamily = Inter,
-            style = MaterialTheme.typography.labelSmall,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            fontSize = 10.sp
         )
         Text(
             text = count.toString(),
-            color = if (count > 0) OnSurfaceInk else OnSurfaceInk.copy(alpha = 0.45f),
+            color = if (active) color else color.copy(alpha = 0.55f),
             fontFamily = Inter,
-            style = MaterialTheme.typography.labelSmall,
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 10.sp
         )
     }
 }
