@@ -10,6 +10,7 @@ import dagger.hilt.components.SingletonComponent
 import nz.keeleysgreenhouse.app.data.AppDatabase
 import nz.keeleysgreenhouse.app.data.dao.CropDao
 import nz.keeleysgreenhouse.app.data.dao.DiseaseDao
+import nz.keeleysgreenhouse.app.data.dao.FavouriteDao
 import nz.keeleysgreenhouse.app.data.dao.PestDao
 import nz.keeleysgreenhouse.app.data.dao.SearchHistoryDao
 import nz.keeleysgreenhouse.app.data.dao.TaskDao
@@ -66,6 +67,9 @@ object AppModule {
 
     @Provides
     fun provideSearchHistoryDao(db: AppDatabase): SearchHistoryDao = db.searchHistoryDao()
+
+    @Provides
+    fun provideFavouriteDao(db: AppDatabase): FavouriteDao = db.favouriteDao()
 
     @Provides
     fun provideSearchAllUseCase(

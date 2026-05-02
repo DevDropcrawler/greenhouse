@@ -12,9 +12,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -47,6 +52,7 @@ import nz.keeleysgreenhouse.app.ui.components.FactsGrid
 import nz.keeleysgreenhouse.app.ui.components.TimelineBar
 import nz.keeleysgreenhouse.app.ui.theme.Brass
 import nz.keeleysgreenhouse.app.ui.theme.Cream
+import nz.keeleysgreenhouse.app.ui.theme.Forest
 import nz.keeleysgreenhouse.app.ui.theme.OliveMoss
 import nz.keeleysgreenhouse.app.ui.theme.OnSurfaceInk
 
@@ -54,9 +60,12 @@ import nz.keeleysgreenhouse.app.ui.theme.OnSurfaceInk
 @Composable
 fun CropDetailScreen(
     onBack: () -> Unit,
+    onAddToGarden: (Int) -> Unit,
     viewModel: CropDetailViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
+    val isFavourite by viewModel.isFavourite.collectAsState()
+    val cropId = state.detail?.crop?.id
 
     Scaffold(
         topBar = {
@@ -67,6 +76,16 @@ fun CropDetailScreen(
                         Icon(Icons.Outlined.ArrowBack, contentDescription = "Back")
                     }
                 },
+                actions = {
+                    if (cropId != null) {
+                        IconButton(onClick = { viewModel.toggleFavourite() }) {
+                            Icon(
+                                imageVector = if (isFavourite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                                contentDescription = if (isFavourite) "Remove from favourites" else "Add to favourites"
+                            )
+                        }
+                    }
+                },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = OliveMoss,
                     titleContentColor = Cream,
@@ -74,6 +93,25 @@ fun CropDetailScreen(
                     actionIconContentColor = Cream
                 )
             )
+        },
+        bottomBar = {
+            if (cropId != null) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Cream)
+                        .padding(horizontal = 16.dp, vertical = 12.dp)
+                ) {
+                    Button(
+                        onClick = { onAddToGarden(cropId) },
+                        colors = ButtonDefaults.buttonColors(containerColor = Forest, contentColor = Cream),
+                        shape = RoundedCornerShape(50),
+                        modifier = Modifier.fillMaxWidth().height(52.dp)
+                    ) {
+                        Text("Add to garden")
+                    }
+                }
+            }
         },
         containerColor = Cream
     ) { inner ->
@@ -227,7 +265,9 @@ private fun factsOf(crop: Crop): List<Fact> = buildList {
     add(Fact("Water", crop.waterNeed.name.lowercase().replaceFirstChar { it.uppercase() }))
     add(Fact("Soil pH", "${crop.soilPhRange.start}–${crop.soilPhRange.endInclusive}"))
     if (crop.daysSeedlingToHarvest.first > 0) {
-        add(Fact("To harvest", "${crop.daysSeedlingToHarvest.first}–${crop.daysSeedlingToHarvest.last} d"))
+        val r = crop.daysSeedlingToHarvest
+        val txt = if (r.first == r.last) "${r.first} d" else "${r.first}–${r.last} d"
+        add(Fact("To harvest", txt))
     }
     crop.yearsToFirstFruit?.let { add(Fact("Years→fruit", "$it")) }
     crop.potSizeLitres?.let { add(Fact("Pot size", "$it L")) }

@@ -24,12 +24,7 @@ import nz.keeleysgreenhouse.app.ui.navigation.TopDestination
 import nz.keeleysgreenhouse.app.ui.theme.Cream
 import nz.keeleysgreenhouse.app.ui.theme.OliveMoss
 
-private val TopLevelRoutesWithSearch = setOf(
-    TopDestination.Home.route,
-    TopDestination.Calendar.route,
-    TopDestination.Crops.route,
-    TopDestination.Garden.route
-)
+private val TopLevelRoutes = TopDestination.entries.map { it.route }.toSet()
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,32 +32,43 @@ fun GreenhouseApp() {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
-    val showSearchAction = currentRoute in TopLevelRoutesWithSearch
+    val isTopLevel = currentRoute in TopLevelRoutes
+
+    val titleRes = when (currentRoute) {
+        TopDestination.Home.route -> R.string.tab_home
+        TopDestination.Calendar.route -> R.string.tab_calendar
+        TopDestination.Crops.route -> R.string.tab_crops
+        TopDestination.Garden.route -> R.string.tab_garden
+        TopDestination.More.route -> R.string.tab_more
+        else -> null
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(stringResource(R.string.app_name)) },
-                actions = {
-                    if (showSearchAction) {
+            if (titleRes != null) {
+                CenterAlignedTopAppBar(
+                    title = { Text(stringResource(titleRes)) },
+                    actions = {
                         IconButton(onClick = { navController.navigate(SearchRoute) }) {
                             Icon(
                                 imageVector = Icons.Outlined.Search,
                                 contentDescription = stringResource(R.string.search_action)
                             )
                         }
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = OliveMoss,
-                    titleContentColor = Cream,
-                    navigationIconContentColor = Cream,
-                    actionIconContentColor = Cream
+                    },
+                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = OliveMoss,
+                        titleContentColor = Cream,
+                        navigationIconContentColor = Cream,
+                        actionIconContentColor = Cream
+                    )
                 )
-            )
+            }
         },
-        bottomBar = { GreenhouseBottomNav(navController) }
+        bottomBar = {
+            if (isTopLevel) GreenhouseBottomNav(navController)
+        }
     ) { innerPadding ->
         AppNavGraph(navController = navController, contentPadding = innerPadding)
     }

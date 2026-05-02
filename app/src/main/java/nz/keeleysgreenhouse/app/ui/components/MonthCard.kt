@@ -86,7 +86,7 @@ fun MonthCard(
                 )
             }
             Spacer(Modifier.height(10.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 CountBadge("S", seedCount, Forest)
                 CountBadge("T", seedlingCount, Sprout)
                 CountBadge("H", harvestCount, Honey)
@@ -101,8 +101,9 @@ private fun CountBadge(letter: String, count: Int, color: Color) {
         modifier = Modifier
             .clip(RoundedCornerShape(50))
             .background(color.copy(alpha = if (count > 0) 0.18f else 0.08f))
-            .padding(horizontal = 8.dp, vertical = 4.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .padding(horizontal = 6.dp, vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         Text(
             text = letter,
@@ -111,12 +112,11 @@ private fun CountBadge(letter: String, count: Int, color: Color) {
             style = MaterialTheme.typography.labelSmall,
             fontWeight = FontWeight.Bold
         )
-        Spacer(Modifier.padding(horizontal = 2.dp))
         Text(
             text = count.toString(),
             color = if (count > 0) OnSurfaceInk else OnSurfaceInk.copy(alpha = 0.45f),
             fontFamily = Inter,
-            style = MaterialTheme.typography.labelMedium,
+            style = MaterialTheme.typography.labelSmall,
             fontWeight = FontWeight.SemiBold
         )
     }

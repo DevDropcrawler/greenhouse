@@ -14,6 +14,12 @@ interface FavouriteDao {
     @Query("SELECT * FROM favourites ORDER BY savedAt DESC")
     fun observeAll(): Flow<List<Favourite>>
 
+    @Query("SELECT EXISTS(SELECT 1 FROM favourites WHERE refType = :type AND refId = :id)")
+    fun observeIsFavourite(type: FavouriteRefType, id: Int): Flow<Boolean>
+
+    @Query("SELECT refId FROM favourites WHERE refType = :type ORDER BY savedAt DESC")
+    fun observeIdsByType(type: FavouriteRefType): Flow<List<Int>>
+
     @Query("SELECT * FROM favourites WHERE refType = :type AND refId = :id LIMIT 1")
     suspend fun find(type: FavouriteRefType, id: Int): Favourite?
 

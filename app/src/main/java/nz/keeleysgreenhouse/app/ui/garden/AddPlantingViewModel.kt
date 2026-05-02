@@ -1,5 +1,6 @@
 package nz.keeleysgreenhouse.app.ui.garden
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,6 +30,7 @@ data class AddPlantingFormState(
 
 @HiltViewModel
 class AddPlantingViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
     observeCrops: ObserveCropsUseCase,
     private val addPlanting: AddPlantingUseCase
 ) : ViewModel() {
@@ -36,7 +38,8 @@ class AddPlantingViewModel @Inject constructor(
     val crops: StateFlow<List<Crop>> = observeCrops()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
 
-    private val _form = MutableStateFlow(AddPlantingFormState())
+    private val initialCropId: Int? = savedStateHandle.get<Int>("cropId")?.takeIf { it >= 0 }
+    private val _form = MutableStateFlow(AddPlantingFormState(cropId = initialCropId))
     val form: StateFlow<AddPlantingFormState> = _form.asStateFlow()
 
     private val _saved = MutableSharedFlow<Unit>(extraBufferCapacity = 1)

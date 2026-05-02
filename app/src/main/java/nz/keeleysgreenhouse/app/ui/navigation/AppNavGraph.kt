@@ -13,6 +13,7 @@ import nz.keeleysgreenhouse.app.ui.crops.CropDetailScreen
 import nz.keeleysgreenhouse.app.ui.crops.CropsScreen
 import nz.keeleysgreenhouse.app.ui.diseases.DiseaseDetailScreen
 import nz.keeleysgreenhouse.app.ui.diseases.DiseasesScreen
+import nz.keeleysgreenhouse.app.ui.favourites.FavouritesScreen
 import nz.keeleysgreenhouse.app.ui.garden.AddPlantingScreen
 import nz.keeleysgreenhouse.app.ui.garden.GardenScreen
 import nz.keeleysgreenhouse.app.ui.garden.PlantingDetailScreen
@@ -36,10 +37,15 @@ const val DiseaseDetailRoute = "disease"
 const val DiseaseDetailArg = "diseaseId"
 const val SearchRoute = "search"
 const val AddPlantingRoute = "add_planting"
+const val AddPlantingArg = "cropId"
 const val PlantingDetailRoute = "planting"
 const val PlantingDetailArg = "plantingId"
 const val TasksRoute = "tasks"
 const val SettingsRoute = "settings"
+const val FavouritesRoute = "favourites"
+
+fun addPlantingRoute(cropId: Int? = null): String =
+    if (cropId == null) AddPlantingRoute else "$AddPlantingRoute?$AddPlantingArg=$cropId"
 
 fun cropDetailRoute(cropId: Int) = "$CropDetailRoute/$cropId"
 fun monthDetailRoute(month: Int) = "$MonthDetailRoute/$month"
@@ -89,7 +95,16 @@ fun AppNavGraph(
                 onPestsClick = { navController.navigate(PestsRoute) },
                 onDiseasesClick = { navController.navigate(DiseasesRoute) },
                 onTasksClick = { navController.navigate(TasksRoute) },
+                onFavouritesClick = { navController.navigate(FavouritesRoute) },
                 onSettingsClick = { navController.navigate(SettingsRoute) }
+            )
+        }
+        composable(FavouritesRoute) {
+            FavouritesScreen(
+                onBack = { navController.popBackStack() },
+                onCropClick = { id -> navController.navigate(cropDetailRoute(id)) },
+                onPestClick = { id -> navController.navigate(pestDetailRoute(id)) },
+                onDiseaseClick = { id -> navController.navigate(diseaseDetailRoute(id)) }
             )
         }
         composable(SettingsRoute) {
@@ -103,7 +118,13 @@ fun AppNavGraph(
                 onDiseaseClick = { id -> navController.navigate(diseaseDetailRoute(id)) }
             )
         }
-        composable(AddPlantingRoute) {
+        composable(
+            route = "$AddPlantingRoute?$AddPlantingArg={$AddPlantingArg}",
+            arguments = listOf(navArgument(AddPlantingArg) {
+                type = NavType.IntType
+                defaultValue = -1
+            })
+        ) {
             AddPlantingScreen(
                 onBack = { navController.popBackStack() },
                 onSaved = { navController.popBackStack() }
@@ -122,7 +143,10 @@ fun AppNavGraph(
             route = "$CropDetailRoute/{$CropDetailArg}",
             arguments = listOf(navArgument(CropDetailArg) { type = NavType.IntType })
         ) {
-            CropDetailScreen(onBack = { navController.popBackStack() })
+            CropDetailScreen(
+                onBack = { navController.popBackStack() },
+                onAddToGarden = { id -> navController.navigate(addPlantingRoute(id)) }
+            )
         }
         composable(
             route = "$MonthDetailRoute/{$MonthDetailArg}",

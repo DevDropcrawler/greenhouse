@@ -16,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.BugReport
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Coronavirus
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
@@ -34,11 +35,12 @@ import nz.keeleysgreenhouse.app.ui.theme.OnSurfaceInk
 @Composable
 fun MoreScreen(
     contentPadding: PaddingValues,
-    onSearchClick: () -> Unit,
     onPestsClick: () -> Unit,
     onDiseasesClick: () -> Unit,
-    onTasksClick: () -> Unit = {},
-    onSettingsClick: () -> Unit = {}
+    onSearchClick: () -> Unit,
+    onTasksClick: () -> Unit,
+    onFavouritesClick: () -> Unit,
+    onSettingsClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -47,13 +49,15 @@ fun MoreScreen(
             .padding(contentPadding)
     ) {
         Spacer(Modifier.height(8.dp))
+        MoreRow(icon = Icons.Outlined.BugReport, label = "Pests", onClick = onPestsClick)
+        RowDivider()
+        MoreRow(icon = Icons.Outlined.Coronavirus, label = "Diseases", onClick = onDiseasesClick)
+        RowDivider()
         MoreRow(icon = Icons.Outlined.Search, label = "Search", onClick = onSearchClick)
         RowDivider()
         MoreRow(icon = Icons.Outlined.CheckCircle, label = "Tasks", onClick = onTasksClick)
         RowDivider()
-        MoreRow(icon = Icons.Outlined.BugReport, label = "Pests", onClick = onPestsClick)
-        RowDivider()
-        MoreRow(icon = Icons.Outlined.Coronavirus, label = "Diseases", onClick = onDiseasesClick)
+        MoreRow(icon = Icons.Outlined.FavoriteBorder, label = "Favourites", onClick = onFavouritesClick)
         RowDivider()
         MoreRow(icon = Icons.Outlined.Settings, label = "Settings", onClick = onSettingsClick)
         RowDivider()

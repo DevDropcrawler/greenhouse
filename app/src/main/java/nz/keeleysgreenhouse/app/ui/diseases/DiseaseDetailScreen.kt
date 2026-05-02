@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -48,6 +50,8 @@ fun DiseaseDetailScreen(
     viewModel: DiseaseDetailViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
+    val isFavourite by viewModel.isFavourite.collectAsState()
+    val diseaseId = state.detail?.disease?.id
 
     Scaffold(
         topBar = {
@@ -56,6 +60,16 @@ fun DiseaseDetailScreen(
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.Outlined.ArrowBack, contentDescription = "Back")
+                    }
+                },
+                actions = {
+                    if (diseaseId != null) {
+                        IconButton(onClick = { viewModel.toggleFavourite() }) {
+                            Icon(
+                                imageVector = if (isFavourite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                                contentDescription = if (isFavourite) "Remove from favourites" else "Add to favourites"
+                            )
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
