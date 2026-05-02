@@ -1,5 +1,6 @@
 package nz.keeleysgreenhouse.app.ui.calendar
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -41,6 +42,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -158,19 +162,35 @@ private fun MonthCropCard(crop: Crop, onClick: () -> Unit) {
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(80.dp)
-                    .background(Brass.copy(alpha = 0.18f))
-                    .clip(RoundedCornerShape(topStart = 22.dp, topEnd = 22.dp)),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = crop.commonName.take(1).uppercase(),
-                    color = Forest,
-                    style = MaterialTheme.typography.headlineLarge
+            val ctx = LocalContext.current
+            val imgId = remember(crop.thumbnailResName) {
+                ctx.resources.getIdentifier(crop.thumbnailResName, "drawable", ctx.packageName)
+            }
+            if (imgId != 0) {
+                Image(
+                    painter = painterResource(imgId),
+                    contentDescription = crop.commonName,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                        .clip(RoundedCornerShape(topStart = 22.dp, topEnd = 22.dp))
                 )
+            } else {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                        .background(Brass.copy(alpha = 0.18f))
+                        .clip(RoundedCornerShape(topStart = 22.dp, topEnd = 22.dp)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = crop.commonName.take(1).uppercase(),
+                        color = Forest,
+                        style = MaterialTheme.typography.headlineLarge
+                    )
+                }
             }
             Column(modifier = Modifier.padding(12.dp)) {
                 Text(
