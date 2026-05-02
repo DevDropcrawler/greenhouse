@@ -34,7 +34,7 @@ import nz.keeleysgreenhouse.app.data.entity.UserPlanting
         Favourite::class,
         SearchHistory::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
