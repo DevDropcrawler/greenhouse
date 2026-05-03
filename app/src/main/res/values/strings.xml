@@ -46,6 +46,14 @@
     <string name="garden_title">My garden</string>
     <string name="garden_empty_title">No plantings yet</string>
     <string name="garden_empty_body">Add your first planting to track its sow, transplant and harvest dates.</string>
+    <string name="garden_onboarding_eyebrow">GETTING STARTED</string>
+    <string name="garden_onboarding_title">Track your greenhouse</string>
+    <string name="garden_onboarding_step1_title">Add a planting</string>
+    <string name="garden_onboarding_step1_body">Tap + to record what you\'ve sown. We\'ll track its progress and remind you when to transplant and harvest.</string>
+    <string name="garden_onboarding_step2_title">Get reminders</string>
+    <string name="garden_onboarding_step2_body">Daily reminders for transplanting, feeding, and harvesting — timed for your Papamoa greenhouse.</string>
+    <string name="garden_onboarding_step3_title">Browse 153 crops</string>
+    <string name="garden_onboarding_step3_body">Vegetables, herbs, and dwarf fruit trees — all with greenhouse timing for Bay of Plenty\'s warm climate.</string>
     <string name="garden_add">Add planting</string>
     <string name="garden_stage_seed">Seed</string>
     <string name="garden_stage_seedling">Seedling</string>

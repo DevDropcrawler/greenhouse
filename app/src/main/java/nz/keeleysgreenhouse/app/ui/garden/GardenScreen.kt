@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -107,31 +110,82 @@ private fun EmptyState(onAddClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 32.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
+            .padding(horizontal = 28.dp),
+        horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Center
     ) {
+        EyebrowLabel(text = stringResource(R.string.garden_onboarding_eyebrow))
+        Spacer(Modifier.height(10.dp))
         Text(
-            text = stringResource(R.string.garden_empty_title),
+            text = stringResource(R.string.garden_onboarding_title),
             color = OliveMoss,
             style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 24.sp
         )
-        Spacer(Modifier.height(8.dp))
-        Text(
-            text = stringResource(R.string.garden_empty_body),
-            color = OnSurfaceInk.copy(alpha = 0.7f),
-            style = MaterialTheme.typography.bodyMedium,
-            fontStyle = FontStyle.Italic
+        Spacer(Modifier.height(20.dp))
+        OnboardingStep(
+            number = 1,
+            title = stringResource(R.string.garden_onboarding_step1_title),
+            body = stringResource(R.string.garden_onboarding_step1_body)
         )
-        Spacer(Modifier.height(24.dp))
+        Spacer(Modifier.height(14.dp))
+        OnboardingStep(
+            number = 2,
+            title = stringResource(R.string.garden_onboarding_step2_title),
+            body = stringResource(R.string.garden_onboarding_step2_body)
+        )
+        Spacer(Modifier.height(14.dp))
+        OnboardingStep(
+            number = 3,
+            title = stringResource(R.string.garden_onboarding_step3_title),
+            body = stringResource(R.string.garden_onboarding_step3_body)
+        )
+        Spacer(Modifier.height(28.dp))
         ExtendedFloatingActionButton(
             onClick = onAddClick,
             containerColor = Forest,
             contentColor = Cream,
             text = { Text(stringResource(R.string.garden_add)) },
-            icon = { Icon(Icons.Filled.Add, contentDescription = null) }
+            icon = { Icon(Icons.Filled.Add, contentDescription = null) },
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
+    }
+}
+
+@Composable
+private fun OnboardingStep(number: Int, title: String, body: String) {
+    androidx.compose.foundation.layout.Row(
+        verticalAlignment = Alignment.Top
+    ) {
+        Box(
+            modifier = Modifier
+                .size(28.dp)
+                .background(Brass.copy(alpha = 0.18f), CircleShape),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = number.toString(),
+                color = Brass,
+                fontWeight = FontWeight.SemiBold,
+                style = MaterialTheme.typography.labelMedium
+            )
+        }
+        Spacer(Modifier.width(14.dp))
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = title,
+                color = OnSurfaceInk,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold
+            )
+            Spacer(Modifier.height(2.dp))
+            Text(
+                text = body,
+                color = OnSurfaceInk.copy(alpha = 0.75f),
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
     }
 }
 

@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,11 +22,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import nz.keeleysgreenhouse.app.ui.theme.Brass
 import nz.keeleysgreenhouse.app.ui.theme.Forest
 import nz.keeleysgreenhouse.app.ui.theme.Honey
 import nz.keeleysgreenhouse.app.ui.theme.OnSurfaceInk
-import nz.keeleysgreenhouse.app.ui.theme.Sprout
+import nz.keeleysgreenhouse.app.ui.theme.Terracotta
 
 private val MonthLabels = listOf("J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D")
 
@@ -33,26 +36,62 @@ fun TimelineBar(
     sowMonths: List<Int>,
     transplantMonths: List<Int>,
     harvestMonths: List<Int>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    alpha: Float = 1f,
+    showMonthLabels: Boolean = true
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
-        TimelineRow(label = "Sow", months = sowMonths, color = Forest)
+        TimelineRow(label = "Sow", months = sowMonths, color = Terracotta.copy(alpha = alpha))
         Spacer(Modifier.height(6.dp))
-        TimelineRow(label = "Plant", months = transplantMonths, color = Sprout)
+        TimelineRow(label = "Plant", months = transplantMonths, color = Forest.copy(alpha = alpha))
         Spacer(Modifier.height(6.dp))
-        TimelineRow(label = "Harvest", months = harvestMonths, color = Honey)
-        Spacer(Modifier.height(8.dp))
-        Row(modifier = Modifier.fillMaxWidth().padding(start = 56.dp)) {
-            MonthLabels.forEach { label ->
-                Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
-                    Text(
-                        text = label,
-                        color = OnSurfaceInk.copy(alpha = 0.55f),
-                        style = MaterialTheme.typography.labelSmall
-                    )
+        TimelineRow(label = "Harvest", months = harvestMonths, color = Honey.copy(alpha = alpha))
+        if (showMonthLabels) {
+            Spacer(Modifier.height(8.dp))
+            Row(modifier = Modifier.fillMaxWidth().padding(start = 56.dp)) {
+                MonthLabels.forEach { label ->
+                    Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+                        Text(
+                            text = label,
+                            color = OnSurfaceInk.copy(alpha = 0.55f * alpha.coerceAtLeast(0.6f)),
+                            style = MaterialTheme.typography.labelSmall
+                        )
+                    }
                 }
             }
         }
+    }
+}
+
+@Composable
+fun TimelineLegend(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier.fillMaxWidth().padding(start = 56.dp, top = 4.dp),
+        horizontalArrangement = Arrangement.spacedBy(14.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        LegendDot(color = Terracotta, label = "Sow")
+        LegendDot(color = Forest, label = "Plant")
+        LegendDot(color = Honey, label = "Harvest")
+    }
+}
+
+@Composable
+private fun LegendDot(color: Color, label: String) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Box(
+            modifier = Modifier
+                .size(8.dp)
+                .clip(CircleShape)
+                .background(color)
+        )
+        Spacer(Modifier.width(5.dp))
+        Text(
+            text = label,
+            color = OnSurfaceInk.copy(alpha = 0.6f),
+            fontSize = 11.sp,
+            style = MaterialTheme.typography.labelSmall
+        )
     }
 }
 

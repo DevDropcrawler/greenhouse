@@ -50,6 +50,10 @@ import nz.keeleysgreenhouse.app.ui.components.VideoSection
 import nz.keeleysgreenhouse.app.ui.components.Fact
 import nz.keeleysgreenhouse.app.ui.components.FactsGrid
 import nz.keeleysgreenhouse.app.ui.components.TimelineBar
+import nz.keeleysgreenhouse.app.ui.components.TimelineLegend
+import nz.keeleysgreenhouse.app.ui.theme.Sprout
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import nz.keeleysgreenhouse.app.ui.theme.Brass
 import nz.keeleysgreenhouse.app.ui.theme.Cream
 import nz.keeleysgreenhouse.app.ui.theme.Forest
@@ -188,11 +192,39 @@ private fun CropDetailContent(detail: CropDetail, contentPadding: PaddingValues)
                 style = MaterialTheme.typography.bodyMedium
             )
             Spacer(Modifier.height(20.dp))
+            Text(
+                text = "\uD83C\uDF3F  Greenhouse",
+                color = Forest,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold,
+                style = MaterialTheme.typography.labelMedium
+            )
+            Spacer(Modifier.height(6.dp))
             TimelineBar(
                 sowMonths = crop.seedSowMonths,
                 transplantMonths = crop.seedlingPlantMonths,
-                harvestMonths = crop.harvestMonths
+                harvestMonths = crop.harvestMonths,
+                showMonthLabels = crop.outdoorSowMonths.isEmpty()
             )
+            if (crop.outdoorSowMonths.isNotEmpty()) {
+                Spacer(Modifier.height(14.dp))
+                Text(
+                    text = "\u2600\uFE0F  Outdoors",
+                    color = OnSurfaceInk.copy(alpha = 0.6f),
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    style = MaterialTheme.typography.labelMedium
+                )
+                Spacer(Modifier.height(6.dp))
+                TimelineBar(
+                    sowMonths = crop.outdoorSowMonths,
+                    transplantMonths = crop.outdoorSeedlingMonths,
+                    harvestMonths = crop.outdoorHarvestMonths,
+                    alpha = 0.6f
+                )
+            }
+            Spacer(Modifier.height(8.dp))
+            TimelineLegend()
             Spacer(Modifier.height(20.dp))
             FactsGrid(facts = factsOf(crop))
             Spacer(Modifier.height(12.dp))
@@ -205,8 +237,15 @@ private fun CropDetailContent(detail: CropDetail, contentPadding: PaddingValues)
                     BodyText(notes)
                 }
             }
-            AccordionSection(title = "Greenhouse") {
-                BodyText(crop.greenhouseNotes)
+            crop.greenhouseNotes.takeIf { it.isNotBlank() }?.let { notes ->
+                AccordionSection(title = "Growing in the greenhouse", initiallyExpanded = true) {
+                    BodyText(notes)
+                }
+            }
+            crop.outdoorNotes.takeIf { it.isNotBlank() }?.let { notes ->
+                AccordionSection(title = "Outdoor growing") {
+                    BodyText(notes)
+                }
             }
             AccordionSection(title = "Feeding") {
                 BodyText(crop.feedingNotes)
