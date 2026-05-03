@@ -56,3 +56,5 @@ __pycache__/
 
 # Superdesign cache (if the IDE extension gets installed later)
 .superdesign/cache/
+
+greenhouse_db_dump.bin
