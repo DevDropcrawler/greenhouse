@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import nz.keeleysgreenhouse.app.data.AppDatabase
 import nz.keeleysgreenhouse.app.data.dao.CropDao
+import nz.keeleysgreenhouse.app.data.migrations.MIGRATION_5_6
 import nz.keeleysgreenhouse.app.data.dao.DiseaseDao
 import nz.keeleysgreenhouse.app.data.dao.FavouriteDao
 import nz.keeleysgreenhouse.app.data.dao.PestDao
@@ -37,7 +38,7 @@ object AppModule {
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase =
         Room.databaseBuilder(context, AppDatabase::class.java, "greenhouse.db")
-            .fallbackToDestructiveMigration()
+            .addMigrations(MIGRATION_5_6)
             .build()
 
     @Provides

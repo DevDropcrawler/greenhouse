@@ -66,3 +66,15 @@ Each entry helps the project owner audit choices and helps a future post-v1 desi
 **Notes for future design pass:**
 - Build screen patterned on Crops list (per design-coverage.md), wired to `FavouriteDao`.
 - Add a heart icon to crop / pest / disease detail app bars to toggle favourite state.
+
+### 2026-05-05 · Sticky bar insets — pending · Phase 8
+
+**Type:** Deferred scope
+**Closest reference frame:** none
+**Decisions taken:**
+- `Modifier.navigationBarsPadding()` applied only to existing sticky `bottomBar`s in `CropDetailScreen` and `AddPlantingScreen`.
+- `PestDetailScreen`, `DiseaseDetailScreen`, and `PlantingDetailScreen` do not currently host a sticky `bottomBar` — no change made.
+
+**Notes for future design pass:**
+- If a sticky action bar is added to Pest, Disease, or Planting detail screens, ensure `Modifier.navigationBarsPadding()` is applied to the outermost layout in the `bottomBar` slot so it clears the system gesture nav.
+
